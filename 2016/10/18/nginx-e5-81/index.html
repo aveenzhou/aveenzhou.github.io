@@ -86,19 +86,22 @@
 
 
 
-<meta name="description" content="&amp;#x7528;lsof / | grep -i delete &amp;#x4ECE;&amp;#x6839;&amp;#x76EE;&amp;#x5F55;&amp;#x5B9A;&amp;#x4F4D;&amp;#x6253;&amp;#x5F00;&amp;#x7684;&amp;#x88AB;&amp;#x5220;&amp;#x9664;&amp;#x7684;&amp;#x6587;&amp;#x4EF6;
-&amp;#x5982;&amp;#x679C;&amp;#x5B9A;&amp;#x4F4D;&amp;#x5230;&amp;#x67D0">
+<meta name="description" content="&amp;#x914D;&amp;#x7F6E;nginx&amp;#x53C2;&amp;#x6570;&amp;#x4E3A;
+proxy_set_header  Host            $host:$server_port;
+&amp;#x8FD9;&amp;#x6837;&amp;#x540E;&amp;#x7AEF;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x80FD;&amp;#x83B7;&amp;#x53D6;&amp;#x5230;&amp;#x5305;&amp;#x6">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux 故障：df -h统计磁盘空间占用太多，但又du -h找不到大的文件">
-<meta property="og:url" content="http://notes.zhouping.xin/2014/12/22/linux-e6-95-85-e9-9a-9c-ef-bc-9adf-h-e7-bb-9f-e8-ae-a1-e7-a3-81-e7-9b-98-e7-a9-ba-e9-97-b4-e5-8d-a0-e7-94-a8-e5-a4-aa-e5-a4-9a-ef-bc-8c-e4-bd-86-e5-8f-88du-h-e6-89-be-e4-b8-8d-e5-88-b0-e5-a4-a7/index.html">
+<meta property="og:title" content="Nginx做代理，当侦听端口非80时，后端服务器重定向的主机名不会包含端口">
+<meta property="og:url" content="http://notes.zhouping.xin/2016/10/18/nginx-e5-81/index.html">
 <meta property="og:site_name" content="Chow's Notes">
-<meta property="og:description" content="&amp;#x7528;lsof / | grep -i delete &amp;#x4ECE;&amp;#x6839;&amp;#x76EE;&amp;#x5F55;&amp;#x5B9A;&amp;#x4F4D;&amp;#x6253;&amp;#x5F00;&amp;#x7684;&amp;#x88AB;&amp;#x5220;&amp;#x9664;&amp;#x7684;&amp;#x6587;&amp;#x4EF6;
-&amp;#x5982;&amp;#x679C;&amp;#x5B9A;&amp;#x4F4D;&amp;#x5230;&amp;#x67D0">
+<meta property="og:description" content="&amp;#x914D;&amp;#x7F6E;nginx&amp;#x53C2;&amp;#x6570;&amp;#x4E3A;
+proxy_set_header  Host            $host:$server_port;
+&amp;#x8FD9;&amp;#x6837;&amp;#x540E;&amp;#x7AEF;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x80FD;&amp;#x83B7;&amp;#x53D6;&amp;#x5230;&amp;#x5305;&amp;#x6">
 <meta property="og:updated_time" content="2016-12-30T16:03:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="linux 故障：df -h统计磁盘空间占用太多，但又du -h找不到大的文件">
-<meta name="twitter:description" content="&amp;#x7528;lsof / | grep -i delete &amp;#x4ECE;&amp;#x6839;&amp;#x76EE;&amp;#x5F55;&amp;#x5B9A;&amp;#x4F4D;&amp;#x6253;&amp;#x5F00;&amp;#x7684;&amp;#x88AB;&amp;#x5220;&amp;#x9664;&amp;#x7684;&amp;#x6587;&amp;#x4EF6;
-&amp;#x5982;&amp;#x679C;&amp;#x5B9A;&amp;#x4F4D;&amp;#x5230;&amp;#x67D0">
+<meta name="twitter:title" content="Nginx做代理，当侦听端口非80时，后端服务器重定向的主机名不会包含端口">
+<meta name="twitter:description" content="&amp;#x914D;&amp;#x7F6E;nginx&amp;#x53C2;&amp;#x6570;&amp;#x4E3A;
+proxy_set_header  Host            $host:$server_port;
+&amp;#x8FD9;&amp;#x6837;&amp;#x540E;&amp;#x7AEF;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x80FD;&amp;#x83B7;&amp;#x53D6;&amp;#x5230;&amp;#x5305;&amp;#x6">
 
 
 
@@ -126,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://notes.zhouping.xin/2014/12/22/linux-e6-95-85-e9-9a-9c-ef-bc-9adf-h-e7-bb-9f-e8-ae-a1-e7-a3-81-e7-9b-98-e7-a9-ba-e9-97-b4-e5-8d-a0-e7-94-a8-e5-a4-aa-e5-a4-9a-ef-bc-8c-e4-bd-86-e5-8f-88du-h-e6-89-be-e4-b8-8d-e5-88-b0-e5-a4-a7/"/>
+  <link rel="canonical" href="http://notes.zhouping.xin/2016/10/18/nginx-e5-81/"/>
 
 
 
 
 
-  <title> linux 故障：df -h统计磁盘空间占用太多，但又du -h找不到大的文件 | Chow's Notes </title>
+  <title> Nginx做代理，当侦听端口非80时，后端服务器重定向的主机名不会包含端口 | Chow's Notes </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -255,7 +258,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://notes.zhouping.xin/2014/12/22/linux-e6-95-85-e9-9a-9c-ef-bc-9adf-h-e7-bb-9f-e8-ae-a1-e7-a3-81-e7-9b-98-e7-a9-ba-e9-97-b4-e5-8d-a0-e7-94-a8-e5-a4-aa-e5-a4-9a-ef-bc-8c-e4-bd-86-e5-8f-88du-h-e6-89-be-e4-b8-8d-e5-88-b0-e5-a4-a7/">
+  <link itemprop="mainEntityOfPage" href="http://notes.zhouping.xin/2016/10/18/nginx-e5-81/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Chow">
@@ -279,7 +282,7 @@
             
             
               
-                linux 故障：df -h统计磁盘空间占用太多，但又du -h找不到大的文件
+                Nginx做代理，当侦听端口非80时，后端服务器重定向的主机名不会包含端口
               
             
           </h1>
@@ -294,8 +297,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-12-22T02:30:00+08:00">
-                2014-12-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-18T10:34:32+08:00">
+                2016-10-18
               </time>
             
 
@@ -317,8 +320,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LINUX/" itemprop="url" rel="index">
-                    <span itemprop="name">LINUX</span>
+                  <a href="/categories/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/nginx/未分类/" itemprop="url" rel="index">
+                    <span itemprop="name">未分类</span>
                   </a>
                 </span>
 
@@ -335,8 +349,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2014/12/22/linux-e6-95-85-e9-9a-9c-ef-bc-9adf-h-e7-bb-9f-e8-ae-a1-e7-a3-81-e7-9b-98-e7-a9-ba-e9-97-b4-e5-8d-a0-e7-94-a8-e5-a4-aa-e5-a4-9a-ef-bc-8c-e4-bd-86-e5-8f-88du-h-e6-89-be-e4-b8-8d-e5-88-b0-e5-a4-a7/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/22/linux-e6-95-85-e9-9a-9c-ef-bc-9adf-h-e7-bb-9f-e8-ae-a1-e7-a3-81-e7-9b-98-e7-a9-ba-e9-97-b4-e5-8d-a0-e7-94-a8-e5-a4-aa-e5-a4-9a-ef-bc-8c-e4-bd-86-e5-8f-88du-h-e6-89-be-e4-b8-8d-e5-88-b0-e5-a4-a7/" itemprop="commentCount"></span>
+                <a href="/2016/10/18/nginx-e5-81/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/18/nginx-e5-81/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -362,18 +376,9 @@
       
 
       
-        <p>&#x7528;lsof / | grep -i delete &#x4ECE;&#x6839;&#x76EE;&#x5F55;&#x5B9A;&#x4F4D;&#x6253;&#x5F00;&#x7684;&#x88AB;&#x5220;&#x9664;&#x7684;&#x6587;&#x4EF6;</p>
-<p>&#x5982;&#x679C;&#x5B9A;&#x4F4D;&#x5230;&#x67D0;&#x6587;&#x4EF6;&#x5360;&#x7528;&#x7A7A;&#x95F4;&#x5F88;&#x5927;</p>
-<p>&#x4E3B;&#x8981;&#x662F;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x5728;&#x5220;&#x9664;&#x8FD9;&#x4E2A;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x7684;&#x65F6;&#x5019;&#x662F;&#x7528;rm -rf *.log&#x8FD9;&#x6837;&#x7684;&#x547D;&#x4EE4;&#x5220;&#x9664;&#x7684;&#xFF0C;&#x5220;&#x9664;&#x65E5;&#x5FD7;&#x4E4B;&#x540E;&#x53C8;&#x6CA1;&#x6709;&#x91CD;&#x542F;&#x76F8;&#x5E94;&#x7684;&#x8FDB;&#x7A0B;&#xFF0C;&#x5BFC;&#x81F4;inode&#x8282;&#x70B9;&#x4E0D;&#x88AB;&#x91CA;&#x653E;&#xFF0C;&#x7A7A;&#x95F4;&#x4E00;&#x76F4;&#x88AB;&#x5360;&#x7528;&#x3002;<br>&#x5982;&#x679C;&#x6211;&#x4EEC;&#x7528;echo &#x201C; &#x201D; &gt; /logpath/201109.log&#x8FD9;&#x6837;&#x7684;&#x547D;&#x4EE4;&#x6765;&#x6E05;&#x7A7A;&#x65E5;&#x5FD7;</p>
-<p>&#xA0;</p>
-<p>&#x76F8;&#x5173;&#x5DE5;&#x5177;&#xFF1A;</p>
-<p>df -h</p>
-<p>du -h</p>
-<p>du -sh</p>
-<p>du -h &#x2013;max-depth=1</p>
-<p>lsof / | grep -i delete</p>
-<p>lsof abc.txt &#x663E;&#x793A;&#x5F00;&#x542F;&#x6587;&#x4EF6;abc.txt&#x7684;&#x8FDB;&#x7A0B;<br>lsof -c abc &#x663E;&#x793A;abc&#x8FDB;&#x7A0B;&#x73B0;&#x5728;&#x6253;&#x5F00;&#x7684;&#x6587;&#x4EF6;<br>lsof -c -p 1234 &#x5217;&#x51FA;&#x8FDB;&#x7A0B;&#x53F7;&#x4E3A;1234&#x7684;&#x8FDB;&#x7A0B;&#x6240;&#x6253;&#x5F00;&#x7684;&#x6587;&#x4EF6;</p>
-<p>find / -size +100c -print &#x4ECE;&#x6839;&#x76D8;&#x59CB;&#x67E5;&#x627E;&#x4E8E;100&#x5B57;&#x8282;&#x6587;&#x4EF6;</p>
+        <p>&#x914D;&#x7F6E;nginx&#x53C2;&#x6570;&#x4E3A;</p>
+<p>proxy_set_header  Host            $host:$server_port;</p>
+<p>&#x8FD9;&#x6837;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x80FD;&#x83B7;&#x53D6;&#x5230;&#x5305;&#x62EC;&#x7AEF;&#x53E3;&#x7684;&#x5B8C;&#x6574;&#x4E3B;&#x673A;&#x540D;</p>
 
       
     </div>
@@ -400,8 +405,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/12/22/blobbinarylargeobject/" rel="next" title="BLOB (binary large object)">
-                <i class="fa fa-chevron-left"></i> BLOB (binary large object)
+              <a href="/2016/08/29/e6-9c-af-e8-af-ad-2/" rel="next" title="术语">
+                <i class="fa fa-chevron-left"></i> 术语
               </a>
             
           </div>
@@ -410,8 +415,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/12/22/python-e7-bd-91-e7-bb-9c-e7-bc-96-e7-a8-8b-e7-ac-94-e8-ae-b0/" rel="prev" title="PYTHON网络编程笔记">
-                PYTHON网络编程笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/10/18/python-e5-ae-89-e8-a3-85easy-install-e5-92-8cpip/" rel="prev" title="python 安装easy_install和pip">
+                python 安装easy_install和pip <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -427,10 +432,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2014/12/22/linux-e6-95-85-e9-9a-9c-ef-bc-9adf-h-e7-bb-9f-e8-ae-a1-e7-a3-81-e7-9b-98-e7-a9-ba-e9-97-b4-e5-8d-a0-e7-94-a8-e5-a4-aa-e5-a4-9a-ef-bc-8c-e4-bd-86-e5-8f-88du-h-e6-89-be-e4-b8-8d-e5-88-b0-e5-a4-a7/"
-     data-title="linux 故障：df -h统计磁盘空间占用太多，但又du -h找不到大的文件"
+        <div class="ds-share flat" data-thread-key="2016/10/18/nginx-e5-81/"
+     data-title="Nginx做代理，当侦听端口非80时，后端服务器重定向的主机名不会包含端口"
      data-content=""
-     data-url="http://notes.zhouping.xin/2014/12/22/linux-e6-95-85-e9-9a-9c-ef-bc-9adf-h-e7-bb-9f-e8-ae-a1-e7-a3-81-e7-9b-98-e7-a9-ba-e9-97-b4-e5-8d-a0-e7-94-a8-e5-a4-aa-e5-a4-9a-ef-bc-8c-e4-bd-86-e5-8f-88du-h-e6-89-be-e4-b8-8d-e5-88-b0-e5-a4-a7/">
+     data-url="http://notes.zhouping.xin/2016/10/18/nginx-e5-81/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -457,8 +462,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2014/12/22/linux-e6-95-85-e9-9a-9c-ef-bc-9adf-h-e7-bb-9f-e8-ae-a1-e7-a3-81-e7-9b-98-e7-a9-ba-e9-97-b4-e5-8d-a0-e7-94-a8-e5-a4-aa-e5-a4-9a-ef-bc-8c-e4-bd-86-e5-8f-88du-h-e6-89-be-e4-b8-8d-e5-88-b0-e5-a4-a7/"
-           data-title="linux 故障：df -h统计磁盘空间占用太多，但又du -h找不到大的文件" data-url="http://notes.zhouping.xin/2014/12/22/linux-e6-95-85-e9-9a-9c-ef-bc-9adf-h-e7-bb-9f-e8-ae-a1-e7-a3-81-e7-9b-98-e7-a9-ba-e9-97-b4-e5-8d-a0-e7-94-a8-e5-a4-aa-e5-a4-9a-ef-bc-8c-e4-bd-86-e5-8f-88du-h-e6-89-be-e4-b8-8d-e5-88-b0-e5-a4-a7/">
+      <div class="ds-thread" data-thread-key="2016/10/18/nginx-e5-81/"
+           data-title="Nginx做代理，当侦听端口非80时，后端服务器重定向的主机名不会包含端口" data-url="http://notes.zhouping.xin/2016/10/18/nginx-e5-81/">
       </div>
     
   </div>
