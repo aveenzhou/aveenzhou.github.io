@@ -1,0 +1,695 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hello, World" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="1 class Singleton(object): 2     def new(cls,args,**kw): 3         if not hasattr(cls,&amp;#x201C;_instance&amp;#x201C;): 4             orig=super(Singleton,cls) 5             cls._instance=orig.new(cls,arg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python中实现单例模式的几种方法">
+<meta property="og:url" content="http://notes.zhouping.xin/2012/09/06/python-e4-b8-ad-e5-ae-9e-e7-8e-b0-e5-8d-95-e4-be-8b-e6-a8-a1-e5-bc-8f-e7-9a-84-e5-87-a0-e7-a7-8d-e6-96-b9-e6-b3-95/index.html">
+<meta property="og:site_name" content="Chow's Notes">
+<meta property="og:description" content="1 class Singleton(object): 2     def new(cls,args,**kw): 3         if not hasattr(cls,&amp;#x201C;_instance&amp;#x201C;): 4             orig=super(Singleton,cls) 5             cls._instance=orig.new(cls,arg">
+<meta property="og:updated_time" content="2016-12-30T16:03:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python中实现单例模式的几种方法">
+<meta name="twitter:description" content="1 class Singleton(object): 2     def new(cls,args,**kw): 3         if not hasattr(cls,&amp;#x201C;_instance&amp;#x201C;): 4             orig=super(Singleton,cls) 5             cls._instance=orig.new(cls,arg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: false,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://notes.zhouping.xin/2012/09/06/python-e4-b8-ad-e5-ae-9e-e7-8e-b0-e5-8d-95-e4-be-8b-e6-a8-a1-e5-bc-8f-e7-9a-84-e5-87-a0-e7-a7-8d-e6-96-b9-e6-b3-95/"/>
+
+
+
+
+
+  <title> Python中实现单例模式的几种方法 | Chow's Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Chow's Notes</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://notes.zhouping.xin/2012/09/06/python-e4-b8-ad-e5-ae-9e-e7-8e-b0-e5-8d-95-e4-be-8b-e6-a8-a1-e5-bc-8f-e7-9a-84-e5-87-a0-e7-a7-8d-e6-96-b9-e6-b3-95/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Chow">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Chow's Notes">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Chow's Notes" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python中实现单例模式的几种方法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2012-09-06T10:22:00+08:00">
+                2012-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2012/09/06/python-e4-b8-ad-e5-ae-9e-e7-8e-b0-e5-8d-95-e4-be-8b-e6-a8-a1-e5-bc-8f-e7-9a-84-e5-87-a0-e7-a7-8d-e6-96-b9-e6-b3-95/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2012/09/06/python-e4-b8-ad-e5-ae-9e-e7-8e-b0-e5-8d-95-e4-be-8b-e6-a8-a1-e5-bc-8f-e7-9a-84-e5-87-a0-e7-a7-8d-e6-96-b9-e6-b3-95/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><div class="cnblogs_code"></div></p>
+<p><pre><span style="color: #008080;"> 1</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Singleton(object):<br></span><span style="color: #008080;"> 2</span>     <span style="color: #0000ff;">def</span> <span style="color: #800080;"><strong>new</strong></span>(cls,<em>args,**<span style="color: #000000;">kw):<br></span><span style="color: #008080;"> 3</span>         <span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span> hasattr(cls,<span style="color: #800000;">&#x201C;</span><span style="color: #800000;">_instance</span><span style="color: #800000;">&#x201C;</span><span style="color: #000000;">):<br></span><span style="color: #008080;"> 4</span>             orig=<span style="color: #000000;">super(Singleton,cls)<br></span><span style="color: #008080;"> 5</span>             cls._instance=orig.<span style="color: #800080;"><strong>new</strong></span>(cls,</em>args,**<span style="color: #000000;">kw)<br></span><span style="color: #008080;"> 6</span>             <span style="color: #0000ff;">print</span> <span style="color: #800000;">&#x201C;</span><span style="color: #800000;">Ok</span><span style="color: #800000;">&#x201C;</span><br><span style="color: #008080;"> 7</span>         <span style="color: #0000ff;">return</span><span style="color: #000000;"> cls._instance<br></span><span style="color: #008080;"> 8</span><br><span style="color: #008080;"> 9</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> MyClass(Singleton):<br></span><span style="color: #008080;">10</span>     <span style="color: #0000ff;">def</span> <span style="color: #800080;"><strong>init</strong></span><span style="color: #000000;">(self,name):<br></span><span style="color: #008080;">11</span>         self.name=name</pre></p>
+<p><div class="cnblogs_code"></div></p>
+<p><pre><span style="color: #0000ff;">def</span><span style="color: #000000;"> singleton(cls):<br>    instances </span>=<span style="color: #000000;"> {}<br>    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> getinstance():<br>            </span><span style="color: #0000ff;">if</span> cls <span style="color: #0000ff;">not</span> <span style="color: #0000ff;">in</span><span style="color: #000000;"> instances:<br>                instances[cls] </span>=<span style="color: #000000;"> cls()<br>            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> instances[cls]<br>    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> getinstance<br>@singleton<br></span><span style="color: #0000ff;">class</span><span style="color: #000000;"> MyClass:<br>           </span><span style="color: #0000ff;">pass</span></pre><br><br>&#xA0;</p>
+<p><pre><strong> &#x7279;&#x6B8A;&#x65B9;&#x6CD5;<strong>new</strong>&#x662F;&#x4E00;&#x4E2A;&#x5143;&#x6784;&#x9020;&#x7A0B;&#x5E8F;&#xFF0C;&#x6BCF;&#x5F53;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x5FC5;&#x987B;&#x88AB;factory&#x7C7B;&#x5B9E;&#x4F8B;&#x5316;&#x65F6;&#x5C31;&#x5C06;&#x8C03;&#x7528;&#x5B83;</strong><br><strong><strong>new</strong>&#x65B9;&#x6CD5;&#x5FC5;&#x987B;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;&#xFF0C;&#x56E0;&#x6B64;&#x5B83;&#x53EF;&#x4EE5;&#x5728;&#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x4E4B;&#x524D;&#x6216;&#x4E4B;&#x540E;&#x4FEE;&#x6539;&#x7C7B;</strong><br><strong>&#x56E0;&#x4E3A;<strong>init</strong>&#x5728;&#x5B50;&#x7C7B;&#x4E2D;&#x4E0D;&#x4F1A;&#x88AB;&#x9690;&#x5F0F;&#x8C03;&#x7528;&#xFF0C;&#x6240;&#x4EE5;<strong>new</strong>&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x786E;&#x5B9A;&#x5DF2;&#x7ECF;&#x5728;&#x6574;&#x4E2A;&#x7C7B;&#x5C42;&#x6B21;&#x5B8C;&#x6210;&#x4E86;&#x521D;&#x59CB;&#x5316;&#x6784;&#x9020;</strong><br><strong><strong>new</strong>&#x662F;&#x5BF9;&#x4E8E;&#x5BF9;&#x8C61;&#x72B6;&#x6001;&#x9690;&#x5F0F;&#x521D;&#x59CB;&#x5316;&#x9700;&#x6C42;&#x7684;&#x56DE;&#x5E94;&#xFF0C;&#x4F7F;&#x5F97;&#x53EF;&#x4EE5;&#x5728;&#x6BD4;<strong>init</strong>&#x66F4;&#x4F4E;&#x7684;&#x4E00;&#x4E2A;&#x5C42;&#x6B21;&#x4E0A;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x521D;&#x59CB;&#x5316;&#xFF0C;<br>&#x8FD9;&#x4E2A;&#x521D;&#x59CB;&#x5316;&#x603B;&#x662F;&#x4F1A;&#x88AB;&#x8C03;&#x7528;</strong></pre><br>&#x4E0E;<strong>init</strong>()&#x76F8;&#x6BD4;<strong>new</strong>()&#x65B9;&#x6CD5;&#x66F4;&#x50CF;&#x4E00;&#x4E2A;&#x771F;&#x6B63;&#x7684;&#x6784;&#x9020;&#x5668;&#x3002;&#x968F;&#x7740;&#x7C7B;&#x548C;&#x7C7B;&#x578B;&#x7684;&#x7EDF;&#x4E00;&#xFF0C;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x5BF9;&#x5185;&#x5EFA;&#x7C7B;&#x578B;&#x8FDB;&#x884C;&#x6D3E;&#x751F;&#xFF0C;&#x56E0;&#x6B64;&#x9700;&#x8981;&#x4E00;&#x79CD;&#x9014;&#x5F84;&#x6765;&#x5B9E;&#x4F8B;&#x5316;&#x4E0D;&#x53EF;&#x53D8;&#x5BF9;&#x8C61;&#xFF0C;&#x6BD4;&#x5982;&#x6D3E;&#x751F;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#x89E3;&#x91CA;&#x5668;&#x5219;&#x8C03;&#x7528;&#x7C7B;&#x7684;<strong>new</strong>&#xFF08;&#xFF09;&#x65B9;&#x6CD5;&#xFF0C;&#x4E00;&#x4E2A;&#x9759;&#x6001;&#x65B9;&#x6CD5;&#xFF0C;&#x5E76;&#x4E14;&#x4F20;&#x5165;&#x7684;&#x53C2;&#x6570;&#x662F;&#x5728;&#x7C7B;&#x5B9E;&#x4F8B;&#x5316;&#x64CD;&#x4F5C;&#x65F6;&#x751F;&#x6210;&#x7684;&#x3002;<strong>new</strong>()&#x4F1A;&#x8C03;&#x7528;&#x7236;&#x7C7B;&#x7684;<strong>new</strong>()&#x6765;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;&#xFF08;&#x5411;&#x4E0A;&#x4EE3;&#x7406;&#xFF09;<br><strong>new</strong>&#x5FC5;&#x987B;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5408;&#x6CD5;&#x7684;&#x5B9E;&#x4F8B;&#xFF0C;&#x8FD9;&#x6837;&#x89E3;&#x91CA;&#x5668;&#x5728;&#x8C03;&#x7528;<strong>init</strong>()&#x65F6;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x5427;&#x8FD9;&#x4E2A;&#x5B9E;&#x4F8B;&#x4F5C;&#x4E3A;self&#x4F20;&#x7ED9;&#x4ED6;&#x3002;&#x8C03;&#x7528;&#x7236;&#x7C7B;&#x7684;<strong>new</strong>&#xFF08;&#xFF09;&#x6765;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;&#xFF0C;&#x6B63;&#x5411;&#x5176;&#x4ED6;&#x8BED;&#x8A00;&#x4F7F;&#x7528;new&#x5173;&#x952E;&#x5B57;&#x4E00;&#x6837;</p>
+<p><br>&#x53E6;&#x4E00;&#x79CD;&#x65B9;&#x6CD5;&#xFF0C;&#x901A;&#x8FC7;&#x4EE3;&#x8868;&#x7684;&#x5F62;&#x5F0F;&#xFF0C;&#x4F7F;&#x7528;&#x9012;&#x5F52;&#x7684;&#x65B9;&#x5F0F;&#x5EFA;&#x7ACB;&#x5B50;&#x7C7B;&#xFF1A;</p>
+<p><div class="cnblogs_code"></div></p>
+<p><pre><span style="color: #008080;"> 1</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> OnlyOne:<br></span><span style="color: #008080;"> 2</span>     <span style="color: #0000ff;">class</span> <span style="color: #800080;"><strong>OnlyOne</strong></span><span style="color: #000000;">:<br></span><span style="color: #008080;"> 3</span>         <span style="color: #0000ff;">def</span> <span style="color: #800080;">init<strong></strong></span><span style="color: #000000;">(self, arg):<br></span><span style="color: #008080;"> 4</span>             self.val =<span style="color: #000000;"> arg<br></span><span style="color: #008080;"> 5</span>         <span style="color: #0000ff;">def</span> <span style="color: #800080;">str<strong></strong></span><span style="color: #000000;">(self):<br></span><span style="color: #008080;"> 6</span>             <span style="color: #0000ff;">return</span> <code>self</code> +<span style="color: #000000;"> self.val<br></span><span style="color: #008080;"> 7</span>     instance =<span style="color: #000000;"> None<br></span><span style="color: #008080;"> 8</span>     <span style="color: #0000ff;">def</span> <span style="color: #800080;">init<strong></strong></span><span style="color: #000000;">(self, arg):<br></span><span style="color: #008080;"> 9</span>         <span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> OnlyOne.instance:<br></span><span style="color: #008080;">10</span>             OnlyOne.instance = OnlyOne.<span style="color: #800080;">OnlyOne</span><span style="color: #000000;">(arg)<br></span><span style="color: #008080;">11</span>         <span style="color: #0000ff;">else</span><span style="color: #000000;">:<br></span><span style="color: #008080;">12</span>             OnlyOne.instance.val =<span style="color: #000000;"> arg<br></span><span style="color: #008080;">13</span>     <span style="color: #0000ff;">def</span> <span style="color: #800080;"><strong>getattr</strong></span><span style="color: #000000;">(self, name):<br></span><span style="color: #008080;">14</span>         <span style="color: #0000ff;">return</span><span style="color: #000000;"> getattr(self.instance, name)<br></span><span style="color: #008080;">15</span><br><span style="color: #008080;">16</span> x = OnlyOne(<span style="color: #800000;">&#x2018;</span><span style="color: #800000;">sausage</span><span style="color: #800000;">&#x2018;</span><span style="color: #000000;">)<br></span><span style="color: #008080;">17</span> <span style="color: #0000ff;">print</span><span style="color: #000000;"> x<br></span><span style="color: #008080;">18</span> y = OnlyOne(<span style="color: #800000;">&#x2018;</span><span style="color: #800000;">eggs</span><span style="color: #800000;">&#x2018;</span><span style="color: #000000;">)<br></span><span style="color: #008080;">19</span> <span style="color: #0000ff;">print</span><span style="color: #000000;"> y<br></span><span style="color: #008080;">20</span> z = OnlyOne(<span style="color: #800000;">&#x2018;</span><span style="color: #800000;">spam</span><span style="color: #800000;">&#x2018;</span><span style="color: #000000;">)<br></span><span style="color: #008080;">21</span> <span style="color: #0000ff;">print</span><span style="color: #000000;"> z<br></span><span style="color: #008080;">22</span> <span style="color: #0000ff;">print</span><span style="color: #000000;"> x<br></span><span style="color: #008080;">23</span> <span style="color: #0000ff;">print</span><span style="color: #000000;"> y<br></span><span style="color: #008080;">24</span> <span style="color: #0000ff;">print</span><span style="color: #000000;"> <code>x</code><br></span><span style="color: #008080;">25</span> <span style="color: #0000ff;">print</span><span style="color: #000000;"> <code>y</code><br></span><span style="color: #008080;">26</span> <span style="color: #0000ff;">print</span><span style="color: #000000;"> <code>z</code><br></span><span style="color: #008080;">27</span> output = <span style="color: #800000;">&#x2018;&#x2019;&#x2019;</span><br><span style="color: #008080;">28</span> <span style="color: #800000;">sausage<br></span><span style="color: #008080;">29</span> <span style="color: #800000;">eggs<br></span><span style="color: #008080;">30</span> <span style="color: #800000;">spam<br></span><span style="color: #008080;">31</span> <span style="color: #800000;">spam<br></span><span style="color: #008080;">32</span> <span style="color: #800000;">spam<br></span><span style="color: #008080;">33</span><br><span style="color: #008080;">34</span><br><span style="color: #008080;">35</span><br><span style="color: #008080;">36</span> <span style="color: #800000;">&#x2018;&#x2019;&#x2019;</span></pre><br><br>&#xA0;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2012/09/06/e7-94-a8python-e5-ae-9e-e7-8e-b0-e7-9a-84-e5-b8-b8-e7-94-a8-e7-ae-97-e6-b3-95/" rel="next" title="用python实现的常用算法">
+                <i class="fa fa-chevron-left"></i> 用python实现的常用算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2012/09/06/windows-e4-b8-8b-e6-90-ad-e5-bb-baeclipse-e5-bc-80-e5-8f-91python-e7-9a-84-e7-8e-af-e5-a2-83/" rel="prev" title="windows下搭建eclipse开发python的环境">
+                windows下搭建eclipse开发python的环境 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2012/09/06/python-e4-b8-ad-e5-ae-9e-e7-8e-b0-e5-8d-95-e4-be-8b-e6-a8-a1-e5-bc-8f-e7-9a-84-e5-87-a0-e7-a7-8d-e6-96-b9-e6-b3-95/"
+     data-title="Python中实现单例模式的几种方法"
+     data-content=""
+     data-url="http://notes.zhouping.xin/2012/09/06/python-e4-b8-ad-e5-ae-9e-e7-8e-b0-e5-8d-95-e4-be-8b-e6-a8-a1-e5-bc-8f-e7-9a-84-e5-87-a0-e7-a7-8d-e6-96-b9-e6-b3-95/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2012/09/06/python-e4-b8-ad-e5-ae-9e-e7-8e-b0-e5-8d-95-e4-be-8b-e6-a8-a1-e5-bc-8f-e7-9a-84-e5-87-a0-e7-a7-8d-e6-96-b9-e6-b3-95/"
+           data-title="Python中实现单例模式的几种方法" data-url="http://notes.zhouping.xin/2012/09/06/python-e4-b8-ad-e5-ae-9e-e7-8e-b0-e5-8d-95-e4-be-8b-e6-a8-a1-e5-bc-8f-e7-9a-84-e5-87-a0-e7-a7-8d-e6-96-b9-e6-b3-95/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Chow" />
+          <p class="site-author-name" itemprop="name">Chow</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">121</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chow</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chow-notes"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

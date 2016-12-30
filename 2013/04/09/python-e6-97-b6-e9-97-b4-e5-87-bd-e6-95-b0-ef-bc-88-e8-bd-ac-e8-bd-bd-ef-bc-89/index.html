@@ -1,0 +1,687 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hello, World" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="### &amp;#x539F;&amp;#x6587;&amp;#x51FA;&amp;#x5904;http://blog.163.com/jackylau_v/blog/static/1757540402011102921232980/&amp;#x5728;&amp;#x5E94;&amp;#x7528;&amp;#x7A0B;&amp;#x5E8F;&amp;#x7684;&amp;#x5F00;&amp;#x53D1;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4E2D;&amp;#xFF0C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python时间函数  （转载）">
+<meta property="og:url" content="http://notes.zhouping.xin/2013/04/09/python-e6-97-b6-e9-97-b4-e5-87-bd-e6-95-b0-ef-bc-88-e8-bd-ac-e8-bd-bd-ef-bc-89/index.html">
+<meta property="og:site_name" content="Chow's Notes">
+<meta property="og:description" content="### &amp;#x539F;&amp;#x6587;&amp;#x51FA;&amp;#x5904;http://blog.163.com/jackylau_v/blog/static/1757540402011102921232980/&amp;#x5728;&amp;#x5E94;&amp;#x7528;&amp;#x7A0B;&amp;#x5E8F;&amp;#x7684;&amp;#x5F00;&amp;#x53D1;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4E2D;&amp;#xFF0C">
+<meta property="og:updated_time" content="2016-12-30T16:03:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python时间函数  （转载）">
+<meta name="twitter:description" content="### &amp;#x539F;&amp;#x6587;&amp;#x51FA;&amp;#x5904;http://blog.163.com/jackylau_v/blog/static/1757540402011102921232980/&amp;#x5728;&amp;#x5E94;&amp;#x7528;&amp;#x7A0B;&amp;#x5E8F;&amp;#x7684;&amp;#x5F00;&amp;#x53D1;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4E2D;&amp;#xFF0C">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: false,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://notes.zhouping.xin/2013/04/09/python-e6-97-b6-e9-97-b4-e5-87-bd-e6-95-b0-ef-bc-88-e8-bd-ac-e8-bd-bd-ef-bc-89/"/>
+
+
+
+
+
+  <title> python时间函数  （转载） | Chow's Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Chow's Notes</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://notes.zhouping.xin/2013/04/09/python-e6-97-b6-e9-97-b4-e5-87-bd-e6-95-b0-ef-bc-88-e8-bd-ac-e8-bd-bd-ef-bc-89/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Chow">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Chow's Notes">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Chow's Notes" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                python时间函数  （转载）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2013-04-09T08:36:00+08:00">
+                2013-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2013/04/09/python-e6-97-b6-e9-97-b4-e5-87-bd-e6-95-b0-ef-bc-88-e8-bd-ac-e8-bd-bd-ef-bc-89/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/04/09/python-e6-97-b6-e9-97-b4-e5-87-bd-e6-95-b0-ef-bc-88-e8-bd-ac-e8-bd-bd-ef-bc-89/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div class="multicntwrap"><br><div class="multicnt"><br><br>### &#x539F;&#x6587;&#x51FA;&#x5904;<a href="http://blog.163.com/jackylau_v/blog/static/1757540402011102921232980/" target="_blank" rel="external">http://blog.163.com/jackylau_v/blog/static/1757540402011102921232980/</a><br><br></div><br></div><br><div class="bct fc05 fc11 nbw-blog ztag js-fs2"><br><br>&#x5728;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7684;&#x5F00;&#x53D1;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x96BE;&#x514D;&#x8981;&#x8DDF;&#x65E5;&#x671F;&#x3001;&#x65F6;&#x95F4;&#x5904;&#x7406;&#x6253;&#x4EA4;&#x9053;&#x3002;<br><br>&#xA0;<br><br>#&#x53D6;&#x5F53;&#x65E5;&#x65F6;&#x95F4;&#x7684;&#x96F6;&#x70B9;&#x96F6;&#x5206;&#x96F6;&#x79D2;&#x7684;&#x65F6;&#x95F4;&#x6233;<br>def getzerotime():<br>tm = int(time.time())<br>dt = datetime.datetime.fromtimestamp(tm).strftime(&#x201C;%Y%m%d%H%M%S&#x201D;)<br>d_time = time.strptime(dt, &#x2018;%Y%m%d%H%M%S&#x2019;)<br>dd_time = datetime.datetime(<em>d_time[:3])<br>i_et = int(time.mktime(dd_time.timetuple()))<br>return i_et<br><br>#&#x53D6;&#x5F97;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x7684;&#x683C;&#x5F0F;&#x5316;&#x65F6;&#x95F4;&#x4E32;<br>def getformattime(format=&#x201D;%Y%m%d%H%M%S&#x201D;):<br>tm = int(time.time())<br>dt = datetime.datetime.fromtimestamp(tm).strftime(&#x201C;%Y%m%d%H%M%S&#x201D;)<br>return dt<br><br>&#xA0;<br><br>&#x5982;&#xFF1A;&#x8BB0;&#x5F55;&#x4E00;&#x4E2A;&#x590D;&#x6742;&#x7B97;&#x6CD5;&#x7684;&#x6267;&#x884C;&#x65F6;&#x95F4;&#xFF1B;&#x7F51;&#x7EDC;&#x901A;&#x4FE1;&#x4E2D;&#x6570;&#x636E;&#x5305;&#x7684;&#x5EF6;&#x8FDF;&#x7B49;&#x7B49;&#x3002;<br><br>Python&#x4E2D;&#x63D0;&#x4F9B;&#x4E86;time, datetime calendar&#x7B49;&#x6A21;&#x5757;&#x6765;&#x5904;&#x7406;&#x65F6;&#x95F4;&#x65E5;&#x671F;&#xFF0C;&#x4ECA;&#x5929;&#x5BF9;time&#x6A21;&#x5757;&#x4E2D;&#x6700;&#x5E38;&#x7528;&#x7684;&#x51E0;&#x4E2A;&#x51FD;&#x6570;&#x4F5C;&#x4E00;&#x4E2A;&#x4ECB;&#x7ECD;&#x3002;<br><br>time.time<br><br>time.time()&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x4ECE;1970&#x5E74;1&#x6708;1&#x65E5;&#x4EE5;&#x6765;&#x7684;&#x79D2;&#x6570;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x6D6E;&#x70B9;&#x6570;&#x3002;<br><br>time.sleep<br><br>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8C03;&#x7528;time.sleep&#x6765;&#x6302;&#x8D77;&#x5F53;&#x524D;&#x7684;&#x8FDB;&#x7A0B;&#x3002;time.sleep&#x63A5;&#x6536;&#x4E00;&#x4E2A;&#x6D6E;&#x70B9;&#x578B;&#x53C2;&#x6570;&#xFF0C;&#x8868;&#x793A;&#x8FDB;&#x7A0B;&#x6302;&#x8D77;&#x7684;&#x65F6;&#x95F4;&#x3002;<br><br>&#xA0;<br><br>time.clock<br><br>&#x5728;windows&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E0A;&#xFF0C;time.clock() &#x8FD4;&#x56DE;&#x7B2C;&#x4E00;&#x6B21;&#x8C03;&#x7528;&#x8BE5;&#x65B9;&#x6CD5;&#x5230;&#x73B0;&#x5728;&#x7684;&#x79D2;&#x6570;&#xFF0C;&#x5176;&#x7CBE;&#x786E;&#x5EA6;&#x9AD8;&#x4E8E;1&#x5FAE;&#x79D2;&#x3002;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8BE5;&#x51FD;&#x6570;&#x6765;&#x8BB0;&#x5F55;&#x7A0B;&#x5E8F;&#x6267;&#x884C;&#x7684;&#x65F6;&#x95F4;&#x3002;&#x4E0B;&#x9762;&#x662F;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x4F8B;&#x5B50;&#xFF1A;<br><br>import time<br><br>print time.clock() #1<br><br>time.sleep(2)<br><br>print time.clock() #2<br><br>time.sleep(3)<br><br>print time.clock() #3<br><br>#&#x2014;- result #3.91111160776e-06 #1.99919151736 #4.99922364435<br><br>import time<br><br>print time.clock() #1<br><br>time.sleep(2)<br><br>print time.clock() #2<br><br>time.sleep(3)<br><br>print time.clock() #3<br><br>#&#x2014;- result #3.91111160776e-06 #1.99919151736 #4.99922364435<br><br>&#xA0;<br><br>time.gmtime<br><br>&#x8BE5;&#x51FD;&#x6570;&#x539F;&#x578B;&#x4E3A;&#xFF1A;time.gmtime([sec])&#xFF0C;&#x53EF;&#x9009;&#x7684;&#x53C2;&#x6570;sec&#x8868;&#x793A;&#x4ECE;1970-1-1&#x4EE5;&#x6765;&#x7684;&#x79D2;&#x6570;&#x3002;&#x5176;&#x9ED8;&#x8BA4;&#x503C;&#x4E3A;time.time()&#xFF0C;&#x51FD;&#x6570;&#x8FD4;&#x56DE;time.struct_time&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#x3002;&#xFF08;struct_time&#x662F;&#x5728;time&#x6A21;&#x5757;&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x8868;&#x793A;&#x65F6;&#x95F4;&#x7684;&#x5BF9;&#x8C61;&#xFF09;&#xFF0C;<br><br>&#x4E0B;&#x9762;&#x662F;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x4F8B;&#x5B50;&#xFF1A;<br><br>import time print time.gmtime()<br><br>#&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x7684;struct_time&#x5BF9;&#x8C61;<br><br>print time.gmtime(time.time() - 24 </em> 60 <em> 60)<br><br>#&#x83B7;&#x53D6;&#x6628;&#x5929;&#x8FD9;&#x4E2A;&#x65F6;&#x95F4;&#x7684;struct_time&#x5BF9;&#x8C61;<br><br>#&#x2014;- result #<br><br>time.struct_time(tm_year=2009, tm_mon=6, tm_mday=23, tm_hour=15, tm_min=16, tm_sec=3, tm_wday=1, tm_yday=174, tm_isdst=0)<br><br>#<br><br>time.struct_time(tm_year=2009, tm_mon=6, tm_mday=22, tm_hour=15, tm_min=16, tm_sec=3, tm_wday=0, tm_yday=173, tm_isdst=0)<br><br>import time print time.gmtime()<br><br>#&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x7684;struct_time&#x5BF9;&#x8C61;<br><br>print time.gmtime(time.time() - 24 </em> 60 * 60)<br><br>#&#x83B7;&#x53D6;&#x6628;&#x5929;&#x8FD9;&#x4E2A;&#x65F6;&#x95F4;&#x7684;struct_time&#x5BF9;&#x8C61; #&#x2014;- result #<br><br>time.struct_time(tm_year=2009, tm_mon=6, tm_mday=23, tm_hour=15, tm_min=16, tm_sec=3, tm_wday=1, tm_yday=174, tm_isdst=0)<br><br>#time.struct_time(tm_year=2009, tm_mon=6, tm_mday=22, tm_hour=15, tm_min=16, tm_sec=3, tm_wday=0, tm_yday=173, tm_isdst=0)<br><br>time.localtime<br><br>time.localtime&#x4E0E;time.gmtime&#x975E;&#x5E38;&#x7C7B;&#x4F3C;&#xFF0C;&#x4E5F;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;struct_time&#x5BF9;&#x8C61;&#xFF0C;&#x53EF;&#x4EE5;&#x628A;&#x5B83;&#x770B;&#x4F5C;&#x662F;gmtime()&#x7684;&#x672C;&#x5730;&#x5316;&#x7248;&#x672C;&#x3002;<br><br>time.mktime<br><br>time.mktime&#x6267;&#x884C;&#x4E0E;gmtime(), localtime()&#x76F8;&#x53CD;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x5B83;&#x63A5;&#x6536;struct_time&#x5BF9;&#x8C61;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#xFF0C;&#x8FD4;&#x56DE;&#x7528;&#x79D2;&#x6570;&#x6765;&#x8868;&#x793A;&#x65F6;&#x95F4;&#x7684;&#x6D6E;&#x70B9;&#x6570;&#x3002;<br><br>&#x4F8B;&#x5982;:<br><br>import time<br><br>#&#x4E0B;&#x9762;&#x4E24;&#x4E2A;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x76F8;&#x540C;&#xFF08;&#x6216;&#x76F8;&#x8FD1;&#xFF09;&#x7684;&#x7ED3;&#x679C;<br><br>print time.mktime(time.localtime())<br><br>print time.time()<br><br>import time<br><br>#&#x4E0B;&#x9762;&#x4E24;&#x4E2A;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x76F8;&#x540C;&#xFF08;&#x6216;&#x76F8;&#x8FD1;&#xFF09;&#x7684;&#x7ED3;&#x679C;<br><br>print time.mktime(time.localtime())<br><br>print time.time() time.strftime<br><br>&#xA0;<br><br>time.strftime&#x5C06;&#x65E5;&#x671F;&#x8F6C;&#x6362;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;&#x8868;&#x793A;&#xFF0C;&#x5B83;&#x7684;&#x51FD;&#x6570;&#x539F;&#x578B;&#x4E3A;&#xFF1A;time.strftime(format[, t])&#x3002;&#x53C2;&#x6570;format&#x662F;&#x683C;&#x5F0F;&#x5B57;&#x7B26;&#x4E32;&#xFF08;&#x683C;&#x5F0F;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x77E5;&#x8BC6;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#xFF1A;time.strftime&#xFF09;&#xFF0C;&#x53EF;&#x9009;&#x7684;&#x53C2;&#x6570;t&#x662F;&#x4E00;&#x4E2A;struct_time&#x5BF9;&#x8C61;&#x3002;<br><br>&#xA0;<br><br>&#x4E0B;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x5C06;struct_time&#x5BF9;&#x8C61;&#x8F6C;&#x6362;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;&#x8868;&#x793A;&#xFF1A;<br><br>import time<br><br>print time.strftime(&#x2018;%Y-%m-%d %H:%M:%S&#x2019;, time.gmtime())<br><br>&#xA0;<br><br>print time.strftime(&#x2018;Weekday: %w; Day of the yesr: %j&#x2019;) #<br><br>&#x2014;- result #2009-06-23 15:30:53<br><br>#Weekday: 2; Day of the yesr: 174 import time print time.strftime(&#x2018;%Y-%m-%d %H:%M:%S&#x2019;, time.gmtime()) print time.strftime(&#x2018;Weekday: %w; Day of the yesr: %j&#x2019;) #<br><br>&#x2014;- result #2009-06-23 15:30:53 #Weekday: 2; Day of the yesr: 174 time.strptime<br><br>&#x6309;&#x6307;&#x5B9A;&#x683C;&#x5F0F;&#x89E3;&#x6790;&#x4E00;&#x4E2A;&#x8868;&#x793A;&#x65F6;&#x95F4;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x8FD4;&#x56DE;struct_time&#x5BF9;&#x8C61;&#x3002;<br><br>&#x8BE5;&#x51FD;&#x6570;&#x539F;&#x578B;&#x4E3A;&#xFF1A;time.strptime(string, format)&#xFF0C;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#x90FD;&#x662F;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;<br><br>&#x4E0B;&#x9762;&#x662F;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x4F8B;&#x5B50;&#xFF0C;&#x6F14;&#x793A;&#x5C06;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x89E3;&#x6790;&#x4E3A;&#x4E00;&#x4E2A;struct_time&#x5BF9;&#x8C61;&#xFF1A;<br><br>import time print time.strptime(&#x2018;2009-06-23 15:30:53&#x2019;, &#x2018;%Y-%m-%d %H:%M:%S&#x2019;)<br><br>#&#x2014;- result #<br><br>time.struct_time(tm_year=2009, tm_mon=6, tm_mday=23, tm_hour=15, tm_min=30, tm_sec=53, tm_wday=1, tm_yday=174, tm_isdst=-1)<br><br>import time print time.strptime(&#x2018;2009-06-23 15:30:53&#x2019;, &#x2018;%Y-%m-%d %H:%M:%S&#x2019;)<br><br>#&#x2014;- result #<br><br>time.struct_time(tm_year=2009, tm_mon=6, tm_mday=23, tm_hour=15, tm_min=30, tm_sec=53, tm_wday=1, tm_yday=174, tm_isdst=-1)<br><br>&#x4EE5;&#x4E0A;&#x4ECB;&#x7ECD;&#x7684;&#x65B9;&#x6CD5;&#x662F;time&#x6A21;&#x5757;&#x4E2D;&#x6700;&#x5E38;&#x7528;&#x7684;&#x51E0;&#x4E2A;&#x65B9;&#x6CD5;&#xFF0C;&#x5728;Python&#x624B;&#x518C;&#x4E2D;&#x8FD8;&#x4ECB;&#x7ECD;&#x4E86;&#x5176;&#x4ED6;&#x7684;&#x65B9;&#x6CD5;&#x548C;&#x5C5E;&#x6027;&#xFF0C;&#x5982;&#xFF1A;time.timezone, time.tzname &#x2026;<br><br></div>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/04/09/ie7-e6-b5-8f-e8-a7-88-e5-99-a8-e4-bc-a0-e8-be-93-e4-b8-ad-e6-96-87-e7-9a-84-e9-97-ae-e9-a2-98/" rel="next" title="ie7浏览器传输中文的问题">
+                <i class="fa fa-chevron-left"></i> ie7浏览器传输中文的问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/04/13/ubuntu12-10-e4-b8-8bpython2-7apache2-2mod-wsgi-sodjango1-4-e5-ae-89-e8-a3-85-e9-85-8d-e7-bd-ae/" rel="prev" title="ubuntu12.10 下python2.7  apache2.2 mod_wsgi.so django 1.4安装配置">
+                ubuntu12.10 下python2.7  apache2.2 mod_wsgi.so django 1.4安装配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2013/04/09/python-e6-97-b6-e9-97-b4-e5-87-bd-e6-95-b0-ef-bc-88-e8-bd-ac-e8-bd-bd-ef-bc-89/"
+     data-title="python时间函数  （转载）"
+     data-content=""
+     data-url="http://notes.zhouping.xin/2013/04/09/python-e6-97-b6-e9-97-b4-e5-87-bd-e6-95-b0-ef-bc-88-e8-bd-ac-e8-bd-bd-ef-bc-89/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2013/04/09/python-e6-97-b6-e9-97-b4-e5-87-bd-e6-95-b0-ef-bc-88-e8-bd-ac-e8-bd-bd-ef-bc-89/"
+           data-title="python时间函数  （转载）" data-url="http://notes.zhouping.xin/2013/04/09/python-e6-97-b6-e9-97-b4-e5-87-bd-e6-95-b0-ef-bc-88-e8-bd-ac-e8-bd-bd-ef-bc-89/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Chow" />
+          <p class="site-author-name" itemprop="name">Chow</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">121</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chow</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chow-notes"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,980 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hello, World" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x4E00;&amp;#x3001;Nginx&amp;#x5B89;&amp;#x88C5;&amp;#xFF1A;
+&amp;#x91C7;&amp;#x53D6;&amp;#x624B;&amp;#x52A8;&amp;#x7F16;&amp;#x8BD1;&amp;#x5B89;&amp;#x88C5;
+&amp;#x5BF9;&amp;#x591A;&amp;#x79CD;&amp;#x91CD;&amp;#x8981;&amp;#x7684;&amp;#x9009;&amp;#x9879;&amp;#x8FDB;&amp;#x884C;&amp;#x914D;&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx HTTP Server相关">
+<meta property="og:url" content="http://notes.zhouping.xin/2014/05/05/nginxhttpserver-e7-9b-b8-e5-85-b3/index.html">
+<meta property="og:site_name" content="Chow's Notes">
+<meta property="og:description" content="&amp;#x4E00;&amp;#x3001;Nginx&amp;#x5B89;&amp;#x88C5;&amp;#xFF1A;
+&amp;#x91C7;&amp;#x53D6;&amp;#x624B;&amp;#x52A8;&amp;#x7F16;&amp;#x8BD1;&amp;#x5B89;&amp;#x88C5;
+&amp;#x5BF9;&amp;#x591A;&amp;#x79CD;&amp;#x91CD;&amp;#x8981;&amp;#x7684;&amp;#x9009;&amp;#x9879;&amp;#x8FDB;&amp;#x884C;&amp;#x914D;&amp;">
+<meta property="og:updated_time" content="2016-12-30T16:03:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nginx HTTP Server相关">
+<meta name="twitter:description" content="&amp;#x4E00;&amp;#x3001;Nginx&amp;#x5B89;&amp;#x88C5;&amp;#xFF1A;
+&amp;#x91C7;&amp;#x53D6;&amp;#x624B;&amp;#x52A8;&amp;#x7F16;&amp;#x8BD1;&amp;#x5B89;&amp;#x88C5;
+&amp;#x5BF9;&amp;#x591A;&amp;#x79CD;&amp;#x91CD;&amp;#x8981;&amp;#x7684;&amp;#x9009;&amp;#x9879;&amp;#x8FDB;&amp;#x884C;&amp;#x914D;&amp;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: false,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://notes.zhouping.xin/2014/05/05/nginxhttpserver-e7-9b-b8-e5-85-b3/"/>
+
+
+
+
+
+  <title> Nginx HTTP Server相关 | Chow's Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Chow's Notes</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://notes.zhouping.xin/2014/05/05/nginxhttpserver-e7-9b-b8-e5-85-b3/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Chow">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Chow's Notes">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Chow's Notes" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Nginx HTTP Server相关
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-05-05T02:24:00+08:00">
+                2014-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2014/05/05/nginxhttpserver-e7-9b-b8-e5-85-b3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/05/05/nginxhttpserver-e7-9b-b8-e5-85-b3/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x4E00;&#x3001;Nginx&#x5B89;&#x88C5;&#xFF1A;</p>
+<p>&#x91C7;&#x53D6;&#x624B;&#x52A8;&#x7F16;&#x8BD1;&#x5B89;&#x88C5;</p>
+<p>&#x5BF9;&#x591A;&#x79CD;&#x91CD;&#x8981;&#x7684;&#x9009;&#x9879;&#x8FDB;&#x884C;&#x914D;&#x7F6E;</p>
+<p>&#x5B89;&#x88C5;&#x524D;&#x63D0;&#xFF1A;&#x5E38;&#x7528;&#x5DE5;&#x5177;&#x548C;&#x5E93;&#xFF0C;GCC PCRE&#xFF08;Rewrite&#x6A21;&#x5757;&#x9700;&#x8981;&#xFF09; pcre-devel(&#x6E90;&#x7801;) zlib zlib-devel(&#x6E90;&#x7801;) OpenSSL openssl-devel(&#x6E90;&#x7801;)</p>
+<p>&#x914D;&#x7F6E;&#x9009;&#x9879;</p>
+<p>./configure &#x2013;help&#x5217;&#x51FA;&#x6709;&#x6548;&#x7684;&#x914D;&#x7F6E;&#x5F00;&#x5173;&#x53D8;&#x91CF;</p>
+<p>&#x2013;prefix= &#x6307;&#x5B9A;&#x5B89;&#x88C5;Nginx&#x7684;&#x57FA;&#x7840;&#x76EE;&#x5F55; &#xFF0C;&#x9ED8;&#x8BA4;&#x503C;/usr/local/nginx. &#x5728;&#x914D;&#x7F6E;&#x662F;&#x4F7F;&#x7528;&#x4E86;&#x76F8;&#x5BF9;&#x8DEF;&#x5F84;&#xFF0C;&#x5219;&#x8FDE;&#x63A5;&#x5230;&#x57FA;&#x7840;&#x76EE;&#x5F55;&#x3002;&#x4F8B;&#x5982;&#x2013;conf-path=conf/nginx.conf</p>
+<p>&#x2013;sbin-path= nginx&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#x7684;&#x5B89;&#x88C5;&#x7684;&#x8DEF;&#x5F84;&#x3002;/sbin/nginx</p>
+<p>&#x2013;config-path= &#x4E3B;&#x8981;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x653E;&#x7F6E;&#x76EE;&#x5F55;&#x3002; /conf/nginx.conf</p>
+<p>&#x2013;erro-log-path=&#x9519;&#x8BEF;&#x65E5;&#x5FD7;&#x5B58;&#x653E;&#x7684;&#x8DEF;&#x5F84;&#x3002;/logs/error.log</p>
+<p>&#x2013;pid-path=Nginx&#x7684;pid&#x6587;&#x4EF6;&#x8DEF;&#x5F84;/logs/nginx.pid &#x5BF9;&#x4E8E;Nginx&#x6765;&#x8BF4;&#x7528;&#x4E8E;&#x786E;&#x5B9A;&#x8BE5;&#x8FDB;&#x7A0B;&#x6CA1;&#x6709;&#x88AB;&#x542F;&#x52A8;&#x4E24;&#x6B21;</p>
+<p>&#x2013;with-perl_modules_path= &#x5B9A;&#x4E49; Perl &#x6A21;&#x5757;&#x7684;&#x8DEF;&#x5F84;&#x3002;&#x5982;&#x679C;&#x9700;&#x8981;&#x5305;&#x542B;&#x53E6;&#x5916;&#x7684;Perl&#x6A21;&#x5757;&#xFF0C;&#x5FC5;&#x987B;&#x5B9A;&#x4E49;&#x8BE5;&#x53C2;&#x6570;</p>
+<p>&#x2013;with-perl=..perl &#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#x7684;&#x8DEF;&#x5F84;&#xFF0C;&#x7528;&#x4E8E;&#x6267;&#x884C;Perl&#x811A;&#x672C;&#x3002;&#x5982;&#x679C;&#x60F3;&#x6267;&#x884C;&#x4E00;&#x4E2A;Perl&#x811A;&#x672C;&#xFF0C;&#x5FC5;&#x987B;&#x8BBE;&#x7F6E;&#x8BE5;&#x8DEF;&#x5F84;</p>
+<p>&#x2013;http-log-path = &#x2026;&#x5B9A;&#x4E49;&#x88AB;&#x8BBF;&#x95EE;&#x6587;&#x4EF6;&#x7684;&#x65E5;&#x5FD7;&#x5B58;&#x653E;&#x8DEF;&#x5F84;&#x3002;/logs/access.log</p>
+<p>&#x2013;http-client-body-temp-path=&#x2026;&#x6539;&#x76EE;&#x5F55;&#x5B58;&#x50A8;&#x5BA2;&#x6237;&#x7AEF;&#x8BF7;&#x6C42;&#x4EA7;&#x751F;&#x7684;&#x4E34;&#x65F6;&#x6587;&#x4EF6; /client_body_temp</p>
+<p>&#x2013;http-proxy-temp-path=&#x2026;&#x8BE5;&#x76EE;&#x5F55;&#x7528;&#x4E8E;&#x4EE3;&#x7406;&#x5B58;&#x50A8;&#x4E34;&#x65F6;&#x6587;&#x4EF6;/proxy_temp</p>
+<p>&#x2013;http-fastcgi-temp-path=&#x2026;&#x6307;&#x5B9A;&#x7528;&#x4E8E;Fast FastCGI &#x6A21;&#x5757;&#x4F7F;&#x7528;&#x7684;&#x4E34;&#x65F6;&#x6587;&#x4EF6;&#x7684;&#x5B58;&#x653E; /fastcgi_temp</p>
+<p>&#x2013;builddir=&#x2026;&#x6307;&#x5B9A;&#x521B;&#x5EFA;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7684;&#x4F4D;&#x7F6E;</p>
+<p>&#x5148;&#x51B3;&#x6761;&#x4EF6;&#x9009;&#x9879;&#xFF1A;</p>
+<p>&#x7F16;&#x8BD1;&#x9009;&#x9879;&#xFF1A;</p>
+<p>&#x2013;with-cc=.. &#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x5907;&#x7528;&#x7684;C&#x7F16;&#x8BD1;&#x5668;&#x4F4D;&#x7F6E;</p>
+<p>&#x2013;with-cpp ~C&#x9884;&#x5904;&#x7406;&#x5668;~</p>
+<p>&#x2013;with-cc-opt=.. &#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x989D;&#x5916;&#x7684;&#x9009;&#x9879;&#xFF0C;&#x7136;&#x540E;&#x5728;&#x547D;&#x4EE4;&#x884C;&#x4F20;&#x9012;&#x7ED9;C&#x7F16;&#x8BD1;&#x5668;</p>
+<p>&#x2013;with-ld-opt ~&#x4F20;&#x9012;&#x7ED9;C&#x8FDE;&#x63A5;&#x5668;~</p>
+<p>&#x2013;with-cpu-opt=.. &#x6307;&#x5B9A;&#x4E0D;&#x540C;&#x7684;&#x76EE;&#x6807;&#x5904;&#x7406;&#x5668;&#x7ED3;&#x6784;</p>
+<p>&#xA0;</p>
+<p>PCRE&#x9009;&#x9879;&#xFF1A;</p>
+<p>&#x2013;without-pcre &#x4E0D;&#x4F7F;&#x7528;pcre&#x5E93;</p>
+<p>&#x2013;with-pcre &#x5F3A;&#x5236;&#x4F7F;&#x7528;pcre&#x5E93;</p>
+<p>&#x2013;with-pcre=.. &#x5141;&#x8BB8;&#x6307;&#x5B9A;pcre&#x5E93;&#x7684;&#x6E90;&#x4EE3;&#x7801;</p>
+<p>&#x2013;with-pcre-opt= &#x7528;&#x4E8E;&#x5EFA;&#x7ACB;pcre&#x5E93;&#x7684;&#x5176;&#x4ED6;&#x9009;&#x9879;</p>
+<p>&#xA0;</p>
+<p>MD5&#x9009;&#x9879;&#xFF1A;</p>
+<p>&#x2013;with-md5= &#x6307;&#x5B9A;MD5&#x6E90;&#x4EE3;&#x7801;&#x8DEF;&#x5F84;</p>
+<p>&#x2013;with-md5-opt=</p>
+<p>&#x2013;with-md5-asm=&#x5EFA;&#x7ACB;MD5&#x5E93;&#x4F7F;&#x7528;&#x6C47;&#x7F16;&#x8BED;&#x8A00;&#x6E90;&#x4EE3;&#x7801;</p>
+<p>SHA1&#x9009;&#x9879;&#xFF1A;</p>
+<p>&#x2013;with-sha1=</p>
+<p>&#x2013;with-sha1-opt=</p>
+<p>&#x2013;with-sha1-asm=</p>
+<p>zlib&#x9009;&#x9879;&#xFF1A;</p>
+<p>&#x2013;with-zlib=</p>
+<p>&#x2013;with-zlib-opt=</p>
+<p>&#x2013;with-zlib-asm=</p>
+<p>openssl&#x9009;&#x9879;&#xFF1A;</p>
+<p>&#x2013;with-openssl=</p>
+<p>&#x2013;with-openssl-opt=</p>
+<p>&#xA0;</p>
+<p>&#x6A21;&#x5757;&#x9009;&#x9879;&#xFF1A;</p>
+<p>(&#x4E00;&#x4E9B;&#x6A21;&#x5757;&#x662F;&#x9ED8;&#x8BA4;&#x5F00;&#x542F;&#xFF0C;&#x4E00;&#x4E9B;&#x9700;&#x8981;&#x624B;&#x52A8;&#x5F00;&#x542F;)</p>
+<p>&#x9ED8;&#x8BA4;&#x5F00;&#x542F;&#x7684;&#x6A21;&#x5757;&#xFF1A;</p>
+<p>&#x2013;without-http_charset_module &#x7981;&#x7528;Charset&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x7528;&#x4E8E;&#x5BF9;&#x7F51;&#x9875;&#x91CD;&#x65B0;&#x7F16;&#x7801;</p>
+<p>&#x2013;without-http_gzip_module &#x7981;&#x7528;Gzip&#x538B;&#x7F29;&#x6A21;&#x5757;</p>
+<p>&#x2013;without-http_ssi_module &#x7981;&#x7528;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x5305;&#x542B;&#x6A21;&#x5757;</p>
+<p>&#x2013;without-http_userid_module &#x7981;&#x7528;&#x7528;&#x6237;ID&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x4E3A;&#x7528;&#x6237;&#x901A;&#x8FC7;cookie&#x9A8C;&#x8BC1;&#x8EAB;&#x4EFD;</p>
+<p>&#x2013;without-http_access_module &#x7981;&#x7528;&#x8BBF;&#x95EE;&#x6A21;&#x5757;&#xFF0C;&#x5BF9;&#x4E8E;&#x6307;&#x5B9A;&#x7684;IP&#x6BB5;&#xFF0C;&#x5141;&#x8BB8;&#x8BBF;&#x95EE;&#x914D;&#x7F6E;</p>
+<p>&#x2013;without-http_auth_basic_module &#x7981;&#x7528;&#x57FA;&#x672C;&#x7684;&#x8BA4;&#x8BC1;&#x6A21;&#x5757;</p>
+<p>&#x2013;without-http_autoindex_module &#x7981;&#x7528;&#x81EA;&#x52A8;&#x7D22;&#x5F15;&#x6A21;&#x5757;</p>
+<p>&#x2013;without-http_geo_module &#x7981;&#x7528;Geo&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x5141;&#x8BB8;&#x4F60;&#x5B9A;&#x4E49;&#x4F9D;&#x8D56;&#x4E8E;IP&#x5730;&#x5740;&#x6BB5;&#x7684;&#x53D8;&#x91CF;&#x3002;</p>
+<p>&#x2013;without-http_map_module &#x7981;&#x7528;Map&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x5141;&#x8BB8;&#x4F60;&#x58F0;&#x660E;map&#x533A;&#x6BB5;</p>
+<p>&#x2013;without-http_referer_module &#x7981;&#x7528;Referer&#x63A7;&#x5236;&#x6A21;&#x5757;</p>
+<p>&#x2013;without-http_rewrite_module &#x7981;&#x7528;Rewrite&#x6A21;&#x5757;</p>
+<p>&#x2013;without-http_proxy_module &#x7981;&#x7528;&#x4EE3;&#x7406;&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x7528;&#x4E8E;&#x5411;&#x5176;&#x4ED6;&#x670D;&#x52A1;&#x5668;&#x4F20;&#x8F93;&#x8BF7;&#x6C42;</p>
+<p>&#x2013;without-http_fastcgi_module &#x7981;&#x7528;FastCGI&#x6A21;&#x5757;&#x3002;&#x8BE5;&#x6A21;&#x5757;&#x662F;&#x7528;&#x4E8E;&#x4E0E;FastCGI&#x8FDB;&#x7A0B;&#x914D;&#x5408;&#x5DE5;&#x4F5C;</p>
+<p>&#x2013;without-http_memcached_module &#x7981;&#x7528;Memcached &#x6A21;&#x5757;&#x3002;&#x8BE5;&#x6A21;&#x5757;&#x662F;&#x7528;&#x4E8E;&#x4E0E;memcached&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x914D;&#x5408;&#x5DE5;&#x4F5C;&#x3002;</p>
+<p>&#x2013;without-http_limit_zone_module &#x7981;&#x7528;Limit Zone &#x6A21;&#x5757;&#x3002;&#x8BE5;&#x6A21;&#x5757;&#x662F;&#x7528;&#x4E8E;&#x6839;&#x636E;&#x5B9A;&#x4E49;&#x7684;Zone&#x6765;&#x9650;&#x5236;&#x7EA6;&#x675F;&#x5BF9;&#x8D44;&#x6E90;&#x7684;&#x4F7F;&#x7528;</p>
+<p>&#x2013;without-http_limit_req_module &#x7981;&#x7528;Limit Request &#x6A21;&#x5757;&#x3002;&#x8BE5;&#x6A21;&#x5757;&#x5141;&#x8BB8;&#x4F60;&#x9650;&#x5236;&#x6BCF;&#x4E2A;&#x7528;&#x6237;&#x8BF7;&#x6C42;&#x7684;&#x603B;&#x6570;</p>
+<p>&#x2013;without-http_empty_gif_module &#x7981;&#x7528;Empty Gif &#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x7528;&#x4E8E;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x7A7A;&#x767D;&#x7684;GIF&#x56FE;&#x50CF;</p>
+<p>&#x2013;without-http_browser_module &#x7981;&#x7528;Browser&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x7528;&#x4E8E;&#x89E3;&#x91CA;&#x7528;&#x6237;&#x4EE3;&#x7406;&#x5B57;&#x7B26;&#x4E32;</p>
+<p>&#x2013;without-http_upstream_ip_hash_module &#x7981;&#x7528;Upstream &#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x7528;&#x4E8E;&#x914D;&#x7F6E;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x7ED3;&#x6784;</p>
+<p>&#xA0;</p>
+<p>&#x9ED8;&#x8BA4;&#x7981;&#x7528;&#x7684;&#x6A21;&#x5757;&#xFF1A;</p>
+<p>&#x2013;with-http_ssl_module &#x5F00;&#x542F;SSL&#x6A21;&#x5757;&#xFF0C;&#x652F;&#x6301;&#x4F7F;&#x7528;HTTPS&#x534F;&#x8BAE;&#x7684;&#x7F51;&#x9875;</p>
+<p>&#x2013;with-http_realip_module &#x5F00;&#x542F;Real IP&#x7684;&#x652F;&#x6301;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x7528;&#x4E8E;&#x4ECE;&#x5BA2;&#x6237;&#x7AEF;&#x8BF7;&#x6C42;&#x7684;&#x5934;&#x6570;&#x636E;&#x8BFB;&#x53D6;real IP&#x5730;&#x5740;&#x3002;</p>
+<p>&#x2013;with-http_addition_module &#x5F00;&#x542F;Addition &#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x5141;&#x8BB8;&#x4F60;&#x8FFD;&#x52A0;&#x6216;&#x524D;&#x7F6E;&#x6570;&#x636E;(prepend data)&#x5230;&#x54CD;&#x5E94;&#x7684;&#x4E3B;&#x4F53;&#x90E8;&#x5206;</p>
+<p>&#x2013;with-http_xslt_module &#x5F00;&#x542F;XSLT&#x6A21;&#x5757;&#x7684;&#x652F;&#x6301;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x5B9E;&#x73B0;XSL&#x8F6C;&#x5316;XML&#x6587;&#x6863;</p>
+<p>&#x2013;with-http_image_filter_module &#x5F00;&#x542F;Image Filter&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x662F;&#x8BA9;&#x4F60;&#x4FEE;&#x6539;&#x56FE;&#x50CF;&#x3002;&#x6CE8;&#x610F;&#xFF1A;&#x5982;&#x679C;&#x60F3;&#x7F16;&#x8BD1;&#x8BE5;&#x6A21;&#x5757;&#xFF0C;&#x9700;&#x8981;&#x5728;&#x7CFB;&#x7EDF;&#x4E2D;&#x5B89;&#x88C5;libgd&#x5E93;</p>
+<p>&#x2013;with-http_geoip_module &#x5F00;&#x542F;GeoIP&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x901A;&#x8FC7;&#x4F7F;&#x7528;MaxMind&#x2019;s GeoI &#x4E8C;&#x8FDB;&#x5236;&#x6570;&#x636E;&#x5E93;&#x6765;&#x83B7;&#x53D6;&#x5BA2;&#x6237;&#x7AEF;&#x5728;&#x5730;&#x91CC;&#x4E0A;&#x7684;&#x5206;&#x5E03;&#x3002;&#x9700;&#x8981;&#x5B89;&#x88C5;libgeoip&#x5E93;</p>
+<p>&#x2013;with-http_sub_module &#x5F00;&#x542F;Substitution&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x7528;&#x4E8E;&#x5728;&#x7F51;&#x9875;&#x4E2D;&#x66FF;&#x6362;&#x6587;&#x672C;</p>
+<p>&#x2013;with-http_dav_module &#x5F00;&#x542F;WebDAV&#x6A21;&#x5757;&#xFF08;Distribute Authoring and Versioning via Web&#xFF09;</p>
+<p>&#x2013;with-http_flv_module &#x5F00;&#x542F;FLV&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x7528;&#x4E8E;&#x4E13;&#x95E8;&#x5904;&#x7406;.flv(falsh&#x89C6;&#x9891;)&#x6587;&#x4EF6;</p>
+<p>&#x2013;with-http_gzip_static_module &#x5F00;&#x542F;Gzip&#x9759;&#x6001;&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x7528;&#x4E8E;&#x53D1;&#x9001;&#x9884;&#x538B;&#x7F29;&#x7684;&#x6587;&#x4EF6;</p>
+<p>&#x2013;with-http_random_index_module &#x5F00;&#x542F;Random Index&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x7528;&#x4E8E;&#x6311;&#x9009;&#x4E00;&#x4E2A;&#x968F;&#x673A;&#x7684;&#x6587;&#x4EF6;&#x4F5C;&#x4E3A;&#x8BE5;&#x76EE;&#x5F55;&#x7684;Index</p>
+<p>&#x2013;with-http_secure_link_module &#x5F00;&#x542F;Secure Link&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x7528;&#x4E8E;&#x5728;URL&#x4E2D;&#x68C0;&#x6D4B;&#x5173;&#x952E;&#x5B57;&#x7684;&#x5B58;&#x5728;</p>
+<p>&#x2013;with-http_stub_status_module &#x5F00;&#x542F;Stub Status&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x4F1A;&#x4EA7;&#x751F;&#x4E00;&#x4E2A;&#x670D;&#x52A1;&#x5668;&#x72B6;&#x6001;&#x548C;&#x4FE1;&#x606F;&#x9875;</p>
+<p>&#x2013;with-google_perftools_module &#x5F00;&#x542F;Google&#x6027;&#x80FD;&#x5DE5;&#x5177;&#x6A21;&#x5757;</p>
+<p>&#x6742;&#x9879;&#xFF08;&#x4F8B;&#x5982;&#x90AE;&#x4EF6;&#x4EE3;&#x7406;&#x670D;&#x52A1;&#x529F;&#x80FD;&#x6216;&#x65F6;&#x95F4;&#x7BA1;&#x7406;&#x529F;&#x80FD;&#xFF09;</p>
+<hr>
+<p>Nginx&#x547D;&#x4EE4;&#x884C;&#x9009;&#x9879;</p>
+<p>&#x542F;&#x52A8;&#x548C;&#x505C;&#x6B62;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;</p>
+<p>nginx -s stop &#x7ACB;&#x5373;&#x505C;&#x6B62;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;(&#x4F7F;&#x7528;TERM&#x4FE1;&#x53F7;)</p>
+<p>nginx -s quit &#x6E29;&#x548C;&#x5730;&#x505C;&#x6B62;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#xFF08;&#x4F7F;&#x7528;QUIT&#x4FE1;&#x53F7;&#xFF09;</p>
+<p>nginx -s reopen &#x91CD;&#x65B0;&#x6253;&#x5F00;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;</p>
+<p>nginx -s reload &#x91CD;&#x65B0;&#x8F7D;&#x5165;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</p>
+<p>&#x6D4B;&#x8BD5;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x662F;&#x5426;&#x6709;&#x6548;&#xFF1A;nginx -t -c(&#x6D4B;&#x8BD5;&#x4E34;&#x65F6;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;)</p>
+<p>nginx -g &#x7528;&#x4E8E;&#x6307;&#x5B9A;&#x989D;&#x5916;&#x7684;&#x914D;&#x7F6E;&#x547D;&#x4EE4;</p>
+<p>&#xA0;</p>
+<p>&#x5C06;Nginx&#x6DFB;&#x52A0;&#x4E3A;&#x7CFB;&#x7EDF;&#x670D;&#x52A1;</p>
+<p>&#x5EFA;&#x7ACB;Nginx&#x7684;init&#x811A;&#x672C;&#xFF0C;&#x4FDD;&#x5B58;&#x5230;init.d&#x76EE;&#x5F55;&#x4E0B;</p>
+<p>&#x5B89;&#x88C5;Nginx&#x7684;init&#x811A;&#x672C;&#xFF0C;&#x6388;&#x4E88;&#x8BE5;&#x811A;&#x672C;&#x53EF;&#x6267;&#x884C;&#x6743;&#x9650;</p>
+<p>&#x8BA9;&#x811A;&#x672C;&#x81EA;&#x52A8;&#x542F;&#x52A8;&#xFF1A;</p>
+<p>&#x57FA;&#x4E8E;Debian&#x7684;&#x53D1;&#x5E03;&#xFF1A; update -rc.d -f nginx defaults</p>
+<p>&#x57FA;&#x4E8E;Red hat&#x7684;&#x53D1;&#x5E03;&#xFF1A;chkconfig &#x2013;add nginx (&#x2013;list nginx)&#x68C0;&#x67E5;&#x8BE5;&#x670D;&#x52A1;&#x7684;&#x8FD0;&#x884C;&#x7EA7;&#x522B;</p>
+<p>&#xA0;</p>
+<p>&#x914D;&#x7F6E;&#x6587;&#x4EF6;</p>
+<p>&#x914D;&#x7F6E;&#x673A;&#x5236;&#xFF1A;&#x6307;&#x4EE4;&#x3001;&#x6A21;&#x5757;&#xFF08;block&#xFF09;&#x3001;&#x6574;&#x4F53;&#x903B;&#x8F91;&#x7ED3;&#x6784;</p>
+<p>&#x5728;http&#x533A;&#x6BB5;&#xFF0C;&#x53EF;&#x4EE5;&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;server&#x533A;&#x6BB5;&#xFF0C;&#x4E00;&#x4E2A;server&#x5141;&#x8BB8;&#x914D;&#x7F6E;&#x4E00;&#x4E2A;&#x865A;&#x62DF;&#x4E3B;&#x673A;&#x3002;</p>
+<p>&#x5728;server&#x533A;&#x6BB5;&#xFF0C;&#x53EF;&#x4EE5;&#x63D2;&#x5165;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;location&#x533A;&#x6BB5;&#xFF0C;&#x5F53;&#x9700;&#x8981;&#x5BF9;&#x7279;&#x5B9A;URI&#x8FDB;&#x884C;&#x5339;&#x914D;&#x65F6;&#xFF0C;&#x8FD9;&#x4E9B;location&#x533A;&#x6BB5;&#x5141;&#x8BB8;&#x5BF9;&#x8FD9;&#x4E9B;&#x8DEF;&#x5F84;&#x5355;&#x72EC;&#x8BBE;&#x7F6E;&#x3002;</p>
+<p>&#x5728;&#x4E00;&#x4E2A;&#x533A;&#x6BB5;&#x5D4C;&#x5957;&#x7684;&#x5176;&#x4ED6;&#x533A;&#x6BB5;&#xFF0C;&#x90A3;&#x4E48;&#x88AB;&#x5D4C;&#x5957;&#x7684;&#x533A;&#x6BB5;&#x4F1A;&#x7EE7;&#x627F;&#x5176;&#x7236;&#x533A;&#x6BB5;&#x7684;&#x8BBE;&#x7F6E;&#x3002;</p>
+<p>&#x6307;&#x4EE4;&#x503C;&#x5355;&#x4F4D; &#x5B57;&#x8282;&#x5355;&#x4F4D;&#x548C;&#x65F6;&#x95F4;&#x5355;&#x4F4D;</p>
+<p>&#x53D8;&#x91CF;</p>
+<p>&#x5B57;&#x7B26;&#x4E32;&#x503C;&#xFF1A;&#x5305;&#x542B;&#x7279;&#x6B8A;&#x7B26;&#x53F7;&#xFF0C;&#x7528;&#x5F15;&#x53F7;&#x62EC;&#x8D77;&#x6765;</p>
+<p>&#x57FA;&#x672C;&#x6A21;&#x5757;&#x6307;&#x4EE4;</p>
+<p>&#x57FA;&#x672C;&#x6A21;&#x5757;&#xFF1A;&#x63D0;&#x4F9B;&#x7684;&#x6307;&#x4EE4;&#x5141;&#x8BB8;&#x4F60;&#x5B9A;&#x4E49;&#x7684;Nginx&#x57FA;&#x672C;&#x529F;&#x80FD;&#x7684;&#x53D8;&#x91CF;&#xFF0C;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x4E0D;&#x80FD;&#x88AB;&#x7981;&#x7528;&#xFF0C;&#x56E0;&#x6B64;&#x4ED6;&#x4EEC;&#x63D0;&#x4F9B;&#x7684;&#x6307;&#x4EE4;&#x548C;&#x533A;&#x6BB5;&#x603B;&#x662F;&#x6709;&#x6548;</p>
+<p>&#x6838;&#x5FC3;&#x6A21;&#x5757;(Core module)&#xFF1A;&#x57FA;&#x672C;&#x7279;&#x5F81;&#x548C;&#x6307;&#x4EE4;&#xFF0C;&#x4F8B;&#x5982;&#x8FDB;&#x7A0B;&#x7BA1;&#x7406;&#x548C;&#x5B89;&#x5168;</p>
+<p>&#x4E8B;&#x4EF6;&#x6A21;&#x5757;(Events module)&#xFF1A;&#x53EF;&#x4EE5;&#x5728;Nginx&#x5185;&#x90E8;&#x673A;&#x5236;&#x914D;&#x7F6E;&#x7F51;&#x7EDC;&#x4F7F;&#x7528;&#x80FD;&#x529B;</p>
+<p>&#x914D;&#x7F6E;&#x6A21;&#x5757;&#xFF08;Configuration module&#xFF09;&#xFF1A;&#x63D0;&#x4F9B;&#x5305;&#x542B;&#x673A;&#x5236;</p>
+<p>Nginx&#x7684;&#x8FDB;&#x7A0B;&#x7ED3;&#x6784;</p>
+<p>&#x542F;&#x52A8;Nginx,&#x6709;&#x4E00;&#x4E2A;&#x72EC;&#x4E00;&#x65E0;&#x4E8C;&#x7684;&#x5185;&#x5B58;&#x2013;master&#x4E3B;&#x8FDB;&#x7A0B;&#x3002;master&#x8FDB;&#x7A0B;&#x672C;&#x8EAB;&#x4E0D;&#x5904;&#x7406;&#x4EFB;&#x4F55;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x8BF7;&#x6C42;&#xFF0C;&#x5B83;&#x7684;&#x529F;&#x80FD;&#x662F;&#x7528;&#x6765;&#x4EA7;&#x751F;&#x8FDB;&#x7A0B;&#x2014;-worker&#x8FDB;&#x7A0B;&#xFF0C;&#x8FD9;&#x4E9B;worker&#x8FDB;&#x7A0B;&#x4EE5;&#x5728;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x6307;&#x5B9A;&#x7684;&#x7528;&#x6237;&#x548C;&#x7528;&#x6237;&#x7EC4;&#x6765;&#x8FD0;&#x884C;&#xFF0C;&#x53EF;&#x4EE5;&#x5927;&#x91CF;worker&#x8FDB;&#x7A0B;&#x4EE5;&#x53CA;&#x6BCF;&#x4E2A;worker&#x8FDB;&#x7A0B;&#x7684;&#x6700;&#x5927;&#x8FDE;&#x63A5;&#x6570;&#x3002;</p>
+<p>&#x6838;&#x5FC3;&#x6A21;&#x5757;&#x6307;&#x4EE4;&#x5FC5;&#x987B;&#x653E;&#x7F6E;&#x5728;&#x6587;&#x4EF6;&#x6839;&#x90E8;&#xFF08;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x5F00;&#x59CB;&#x90E8;&#x5206;&#xFF09;&#xFF0C;&#x800C;&#x4E14;&#x53EA;&#x80FD;&#x4F7F;&#x7528;&#x4E00;&#x6B21;</p>
+<p>Events&#x6A21;&#x5757;&#xFF1A;&#x4E0E;&#x8BE5;&#x6A21;&#x5757;&#x63D0;&#x4F9B;&#x7684;&#x6307;&#x4EE4;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x914D;&#x7F6E;&#x7F51;&#x7EDC;&#x673A;&#x5236;&#xFF0C;&#x6307;&#x4EE4;&#x7684;&#x4E00;&#x4E9B;&#x53C2;&#x6570;&#x4F1A;&#x5BF9;Nginx&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7684;&#x6027;&#x80FD;&#x4EA7;&#x751F;&#x91CD;&#x8981;&#x5F71;&#x54CD;</p>
+<p>Configuration&#x6A21;&#x5757;&#xFF1A;&#x662F;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x6A21;&#x5757;&#xFF0C;&#x5B83;&#x63D0;&#x4F9B;&#x7684;include&#x6307;&#x4EE4;&#x80FD;&#x591F;&#x5C06;&#x5176;&#x4ED6;&#x6587;&#x4EF6;&#x5305;&#x542B;&#x5728;Nginx&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x3002;</p>
+<p>&#x5E73;&#x6ED1;&#x5347;&#x7EA7;Nginx(&#x907F;&#x514D;&#x4E22;&#x5931;&#x8FDE;&#x63A5;)</p>
+<p>&#xA0;</p>
+<p>HTTP&#x914D;&#x7F6E;</p>
+<p>HTTP&#x6838;&#x5FC3;&#x6A21;&#x5757;</p>
+<p>http &#x8BE5;&#x533A;&#x6BB5;&#x5D4C;&#x5165;&#x5D4C;&#x5165;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x6839;&#x90E8;&#xFF0C;&#x5728;&#x8FD9;&#x4E2A;&#x533A;&#x6BB5;&#x4E2D;&#x5141;&#x8BB8;&#x5B9A;&#x4E49;&#x6307;&#x4EE4;&#x548C;&#x5D4C;&#x5165;HTTP&#x76F8;&#x5173;&#x6A21;&#x5757;&#x7684;&#x533A;&#x6BB5;&#x3002;</p>
+<p>server &#x8FD9;&#x4E2A;&#x533A;&#x6BB5;&#x5141;&#x8BB8;&#x4F60;&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x7AD9;&#x70B9; &#x3002;&#x8BE5;&#x533A;&#x6BB5;&#x53EA;&#x80FD;&#x7528;&#x5728;http&#x533A;&#x6BB5;&#x4E2D;</p>
+<p>location &#x5B9A;&#x4E49;&#x4E00;&#x7EC4;&#x8BBE;&#x7F6E;&#xFF0C;&#x5E94;&#x7528;&#x4E8E;&#x7F51;&#x7AD9;&#x7684;&#x4E00;&#x4E2A;&#x7279;&#x5B9A;&#x4F4D;&#x7F6E;&#x3002;&#x8BE5;&#x533A;&#x6BB5;&#x80FD;&#x591F;&#x7528;&#x4E8E;server&#x533A;&#x6BB5;&#xFF0C;&#x4E5F;&#x80FD;&#x591F;&#x5D4C;&#x5957;&#x5728;&#x5176;&#x5B83;location&#x4E2D;</p>
+<p>&#x5728;&#x8FD9;&#x4E09;&#x4E2A;&#x5C42;&#x6B21;&#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;&#x5C42;&#x6B21;&#x4E2D;&#xFF0C;&#x90FD;&#x53EF;&#x4EE5;&#x63D2;&#x5165;&#x6307;&#x4EE4;&#xFF0C;&#x8FD9;&#x4E9B;&#x6307;&#x4EE4;&#x5C06;&#x5F71;&#x54CD;web&#x670D;&#x52A1;&#x5668;&#x7684;&#x884C;&#x4E3A;&#x3002;</p>
+<p>Nginx&#x63D0;&#x4F9B;&#x7684;&#x670D;&#x52A1;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4E09;&#x4E2A;&#x7EA7;&#x522B;&#x8C03;&#x6574;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF1A;&#x5728;&#x534F;&#x8BAE;&#x7EA7;&#x522B;&#xFF08;http&#x533A;&#x6BB5;&#xFF09;&#x3001;&#x5728;server&#x7EA7;&#x522B;&#xFF08;server&#x533A;&#x6BB5;&#xFF09;&#x53CA;&#x5728;&#x8BF7;&#x6C42;&#x7684;URI&#x7EA7;&#x522B;&#xFF08;location&#x533A;&#x6BB5;&#xFF09;</p>
+<p>location &#x4FEE;&#x9970;&#x7B26;&#xFF1A;</p>
+<p>= URI &#x7684;&#x5B9A;&#x4F4D;&#x5FC5;&#x987B;&#x4E0E;&#x6307;&#x5B9A;&#x7684;&#x6A21;&#x5F0F;&#x7CBE;&#x786E;&#x5339;&#x914D;&#x3002;&#x8BE5;&#x6A21;&#x5F0F;&#x5728;&#x8FD9;&#x91CC;&#x9650;&#x5B9A;&#x4E3A;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x6587;&#x672C;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x4E0D;&#x80FD;&#x7528;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x3002;</p>
+<p>(&#x65E0;) URI&#x7684;&#x5B9A;&#x4F4D;&#x5FC5;&#x987B;&#x4EE5;&#x6307;&#x5B9A;&#x6A21;&#x5F0F;&#x5F00;&#x59CB;&#xFF0C;&#x4E0D;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;</p>
+<p>~ &#x5BA2;&#x6237;&#x7AEF;&#x8BF7;&#x6C42;&#x7684;URI&#x4E0E;&#x6307;&#x5B9A;&#x7684;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x5339;&#x914D;&#xFF0C;&#x5FC5;&#x987B;&#x533A;&#x5206;&#x5927;&#x5C0F;&#x5199;</p>
+<p>~* &#x5BF9;&#x5BA2;&#x6237;&#x7AEF;&#x8BF7;&#x6C42;&#x7684;URI&#x4E0E;&#x6307;&#x5B9A;&#x7684;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x5339;&#x914D;&#xFF0C;&#x5FC5;&#x987B;&#x4E0D;&#x533A;&#x5206;&#x5927;&#x5C0F;&#x5199;</p>
+<p>^~ &#x7C7B;&#x4F3C;&#x4E8E;&#x65E0;&#x6807;&#x5FD7;&#x884C;&#x4E3A;&#xFF0C;URI&#x7684;&#x5B9A;&#x4F4D;&#x5FC5;&#x987B;&#x4EE5;&#x6307;&#x5B9A;&#x6A21;&#x5F0F;&#x5F00;&#x59CB;&#x3002;&#x4E0D;&#x540C;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x6A21;&#x5F0F;&#x5339;&#x914D;&#xFF0C;&#x90A3;&#x4E48;Nginx&#x5C31;&#x505C;&#x6B62;&#x641C;&#x7D22;&#x5176;&#x4ED6;&#x6A21;&#x5F0F;</p>
+<p>@&#x5B9A;&#x4E49;&#x547D;&#x540D;location&#x533A;&#x6BB5;,&#x8FD9;&#x4E9B;&#x533A;&#x6BB5;&#x5BA2;&#x6237;&#x7AEF;&#x4E0D;&#x80FD;&#x8BBF;&#x95EE;&#xFF0C;&#x53EA;&#x53EF;&#x4EE5;&#x7531;&#x5185;&#x90E8;&#x7684;&#x8BF7;&#x6C42;&#x6765;&#x8BBF;&#x95EE;&#x3002;</p>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<p>&#x6A21;&#x5757;&#x53D8;&#x91CF;&#xFF1A;</p>
+<p>&#x5BA2;&#x6237;&#x7AEF;&#x8BF7;&#x6C42;&#x5934;&#x7684;&#x503C;</p>
+<p>&#x53D1;&#x9001;&#x54CD;&#x5E94;&#x5934;&#x4E2D;&#x7684;&#x503C;</p>
+<p>Nginx&#x4EA7;&#x751F;&#x7684;&#x5404;&#x79CD;&#x53D8;&#x91CF;</p>
+<p>&#xA0;</p>
+<p><strong>Rewrite &#x6A21;&#x5757;&#xFF1A;</strong></p>
+<p>&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#xFF1A;<br>&#x5143;&#x5B57;&#x7B26;&#xFF0C;&#x91CF;&#x8BCD;&#xFF0C;&#x6355;&#x83B7;</p>
+<p>&#x8FD9;&#x4E9B;&#x88AB;&#x6355;&#x83B7;&#x7684;&#x6570;&#x636E;&#xFF08;&#x8FD9;&#x4E9B;&#x6570;&#x636E;&#x5747;&#x653E;&#x5728;&#x7F13;&#x51B2;&#x533A;&#x4E2D;&#xFF09;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x4E8E;&#x540E;&#x9762;&#x7684;&#x6307;&#x4EE4;&#x3002;</p>
+<p>&#xA0;</p>
+<p>&#x5185;&#x90E8;&#x8BF7;&#x6C42;&#xFF1A;Nginx&#x533A;&#x5206;&#x5916;&#x90E8;&#x8BF7;&#x6C42;&#x548C;&#x5185;&#x90E8;&#x8BF7;&#x6C42;&#x3002;&#x5916;&#x90E8;&#x8BF7;&#x6C42;&#x76F4;&#x63A5;&#x6E90;&#x4E8E;&#x5BA2;&#x6237;&#x7AEF;&#xFF0C;URI&#x5C3D;&#x91CF;&#x4E0E;location&#x533A;&#x6BB5;&#x5339;&#x914D;&#x3002;</p>
+<p>&#x5185;&#x90E8;&#x8BF7;&#x6C42;&#x4F1A;&#x88AB;Nginx&#x901A;&#x8FC7;&#x7279;&#x5B9A;&#x7684;&#x6307;&#x4EE4;&#x89E6;&#x53D1;&#x3002;&#x5728;&#x9ED8;&#x8BA4;&#x7684;Nginx&#x6A21;&#x5757;&#x4E2D;&#xFF0C;&#x6709;&#x4E9B;&#x5185;&#x90E8;&#x6307;&#x4EE4;&#x6709;&#x80FD;&#x529B;&#x5904;&#x7406;&#x5185;&#x90E8;&#x8BF7;&#x6C42;&#xFF1A;error_page,index,rewrite,</p>
+<p>try_files,add_before_body,add_after_body,include,SSI&#x547D;&#x4EE4;,&#x7B49;&#x7B49;&#x3002;</p>
+<p>&#xA0;</p>
+<p>&#x4E24;&#x79CD;&#x4E0D;&#x540C;&#x7C7B;&#x578B;&#x7684;&#x5185;&#x90E8;&#x8BF7;&#x6C42;&#xFF1A;</p>
+<p><strong>&#x5185;&#x90E8;&#x91CD;&#x5B9A;&#x5411;&#xFF1A;</strong>Nginx&#x5728;&#x5185;&#x90E8;&#x91CD;&#x5B9A;&#x5411;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x8BF7;&#x6C42;&#x3002;</p>
+<p><strong>&#x5B50;&#x8BF7;&#x6C42;&#xFF1A;</strong>&#x53E6;&#x5916;&#x4E00;&#x79CD;&#x89E6;&#x53D1;&#x5185;&#x90E8;&#x8BF7;&#x6C42;&#x800C;&#x4EA7;&#x751F;&#x5185;&#x5BB9;&#x7684;&#x662F;&#x5B50;&#x8BF7;&#x6C42;&#x3002;</p>
+<p>error_page</p>
+<p><strong>rewrite</strong></p>
+<p>&#x5982;&#x679C;&#x5E0C;&#x671B;Nginx&#x5728;&#x6539;&#x5199;&#x7684;URI&#x4E2D;&#x4E0D;&#x5305;&#x542B;&#x53C2;&#x6570;&#x90A3;&#x4E48;<strong>&#x5728;&#x66FF;&#x4EE3;&#x7684;URI&#x7ED3;&#x5C3E;&#x63D2;&#x5165;&#x4E00;&#x4E2A;&#x201C;?&#x201D;&#x5B57;&#x7B26;</strong></p>
+<p>&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x5305;&#x542B;SSI</p>
+<p>&#xA0;</p>
+<p>&#x6761;&#x4EF6;&#x7ED3;&#x6784;&#xFF1A;rewrite&#x6A21;&#x5757;&#x5F15;&#x8FDB;&#x4E86;&#x4E00;&#x7EC4;&#x65B0;&#x7684;&#x6307;&#x4EE4;&#x548C;&#x533A;&#x6BB5;&#xFF0C;&#x5176;&#x4E2D;&#x4E4B;&#x4E00;&#x5C31;&#x662F;if&#x6761;&#x4EF6;&#x7ED3;&#x6784;</p>
+<p>&#xA0;</p>
+<p><span style="font-size: 18px;"><strong>&#x9650;&#x5236;&#x4E0E;&#x7EA6;&#x675F;</strong></span></p>
+<p><strong>auth_basic&#x6A21;&#x5757;</strong></p>
+<p><strong> Access &#x6A21;&#x5757;</strong></p>
+<p>&#x4E24;&#x4E2A;&#x91CD;&#x8981;&#x6307;&#x4EE4;&#xFF1A;allow &#x548C; deny&#xFF0C;&#x5141;&#x8BB8;&#x4F60;&#x901A;&#x8FC7;&#x6307;&#x5B9A;IP&#x6216;IP&#x8303;&#x56F4;&#x6765;&#x5141;&#x8BB8;&#x6216;&#x62D2;&#x7EDD;&#x88AB;&#x8BBF;&#x95EE;&#x7684;&#x8D44;&#x6E90;&#x3002;</p>
+<p>&#x8BED;&#x6CD5;&#xFF1A;</p>
+<p>allow  IP | CIDR | all     CIDR:IP&#x8303;&#x56F4;&#x3002;all &#x8868;&#x793A;&#x6240;&#x6709;&#x5BA2;&#x6237;&#x7AEF;&#x7684;IP&#x3002;</p>
+<p>&#x89C4;&#x5219;&#x7684;&#x5904;&#x7406;&#x987A;&#x5E8F;&#x4E3A;&#x81EA;&#x4E0A;&#x800C;&#x4E0B;&#xFF08;&#x5F00;&#x59CB;&#x7684;&#x6307;&#x4EE4;&#x4F18;&#x5148;&#xFF09;</p>
+<p>Limit zone&#x6A21;&#x5757;</p>
+<p>&#x5141;&#x8BB8;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;zone,&#x7136;&#x540E;&#x901A;&#x8FC7;&#x9650;&#x5236;&#x8BE5;zone&#x800C;&#x8FBE;&#x5230;&#x9650;&#x5236;&#x670D;&#x52A1;&#x5668;&#x7684;&#x6700;&#x5927;&#x5E76;&#x53D1;&#x8FDE;&#x63A5;&#x6570;&#x3002;</p>
+<p>Limit request &#x6A21;&#x5757;</p>
+<p>&#x5141;&#x8BB8;&#x4F60;&#x9650;&#x5236;&#x88AB;&#x5B9A;&#x4E49;&#x7684;zone&#x7684;&#x8BF7;&#x6C42;&#x603B;&#x6570;</p>
+<p>&#xA0;</p>
+<p><span style="font-size: 18px;"><strong>&#x5185;&#x5BB9;&#x4E0E;&#x7F16;&#x7801;</strong></span></p>
+<p><span style="font-size: 14px;"><strong> empty_gif&#x6A21;&#x5757;&#xFF1A;&#x4ECE;&#x5185;&#x5B58;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;1x1&#x7684;&#x900F;&#x660E;gif&#x56FE;&#x7247;</strong></span></p>
+<p><span style="font-size: 14px;"><strong>FLV&#x6A21;&#x5757;</strong></span></p>
+<p><span style="font-size: 14px;"><strong>HTTP Header&#x6A21;&#x5757;&#xFF1A;</strong></span>&#x8BE5;&#x6A21;&#x5757;&#x63D0;&#x4F9B;&#x4E86;&#x4E24;&#x4E2A;&#x6307;&#x4EE4;&#xFF0C;&#x5B83;&#x4EEC;&#x4F1A;&#x5F71;&#x54CD;&#x53D1;&#x9001;&#x5230;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x54CD;&#x5E94;&#x5934;</p>
+<p>add_header name value</p>
+<p>expires &#x5141;&#x8BB8;&#x63A7;&#x5236;&#x53D1;&#x9001;&#x5230;&#x5BA2;&#x6237;&#x7AEF; Expires&#x548C; Cache-Control HTTP header&#x7684;&#x503C;</p>
+<p><strong>Addition&#x6A21;&#x5757;&#xFF1A;</strong>&#x5141;&#x8BB8;&#x4F60;&#xFF08;&#x901A;&#x8FC7;&#x7B80;&#x5355;&#x6307;&#x4EE4;&#xFF09;&#x5728;HTTP&#x54CD;&#x5E94;&#x4E4B;&#x524D;&#x6216;&#x8005;&#x4E4B;&#x540E;&#x6DFB;&#x52A0;&#x5185;&#x5BB9;</p>
+<p><strong>Substitution&#x6A21;&#x5757;&#xFF1A;</strong>&#x987A;&#x7740;&#x524D;&#x9762;&#x6A21;&#x5757;&#x7684;&#x8DEF;&#x7EBF;,Substitution &#x6A21;&#x5757;&#x5141;&#x8BB8;&#x4F60;&#x4ECE;&#x54CD;&#x5E94;&#x4F53;&#x4E2D;&#x67E5;&#x627E;&#x548C;&#x76F4;&#x63A5;&#x66FF;&#x6362;&#x6587;&#x672C;</p>
+<p><strong> Gzip filter &#x6A21;&#x5757;&#xFF1A;</strong>&#x8BE5;&#x6A21;&#x5757;&#x5141;&#x8BB8;&#x4F60;&#x5728;&#x5C06;&#x54CD;&#x5E94;&#x4F53;&#x53D1;&#x9001;&#x5230;&#x5BA2;&#x6237;&#x7AEF;&#x4E4B;&#x524D;&#x5C06;&#x54CD;&#x5E94;&#x4F53;&#x5229;&#x7528;Gzip &#x7B97;&#x6CD5;&#x538B;&#x7F29;</p>
+<p><strong> Gzip static&#x6A21;&#x5757;&#xFF1A;</strong>&#x8BE5;&#x6A21;&#x5757;&#x4E3A;Gzip&#x8FC7;&#x6EE4;&#x673A;&#x5236;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x529F;&#x80FD;&#x2013;&#x5F53;gzip_static&#x6307;&#x4EE4;(on &#x6216; off)&#x5F00;&#x542F;&#xFF0C;Nginx&#x5C06;&#x81EA;&#x52A8;&#x67E5;&#x627E;.gz&#x6587;&#x4EF6;&#xFF0C;&#x5148;&#x67E5;&#x627E;&#x4E0B;&#xFF0C;&#x662F;&#x5426;&#x6709;&#x8BE5;&#x6587;&#x4EF6;</p>
+<p>&#x7684;&#x538B;&#x7F29;&#x5F62;&#x5F0F;&#x6587;&#x4EF6;&#x3002;</p>
+<p><strong>Charset filter&#x6A21;&#x5757;&#xFF1A;</strong>&#x53EF;&#x4EE5;&#x66F4;&#x7CBE;&#x786E;&#x5730;&#x63A7;&#x5236;&#x54CD;&#x5E94;&#x4F53;&#x7684;&#x5B57;&#x7B26;&#x96C6;</p>
+<p><strong>Memcached&#x6A21;&#x5757;&#xFF1A;</strong>Memcached&#x662F;&#x4E00;&#x4E2A;&#x901A;&#x8FC7;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x65B9;&#x5F0F;&#x6765;&#x8FD0;&#x884C;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF0C;&#x5B83;&#x80FD;&#x591F;&#x901A;&#x8FC7;&#x5957;&#x63A5;&#x5B57;&#x8FDE;&#x63A5;&#x3002;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x9AD8;&#x6548;&#x7684;&#x5206;&#x5E03;&#x5F0F;&#x952E;/&#x503C;&#x7684;&#x5185;&#x5B58;&#x7F13;&#x5B58;&#x7CFB;&#x7EDF;&#x3002;</p>
+<p><strong>Image filter &#x6A21;&#x5757;&#xFF1A;</strong> &#x63D0;&#x4F9B;&#x56FE;&#x50CF;&#x5904;&#x7406;&#x529F;&#x80FD;</p>
+<p><strong>XLST&#x6A21;&#x5757;</strong>&#xFF1A;&#x5141;&#x8BB8;&#x5BF9;XML&#x6587;&#x4EF6;&#x6216;&#x8005;&#x540E;&#x53F0;&#x670D;&#x52A1;&#x5668;&#xFF08;&#x4EE3;&#x7406;&#x548C;FastCGI&#xFF09;&#x6536;&#x5230;&#x7684;&#x54CD;&#x5E94;&#x5E94;&#x7528;XSLT&#x8F6C;&#x6362;</p>
+<p>&#xA0;</p>
+<hr>
+<p>CGI &#x901A;&#x7528;&#x7F51;&#x5173;&#x63A5;&#x53E3;&#xFF1A;CGI&#x662F;&#x4E00;&#x4E2A;&#x534F;&#x8BAE;&#xFF0C;&#x5B83;&#x63CF;&#x8FF0;&#x4E86;web&#x670D;&#x52A1;&#x5668;&#x4E0E;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7F51;&#x5173;&#xFF08;PHP&#x3001;python,&#x7B49;&#x7B49;&#xFF09;&#x4E4B;&#x95F4;&#x7684;&#x4FE1;&#x606F;&#x4EA4;&#x6362;&#x3002;</p>
+<p>&#x5B9A;&#x4E49;&#xFF1A;&#x6309;&#x7167;RFC3875&#x7684;&#x89C4;&#x5B9A;&#xFF08;CGI protocol v1.1&#xFF09;,&#x901A;&#x7528;&#x7F51;&#x5173;&#x63A5;&#x53E3;(CGI)&#x5141;&#x8BB8;&#x4E00;&#x4E2A;HTTP&#x670D;&#x52A1;&#x548C;CGI&#x811A;&#x672C;&#x8D1F;&#x62C5;&#x8D23;&#x4EFB;&#x2014;&#x2014;&#x54CD;&#x5E94;&#x5BA2;&#x6237;&#x7AEF;&#x7684;requests.[&#x2026;].</p>
+<p>&#x670D;&#x52A1;&#x5668;&#xFF08;Nginx&#xFF09;&#x54CD;&#x5E94;&#x7BA1;&#x7406;&#x8FDE;&#x63A5;&#x3001;&#x6570;&#x636E;&#x4F20;&#x9001;&#x3001;&#x4F20;&#x8F93;&#x53CA;&#x5BA2;&#x6237;&#x7AEF;&#x76F8;&#x5173;&#x7684;&#x7F51;&#x7EDC;&#x95EE;&#x9898;&#xFF0C;&#x800C;CGI&#x811A;&#x672C;&#x5904;&#x7406;&#x8BF8;&#x5982;&#x6570;&#x636E;&#x8BBF;&#x95EE;&#x548C;&#x6587;&#x6863;&#x5904;&#x7406;&#x7B49;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x95EE;&#x9898;&#x3002;</p>
+<p>CGI &#x5B58;&#x5728;&#x7684;&#x7F3A;&#x70B9;&#xFF08;&#x5982;&#x6BCF;&#x4E2A;&#x8BF7;&#x6C42;&#x4EA7;&#x751F;&#x4E00;&#x4E2A;&#x552F;&#x4E00;&#x8FDB;&#x7A0B;&#xFF09;&#xFF0C;&#x4EA7;&#x751F;&#x4E86;&#x7531;CGI&#x5230;FastCGI&#x7684;&#x6F14;&#x53D8;&#x3002;</p>
+<p>FastCGi&#x4E0E;Nginx&#x7684;&#x548C;&#x8C10;&#x5171;&#x5904;&#x6709;FastCGI&#x6A21;&#x5757;&#x6765;&#x5B8C;&#x6210;&#x3002;</p>
+<p>FastCGI&#x6A21;&#x5757; &#x4E3B;&#x8981;&#x6307;&#x4EE4;&#xFF1A;</p>
+<p>fastcgi_pass:&#x4F7F;&#x7528;&#x73AF;&#x5883;location,if       &#x6307;&#x5B9A;&#x4EC0;&#x4E48;&#x8BF7;&#x6C42;&#x5E94;&#x8BE5;&#x4F20;&#x9012;&#x7ED9; FastCGI &#x670D;&#x52A1;&#x5668;</p>
+<p>fastcgi_param:   location,http,server  &#x5141;&#x8BB8;&#x914D;&#x7F6E;&#x4F20;&#x9012;&#x7ED9;FastCGI &#x670D;&#x52A1;&#x5668;&#x7684;&#x8BF7;&#x6C42;&#x53C2;&#x6570;</p>
+<p>fastcgi_pass_header  &#x6307;&#x5B9A;&#x4F20;&#x9012;&#x5230;FastCGI&#x670D;&#x52A1;&#x5668;&#x989D;&#x5916;&#x7684;&#x5934;&#xFF08;header&#xFF09;&#x4FE1;&#x606F;&#x3002;</p>
+<p>fastcgi_hide_header &#x6307;&#x5B9A;FastCGI&#x670D;&#x52A1;&#x5668;&#x5E94;&#x8BE5;&#x9690;&#x85CF;&#x7684;&#x5934;&#x4FE1;&#x606F;&#xFF08;&#x5373;Nginx&#x6CA1;&#x6709;&#x8F6C;&#x53D1;&#x7684;&#x5934;&#x4FE1;&#x606F;&#xFF09;</p>
+<p>fastcgi_index FastCGI  &#x4E0D;&#x652F;&#x6301;&#x81EA;&#x52A8;&#x76EE;&#x5F55;&#x7D22;&#x5F15;&#x2014;-&#x5982;&#x679C;URI&#x8BF7;&#x6C42;&#x4EE5;/&#x7ED3;&#x5C3E;&#xFF0C;Nginx&#x4F1A;&#x5C06;fastcgi_index&#x6307;&#x5B9A;&#x7684;&#x503C;&#x9644;&#x52A0;&#x5728; / &#x4E4B;&#x540E;</p>
+<p>fastcgi_ignore_client_abort</p>
+<p>fastcgi_intercept_errors  &#x5B9A;&#x4E49;Nginx &#x662F;&#x5426;&#x5904;&#x7406;&#x7F51;&#x5173;&#x8FD4;&#x56DE;&#x7684;&#x9519;&#x8BEF;&#x6216;&#x76F4;&#x63A5;&#x5411;&#x5BA2;&#x6237;&#x7AEF;&#x8FD4;&#x56DE;&#x9519;&#x8BEF;&#x9875;</p>
+<p>fastcgi_read_timeout     &#x5B9A;&#x4E49;&#x5E94;&#x7528;&#x7A0B;&#x5E8F; FastCGI &#x7684;&#x54CD;&#x5E94;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#x3002;&#x5982;&#x679C;&#x5728;&#x8FD9;&#x4E2A;&#x65F6;&#x95F4;&#x6BB5;&#x5185; Nginx&#x6CA1;&#x6709;&#x6536;&#x5230;&#x54CD;&#x5E94;&#xFF0C;&#x5219;&#x8FD4;&#x56DE; &#x201C;504 Gateway Timeout&#x201D;</p>
+<p>&#x7684;HTTP &#x9519;&#x8BEF;&#x3002;</p>
+<p>fastcgi_connect_timeout  &#x5B9A;&#x4E49;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x8FDE;&#x63A5;&#x8D85;&#x65F6;</p>
+<p>fastcgi_send_timeout &#x5B9A;&#x4E49;&#x53D1;&#x9001;&#x6570;&#x636E;&#x5230;&#x540E;&#x53F0;&#x670D;&#x52A1;&#x5668;&#x7684;&#x8D85;&#x65F6;&#x65F6;&#x95F4;</p>
+<p>fastcgi_split_path_info  &#x8FD9;&#x4E2A;&#x6307;&#x4EE4;&#x5BF9;&#x4E8E;&#x4EE5;&#x4E0B;&#x5F62;&#x5F0F;&#x7684;URL &#x7279;&#x522B;&#x6709;&#x7528;</p>
+<p>fastcgi_store &#x7528;&#x4E8E;&#x5F00;&#x542F;&#x6216;&#x7981;&#x7528;&#x7B80;&#x5355;&#x7684;&#x7F13;&#x5B58;&#x5B58;&#x50A8;&#xFF0C;&#x7528;&#x4E8E;&#x5B58;&#x50A8;FastCGI&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7684;&#x54CD;&#x5E94;&#xFF0C;&#x4F5C;&#x4E3A;&#x6587;&#x4EF6;&#x5B58;&#x50A8;&#x5728;&#x9A71;&#x52A8;&#x5668;&#x4E0A;&#xFF0C;&#x518D;&#x6709;&#x540C;&#x6837;&#x7684;URI&#x8BF7;&#x6C42;&#x65F6;&#xFF0C;&#x6587;&#x6863;&#x5C31;&#x76F4;&#x63A5;&#x4ECE;&#x7F13;&#x5B58;&#x4E2D;&#x63D0;&#x4F9B;&#xFF0C;&#x800C;&#x4E0D;&#x7528;&#x518D;&#x5C06;&#x8BF7;&#x6C42;&#x53D1;&#x9001;&#x5230;FastCGI&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x3002;</p>
+<p>fastcgi_store_access &#x8BE5;&#x6307;&#x4EE4;&#x5B9A;&#x4E49;&#x5728;&#x4F7F;&#x7528;&#x73AF;&#x5883;&#x4E2D;&#x5BF9;&#x7F13;&#x5B58;&#x6587;&#x4EF6;&#x7684;&#x8BBF;&#x95EE;&#x6743;&#x9650;&#x3002;</p>
+<p>fastcgi_temp_path &#x8BBE;&#x7F6E;&#x4E34;&#x65F6;&#x6587;&#x4EF6;&#x548C;&#x7F13;&#x5B58;&#x6587;&#x4EF6;&#x7684;&#x8DEF;&#x5F84;</p>
+<p>fastcgi_max_temp_file_size &#x6307;&#x5B9A;&#x4E34;&#x65F6;&#x6587;&#x4EF6;&#x7684;&#x6700;&#x5927;&#x503C;&#x3002;</p>
+<p>fastcgi_max_temp_write_size  &#x63D0;&#x4F9B;&#x4F7F;&#x7528;&#x5B58;&#x50A8;&#x9A71;&#x52A8;&#x5668;&#x4E0A;&#x7684;&#x4E34;&#x65F6;&#x6587;&#x4EF6;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x8BBE;&#x7F6E;&#x5199;&#x7F13;&#x51B2;&#x533A;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x8BE5;&#x6307;&#x4EE4;&#x5C31;&#x662F;&#x6765;&#x5B8C;&#x6210;&#x8FD9;&#x4E2A;&#x5DE5;&#x4F5C;&#x7684;</p>
+<p>fastcgi_buffers &#x8BBE;&#x7F6E;&#x7F13;&#x51B2;&#x533A;&#x7684;&#x6570;&#x91CF;&#x548C;&#x5927;&#x5C0F;&#xFF0C;&#x7528;&#x4E8E;&#x4ECE;FastCGI&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x8BFB;&#x53D6;&#x54CD;&#x5E94;&#x6570;&#x636E;</p>
+<p>fastcgi_buffers_size &#x8BBE;&#x7F6E;&#x7F13;&#x51B2;&#x533A;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x7528;&#x4E8E;&#x8BFB;&#x53D6;&#x4ECE;FastCGI&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x54CD;&#x5E94;&#x6570;&#x636E;&#x5305;&#x5F00;&#x59CB;&#x7684;&#x90E8;&#x5206;&#xFF0C;&#x901A;&#x5E38;&#x5305;&#x542B;&#x7B80;&#x5355;&#x7684;&#x5934;&#x6570;&#x636E;</p>
+<p>&#x2026;&#x2026;</p>
+<p><strong>FastCGI &#x7F13;&#x5B58;</strong></p>
+<p>fastcgi_cache &#x5B9A;&#x4E49;&#x4E00;&#x4E2A;cache&#x533A;&#x57DF;&#xFF08;zone&#xFF09;&#x3002;&#x5BF9;&#x533A;&#x57DF;&#xFF08;zone&#xFF09;&#x5B9A;&#x4E49;&#x6807;&#x8BC6;&#x7B26;&#x4E3A;&#x4E86;&#x8FDB;&#x4E00;&#x6B65;&#x5728;&#x5176;&#x4ED6;&#x6307;&#x4EE4;&#x4E2D;&#x4F7F;&#x7528;</p>
+<p>fastcgi_cache_key &#x5B9A;&#x4E49;&#x7F13;&#x5B58;key&#xFF0C;&#x4E3A;&#x4E86;&#x533A;&#x5206;&#x4E0D;&#x540C;&#x7684;&#x7F13;&#x5B58;&#x6761;&#x76EE;</p>
+<p>fastcgi_cache_min_uses &#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x8BF7;&#x6C42;&#x6709;&#x8D44;&#x683C;&#x7F13;&#x5B58;&#x4E4B;&#x524D;&#x88AB;&#x51FB;&#x4E2D;&#x7684;&#x6700;&#x5C11;&#x6B21;&#x6570;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E00;&#x4E2A;&#x8BF7;&#x6C42;&#x7684;&#x54CD;&#x5E94;&#x4E00;&#x6B21;&#x88AB;&#x51FB;&#x4E2D;&#x5C31;&#x4F1A;&#x88AB;&#x7F13;&#x5B58;</p>
+<p>fastcgi_cache_path &#x6307;&#x5B9A;&#x7528;&#x4E8E;&#x5B58;&#x50A8;&#x7F13;&#x5B58;&#x6587;&#x4EF6;&#x7684;&#x76EE;&#x5F55;&#x3002;&#x4E5F;&#x5305;&#x62EC;&#x5176;&#x4ED6;&#x53C2;&#x6570;</p>
+<p>fastcgi_cache_use_stale &#x5B9A;&#x4E49;Nginx&#x5728;&#x67D0;&#x4E9B;&#x60C5;&#x51B5;&#x4E0B;&#xFF08;&#x5173;&#x4E8E;&#x7F51;&#x5173;&#xFF09;&#x662F;&#x5426;&#x63D0;&#x4F9B;&#x8FC7;&#x671F;&#x7684;&#x7F13;&#x5B58;&#x6570;&#x636E;&#x3002;</p>
+<p>fastcgi_cache_valid &#x5141;&#x8BB8;&#x4F60;&#x5BF9;&#x4E0D;&#x540C;&#x7684;&#x54CD;&#x5E94;&#x4EE3;&#x7801;&#x5B9A;&#x5236;&#x4E0D;&#x540C;&#x7684;&#x7F13;&#x5B58;&#x65F6;&#x95F4;</p>
+<p>&#xA0;</p>
+<p><strong>Upstream&#x6A21;&#x5757;&#xFF1A;</strong></p>
+<p>&#x8BE5;&#x6A21;&#x5757;&#x5141;&#x8BB8;&#x4F60;&#x58F0;&#x660E;&#x547D;&#x540D;upstream&#x533A;&#x6BB5;&#x6765;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x670D;&#x52A1;&#x5668;&#x5217;&#x8868;&#xFF08;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#xFF09;</p>
+<p>&#x5B58;&#x5728;session&#x5171;&#x4EAB;&#x7684;&#x95EE;&#x9898;</p>
+<p>&#x8981;&#x786E;&#x5B9A;&#x540C;&#x4E00;&#x4E2A;&#x8BBF;&#x95EE;&#x8005;&#x53D1;&#x51FA;&#x7684;&#x8BF7;&#x6C42;&#x603B;&#x662F;&#x7531;&#x540C;&#x4E00;&#x4E2A;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x6765;&#x5904;&#x7406;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;ip_hash&#x9009;&#x9879;&#xFF0C;&#x5728;upstream&#x533A;&#x6BB5;&#x4E2D;&#x58F0;&#x660E;&#x5373;&#x53EF;.</p>
+<p>(ip_hash&#x5E76;&#x4E0D;&#x80FD;&#x5B8C;&#x5168;&#x4FDD;&#x8BC1;&#x5BA2;&#x6237;&#x7AEF;&#x603B;&#x80FD;&#x8FDE;&#x63A5;&#x5230;&#x540C;&#x4E00;&#x53F0;upstream&#x670D;&#x52A1;&#x5668;)</p>
+<p>&#xA0;</p>
+<p>server&#x6307;&#x4EE4;&#xFF1A;&#x53C2;&#x6570;</p>
+<p>weight=n &#x8868;&#x793A;&#x8FD9;&#x4E2A;&#x670D;&#x52A1;&#x5668;&#x7684;&#x6743;&#x91CD;</p>
+<p>max_fails=n &#x5B9A;&#x4E49;&#x53EF;&#x4EE5;&#x53D1;&#x751F;&#x901A;&#x4FE1;&#x9519;&#x8BEF;&#x7684;&#x6700;&#x5927;&#x6B21;&#x6570;&#xFF08;&#x5728;fail_timeout&#x5B9A;&#x4E49;&#x7684;&#x65F6;&#x95F4;&#x53C2;&#x6570;&#x5185;&#xFF09;</p>
+<p>fail_timeout=n</p>
+<p>down &#x6807;&#x8BB0;&#x4E00;&#x4E2A;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x4E3A;&#x79BB;&#x7EBF;&#x72B6;&#x6001; &#xFF0C;&#x4E0D;&#x4F7F;&#x7528;&#x8BE5;&#x670D;&#x52A1;&#x5668;</p>
+<p>backup &#x6807;&#x8BB0;&#x4E00;&#x4E2A;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x4E3A;&#x5907;&#x4EFD;&#x670D;&#x52A1;&#x5668;&#xFF0C;Nginx&#x4E0D;&#x4F1A;&#x4F7F;&#x7528;&#x8BE5;&#x670D;&#x52A1;&#x5668;&#x76F4;&#x5230;&#x5176;&#x4ED6;&#x670D;&#x52A1;&#x5668;&#x5168;&#x90E8;&#x5B95;&#x673A;&#x6216;&#x65E0;&#x6548;&#x65F6;&#x624D;&#x542F;&#x7528;</p>
+<p>&#xA0;</p>
+<p><strong><span style="font-size: 16px;">Nginx&#x4F5C;&#x4E3A;&#x53CD;&#x5411;&#x4EE3;&#x7406;</span></strong></p>
+<p><span style="font-size: 14px;"><strong>&#x53CD;&#x54CD;&#x4EE3;&#x7406;&#x673A;&#x5236;</strong></span></p>
+<p>Nginx &#x653E;&#x5728;&#x524D;&#x7AEF;,&#x4F5C;&#x4E3A;&#x524D;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#xFF08;&#x6362;&#x53E5;&#x8BDD;&#x8BF4;,&#x4F5C;&#x4E3A;&#x53CD;&#x5411;&#x4EE3;&#x7406;&#xFF09;,&#x63A5;&#x6536;&#x4ECE;&#x5916;&#x9762;&#x8FDB;&#x6765;&#x7684;&#x6240;&#x6709;&#x8BF7;&#x6C42;&#xFF0C;&#x4ED6;&#x4F1A;&#x5BF9;&#x8BF7;&#x6C42;&#x8FDB;&#x884C;&#x8FC7;&#x6EE4;&#xFF0C;<strong>&#x5982;&#x679C;&#x8BF7;&#x6C42;&#x7684;&#x8D44;&#x6E90;&#x662F;&#x9759;&#x6001;&#x6587;&#x4EF6;&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x7531;Nginx&#x63D0;&#x4F9B;&#x7ED9;&#x5BA2;&#x6237;&#x7AEF;&#xFF0C;&#x8BF7;&#x6C42;&#x7684;&#x8D44;&#x6E90;&#x662F;&#x52A8;&#x6001;&#x9875;&#x9762;&#xFF0C;&#x5219;&#x8F6C;&#x53D1;&#x7ED9;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x3002;</strong></p>
+<p>&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x53EA;&#x4E0E;Nginx&#x901A;&#x4FE1;&#x3002;&#x5B83;&#x53EF;&#x4EE5;&#x4E0E;&#x524D;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x4F4D;&#x4E8E;&#x540C;&#x4E00;&#x53F0;&#x8BA1;&#x7B97;&#x673A;&#x4E0A;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x673A;&#x5668;&#x4E0A;&#x4F7F;&#x7528;&#x591A;&#x4E2A;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#xFF08;&#x4F7F;&#x7528;upstream&#x533A;&#x6BB5;&#xFF09;&#x4EE5;&#x4FBF;&#x8D1F;&#x62C5;&#x8D1F;&#x8F7D;</p>
+<p>&#x4E24;&#x4E2A;&#x8FDB;&#x7A0B;&#x7684;&#x901A;&#x4FE1;&#x5175;&#x6CA1;&#x6709;&#x4F7F;&#x7528;FastCGI&#xFF0C;Nginx&#x5145;&#x5F53;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x4EE3;&#x7406;&#x670D;&#x52A1;&#x5668;&#xFF1A;&#x5B83;&#x4ECE;&#x5BA2;&#x6237;&#x7AEF;&#x6536;&#x5230;HTTP&#x8BF7;&#x6C42;&#x5E76;&#x4E14;&#x8F6C;&#x53D1;&#x5230;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#xFF08;&#x5145;&#x5F53;&#x4E00;&#x4E2A;HTTP&#x5BA2;&#x6237;&#x7AEF;&#xFF09;&#x3002;&#x56E0;&#x6B64;&#x8FD9;&#x91CC;&#x6CA1;&#x6709;&#x4F7F;&#x7528;&#x65B0;&#x7684;&#x534F;&#x8BAE;&#x6216;&#x590D;&#x6742;&#x7684;&#x8F6F;&#x4EF6;&#xFF0C;&#x8FD9;&#x79CD;&#x673A;&#x5236;&#x7531;Nginx&#x63D0;&#x4F9B;&#x7684;&#x4EE3;&#x7406;&#xFF08;Proxy&#xFF09;&#x6A21;&#x5757;&#x6765;&#x5B9E;&#x73B0;&#x3002;</p>
+<p><strong>Nginx&#x4EE3;&#x7406;&#x6A21;&#x5757;</strong></p>
+<p><strong>&#x4E3B;&#x8981;&#x6307;&#x4EE4;&#xFF1A;</strong></p>
+<p>proxy_pass &#x5728;location&#x6307;&#x5B9A;&#x8F6C;&#x53D1;&#x5230;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x7684;&#x8BF7;&#x6C42;</p>
+<p>proxy_method &#x5141;&#x8BB8;&#x4E3B;&#x8981;&#x7684;http&#x8BF7;&#x6C42;&#x65B9;&#x6CD5;&#x8F6C;&#x53D1;&#x5230;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;</p>
+<p>proxy_hide_header &#x8F6C;&#x53D1;&#x81F3;&#x5BA2;&#x6237;&#x7AEF;&#x54CD;&#x5E94;&#x65F6;&#xFF0C;&#x9690;&#x85CF;&#x66F4;&#x591A;&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#x5934;&#x884C;</p>
+<p>proxy_pass_header &#x7ED3;&#x5408;&#x524D;&#x9762;&#x7684;&#x547D;&#x4EE4;&#x3002;&#x8BE5;&#x6307;&#x4EE4;&#x5F3A;&#x5236;&#x4E00;&#x4E9B;&#x88AB;&#x5FFD;&#x7565;&#x7684;&#x5934;&#x4F20;&#x9012;&#x5230;&#x5BA2;&#x6237;&#x7AEF;</p>
+<p>proxy_redirect  &#x5141;&#x8BB8;&#x6539;&#x5199;&#x51FA;&#x73B0;&#x5728;HTTP&#x5934;&#x5374;&#x88AB;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x89E6;&#x53D1;&#x91CD;&#x5B9A;&#x5411;&#x7684;&#xFF35;&#xFF32;&#xFF2C;</p>
+<p>off &#x91CD;&#x5B9A;&#x5411;&#x88AB;&#x8F6C;&#x5230;&#x5B9E;&#x9645;&#x7684;&#x4F4D;&#x7F6E;</p>
+<p>proxy_next_upstream proxy_pass&#x8FDE;&#x63A5;&#x5230;&#x4E00;&#x4E2A;upstream&#x5757;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8BE5;&#x6307;&#x4EE4;&#x6307;&#x5B9A;&#x5728;&#x67D0;&#x79CD;&#x60C5;&#x51B5;&#xFF0C;&#x8BF7;&#x6C42;&#x8D44;&#x6E90;&#x653E;&#x5F03;&#x5E76;&#x4E14;&#x91CD;&#x65B0;&#x53D1;&#x9001;&#x5230;&#x4E0B;&#x4E00;&#x4E2A;&#x8BE5;&#x533A;&#x6BB5;&#x7684;&#x4E0B;&#x4E00;&#x4E2A;upstream server</p>
+<p><strong>&#x7F13;&#x5B58;&#x3001;&#x7F13;&#x51B2;&#x548C;&#x4E34;&#x65F6;&#x6587;&#x4EF6;</strong></p>
+<p>proxy_buffer_size   &#x8BBE;&#x7F6E;&#x7F13;&#x51B2;&#x533A;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x8BE5;&#x7F13;&#x51B2;&#x533A;&#x7528;&#x4E8E;&#x5B58;&#x653E;&#x8BFB;&#x53D6;&#x6765;&#x81EA;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x54CD;&#x5E94;&#x6570;&#x636E;&#x7684;&#x5F00;&#x59CB;&#x90E8;&#x5206;&#xFF0C;&#x901A;&#x5E38;&#x5305;&#x542B;&#x7B80;&#x5355;&#x7684;&#x5934;&#x6570;&#x636E;</p>
+<p>proxy_buffering  &#x5B9A;&#x4E49;&#x662F;&#x5426;&#x7F13;&#x51B2;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x7684;&#x54CD;&#x5E94;&#xFF0C;&#x5982;&#x679C;&#x8BBE;&#x7F6E;&#x4E3A;on&#xFF0C;&#x90A3;&#x4E48;Nginx&#x5C06;&#x628A;&#x54CD;&#x5E94;&#x5B58;&#x50A8;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#xFF0C;&#x4F7F;&#x7528;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#x6765;&#x63D0;&#x4F9B;&#x7F13;&#x51B2;.&#x5982;&#x679C;&#x7F13;&#x51B2;&#x7528;&#x5B8C;&#xFF0C;&#x54CD;&#x5E94;&#x6570;&#x636E;&#x5C31;&#x5B58;&#x50A8;&#x5230;&#x4E34;&#x65F6;&#x6587;&#x4EF6;&#x3002;</p>
+<p>proxy_buffers &#x8BBE;&#x7F6E;&#x7F13;&#x51B2;&#x6570;&#x91CF;&#x548C;&#x5927;&#x5C0F;&#xFF0C;&#x7528;&#x4E8E;&#x5B58;&#x653E;&#x4ECE;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x8BFB;&#x53D6;&#x7684;&#x54CD;&#x5E94;&#x6570;&#x636E;</p>
+<p>proxy_busy_buffers_size &#x5728;&#x7F13;&#x51B2;&#x533A;&#x4E2D;&#xFF0C;&#x6536;&#x5230;&#x7684;&#x540E;&#x7AEF;&#x6570;&#x636E;&#x5806;&#x79EF;&#x8D85;&#x8FC7;&#x8BE5;&#x6307;&#x4EE4;&#x6307;&#x5B9A;&#x7684;&#x6570;&#x503C;&#x65F6;&#x7F13;&#x51B2;&#x533A;&#x4F1A;&#x88AB;&#x5237;&#x65B0;&#xFF0C;&#x5E76;&#x4E14;&#x6570;&#x636E;&#x88AB;&#x53D1;&#x9001;&#x5230;&#x5BA2;&#x6237;&#x7AEF;</p>
+<p>proxy_cache &#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x7F13;&#x5B58;zone&#x3002;&#x6307;&#x5B9A;zone&#x7684;&#x6807;&#x8BC6;&#x7B26;&#xFF0C;&#x4EE5;&#x4FBF;&#x5C06;&#x6765;&#x7684;&#x6307;&#x4EE4;&#x4F7F;&#x7528;</p>
+<p>proxy_cache_key &#x5B9A;&#x4E49;&#x7F13;&#x5B58;key</p>
+<p>proxy_cache_path &#x6307;&#x51FA;&#x7528;&#x4E8E;&#x5B58;&#x653E;&#x7F13;&#x5B58;&#x6587;&#x4EF6;&#x7684;&#x76EE;&#x5F55;</p>
+<p>proxy_cache_methods &#x5B9A;&#x4E49;&#x6709;&#x8D44;&#x683C;&#x7F13;&#x5B58;&#x7684;HTTP&#x65B9;&#x6CD5;</p>
+<p>proxy_cache_min_uses &#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x8BF7;&#x6C42;&#x6709;&#x8D44;&#x683C;&#x7F13;&#x5B58;&#x4E4B;&#x524D;&#x88AB;&#x51FB;&#x4E2D;&#x7684;&#x6700;&#x5C11;&#x6B21;&#x6570;</p>
+<p>&#x3002;&#x3002;&#x3002;&#x3002;</p>
+<p><strong>&#x9650;&#x5236;&#x3001;&#x8D85;&#x65F6;&#x8BBE;&#x5B9A;&#x548C;&#x9519;&#x8BEF; &#x6307;&#x4EE4;</strong></p>
+<p>proxy_connect_timeout &#x5B9A;&#x4E49;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x8FDE;&#x63A5;&#x8D85;&#x65F6;</p>
+<p>&#x3002;&#x3002;&#x3002;</p>
+<p><strong>&#x5176;&#x5B83;&#x6307;&#x4EE4;</strong></p>
+<p><strong>&#x3002;&#x3002;&#x3002;</strong></p>
+<p>&#xA0;</p>
+<p><strong>&#x9AD8;&#x7EA7;&#x914D;&#x7F6E;&#xFF1A;</strong></p>
+<p>&#xA0;</p>
+<p>&#x53EF;&#x4EE5;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;proxy.conf&#x6587;&#x4EF6;&#xFF0C;&#x7528;include&#x5BFC;&#x5165;</p>
+<p><strong>&#x5BF9;&#x4E8E;&#x4E00;&#x4E9B;&#x8BBE;&#x7F6E;&#x7684;&#x5EFA;&#x8BAE;&#x503C;</strong></p>
+<p>proxy_redirect off; &#x8BBE;&#x7F6E;&#x4E3A;off&#x540E;&#xFF0C;&#x8BA9;Nginx&#x4EE5; &#x201C;as it is &#x201D; &#x65B9;&#x5F0F;&#x91CD;&#x5B9A;&#x5411;&#x5230;&#x5BA2;&#x6237;&#x7AEF;&#xFF0C;&#x5373;&#x5BF9;&#x54CD;&#x5E94;&#x672C;&#x8EAB;&#x4E0D;&#x505A;&#x4EFB;&#x4F55;&#x5904;&#x7406;&#x3002;</p>
+<p>proxy_set_header Host $host; &#x8F6C;&#x53D1;&#x5230;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x7684;&#x8BF7;&#x6C42;&#x4E2D;&#x7684;Host HTTP&#x5934;&#x9ED8;&#x8BA4;&#x4E3A;&#x4EE3;&#x7406;&#x7684;&#x4E3B;&#x673A;&#x540D;&#x3002;&#x8FD9;&#x6837;&#x7684;&#x8BBE;&#x7F6E;&#x4EE4;Nginx&#x53EF;&#x4EE5;&#x6362;&#x800C;&#x4F7F;&#x7528;&#x5BA2;&#x6237;&#x7AEF;&#x8BF7;&#x6C42;&#x4E2D;&#x7684;&#x539F;&#x59CB;&#x4E3B;&#x673A;&#x540D;</p>
+<p>proxy_ser_header X-Real-IP $remote_addr; &#x7531;&#x4E8E;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x4ECE;Nginx&#x6536;&#x5230;&#x8BF7;&#x6C42;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x662F;&#x4E0E;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x901A;&#x8BAF;&#x7684;IP&#x5C06;&#x662F;Nginx&#x7684;IP&#x5730;&#x5740;&#x800C;&#x4E0D;&#x662F;&#x539F;&#x59CB;&#x5BA2;&#x6237;&#x7AEF;&#x7684;IP&#x5730;&#x5740;&#xFF0C;&#x4F7F;&#x7528;&#x8FD9;&#x79CD;&#x8BBE;&#x7F6E;&#x80FD;&#x591F;&#x8F6C;&#x53D1;&#x771F;&#x5B9E;&#x7684;&#x5BA2;&#x6237;&#x7AEF;IP&#x5730;&#x5740;&#xFF0C;&#x4F7F;&#x7528;&#x8FD9;&#x79CD;&#x8BBE;&#x7F6E;&#x80FD;&#x591F;&#x8F6C;&#x53D1;&#x771F;&#x5B9E;&#x7684;&#x5BA2;&#x6237;&#x7AEF;IP&#x5730;&#x5740;&#x5230;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x5934;&#xFF0C;&#x5373;X-Real-IP&#x5934;</p>
+<p>proxy_set_header  X-Forwarded-For $proxy_add_x_forworded_for; &#x6765;&#x786E;&#x4FDD;&#x7528;&#x4E8E;&#x5957;&#x63A5;&#x5B57;&#x901A;&#x4FE1;&#x7684;IP&#x5730;&#x5740;&#xFF0C;&#x53EF;&#x80FD;&#x662F;&#x539F;&#x59CB;&#x5BA2;&#x6237;&#x7AEF;&#x7684;IP&#x5730;&#x5740;&#xFF08;&#x4EE3;&#x7406;&#x540E;&#x9762;&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#xFF09;&#x8F6C;&#x4EA4;&#x5230;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;</p>
+<p>client_max_body_size 10m; &#x9650;&#x5236;&#x5BA2;&#x6237;&#x7AEF;&#x8BF7;&#x6C42;&#x4F53;&#x7684;&#x6700;&#x5927;&#x503C;&#x4E3A;10M&#x3002;&#x8FD9;&#x91CC;&#x8BBE;&#x7F6E;&#x7684;&#x503C;&#x53EA;&#x662F;&#x4E00;&#x4E2A;&#x53C2;&#x8003;&#x503C;&#xFF0C;&#x8BF7;&#x786E;&#x4FDD;&#x8C03;&#x6574;&#x7684;&#x503C;&#x4E0E;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x7684;&#x6C34;&#x5E73;&#x76F8;&#x540C;&#x3002;&#x5426;&#x5219;&#x4E00;&#x4E2A;&#x6B63;&#x786E;&#x6536;&#x5230;&#x8BF7;&#x6C42;&#x7684;&#xFF08;&#x88AB;Nginx&#x5904;&#x7406;&#x540E;&#xFF09;&#x5C06;&#x4E0D;&#x80FD;&#x591F;&#x6210;&#x529F;&#x7684;&#x8F6C;&#x53D1;&#x5230;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x3002;</p>
+<p>client_body_buffer_size 128k; &#x5B9A;&#x4E8E;&#x7528;&#x4E8E;&#x6301;&#x6709;&#x8BF7;&#x6C42;&#x4F53;&#xFF08;Request body&#xFF09;&#x5185;&#x5B58;&#x7F13;&#x51B2;&#x533A;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x8D85;&#x8FC7;&#x8BE5;&#x503C;&#x540E;&#xFF0C;&#x5185;&#x5BB9;&#x5C31;&#x88AB;&#x4FDD;&#x5B58;&#x5230;&#x4E34;&#x65F6;&#x6587;&#x4EF6;&#x4E2D;</p>
+<p>proxy_connect_timeout 15&#xFF1B;&#x5982;&#x679C;&#x4E0E;&#x4EE3;&#x7406;&#x670D;&#x52A1;&#x5668;&#x534F;&#x540C;&#x5DE5;&#x4F5C;&#x7684;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x5728;&#x672C;&#x5730;&#x7F51;&#x7EDC;&#xFF0C;&#x8BF7;&#x52A1;&#x5FC5;&#x4FDD;&#x6301;&#x6B64;&#x503C;&#x5C3D;&#x53EF;&#x80FD;&#x4F4E;&#xFF08;&#x8FD9;&#x4E2A;&#x503C;&#x53D6;&#x51B3;&#x4E8E;&#x5E73;&#x5747;&#x8D1F;&#x8377;&#xFF09;&#xFF0C;&#x6307;&#x4EE4;&#x7684;&#x6700;&#x5927;&#x503C;&#x662F;75&#x79D2;</p>
+<p>proxy_send_timeout 15;</p>
+<p>proxy_read_timeout 15;</p>
+<p>&#xA0;</p>
+<p>241</p>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/04/30/e5-af-b9-e5-ad-97-e5-85-b8-e4-bd-9c-e9-9b-86-e5-90-88-e6-93-8d-e4-bd-9c/" rel="next" title="对字典作集合操作">
+                <i class="fa fa-chevron-left"></i> 对字典作集合操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/05/05/pythonwebservergatewayinterfacewsginotes/" rel="prev" title="python web server gateway interface (wsgi ) notes">
+                python web server gateway interface (wsgi ) notes <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2014/05/05/nginxhttpserver-e7-9b-b8-e5-85-b3/"
+     data-title="Nginx HTTP Server相关"
+     data-content=""
+     data-url="http://notes.zhouping.xin/2014/05/05/nginxhttpserver-e7-9b-b8-e5-85-b3/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2014/05/05/nginxhttpserver-e7-9b-b8-e5-85-b3/"
+           data-title="Nginx HTTP Server相关" data-url="http://notes.zhouping.xin/2014/05/05/nginxhttpserver-e7-9b-b8-e5-85-b3/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Chow" />
+          <p class="site-author-name" itemprop="name">Chow</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">121</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chow</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chow-notes"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

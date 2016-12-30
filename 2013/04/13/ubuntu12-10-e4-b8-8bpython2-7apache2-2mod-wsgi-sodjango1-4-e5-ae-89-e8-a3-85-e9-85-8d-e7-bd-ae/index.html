@@ -1,0 +1,731 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hello, World" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="1.&amp;#x5B89;&amp;#x88C5;apache
+sudo apt-get install apache2&amp;#x542F;&amp;#x52A8;apache&amp;#x670D;&amp;#x52A1;sudo service apache2 start
+&amp;#x505C;&amp;#x6B62;sudo service apache2 stop&amp;#x91CD;&amp;#x542F;sudo service apache2 rest">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ubuntu12.10 下python2.7  apache2.2 mod_wsgi.so django 1.4安装配置">
+<meta property="og:url" content="http://notes.zhouping.xin/2013/04/13/ubuntu12-10-e4-b8-8bpython2-7apache2-2mod-wsgi-sodjango1-4-e5-ae-89-e8-a3-85-e9-85-8d-e7-bd-ae/index.html">
+<meta property="og:site_name" content="Chow's Notes">
+<meta property="og:description" content="1.&amp;#x5B89;&amp;#x88C5;apache
+sudo apt-get install apache2&amp;#x542F;&amp;#x52A8;apache&amp;#x670D;&amp;#x52A1;sudo service apache2 start
+&amp;#x505C;&amp;#x6B62;sudo service apache2 stop&amp;#x91CD;&amp;#x542F;sudo service apache2 rest">
+<meta property="og:updated_time" content="2016-12-30T16:03:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ubuntu12.10 下python2.7  apache2.2 mod_wsgi.so django 1.4安装配置">
+<meta name="twitter:description" content="1.&amp;#x5B89;&amp;#x88C5;apache
+sudo apt-get install apache2&amp;#x542F;&amp;#x52A8;apache&amp;#x670D;&amp;#x52A1;sudo service apache2 start
+&amp;#x505C;&amp;#x6B62;sudo service apache2 stop&amp;#x91CD;&amp;#x542F;sudo service apache2 rest">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: false,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://notes.zhouping.xin/2013/04/13/ubuntu12-10-e4-b8-8bpython2-7apache2-2mod-wsgi-sodjango1-4-e5-ae-89-e8-a3-85-e9-85-8d-e7-bd-ae/"/>
+
+
+
+
+
+  <title> ubuntu12.10 下python2.7  apache2.2 mod_wsgi.so django 1.4安装配置 | Chow's Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Chow's Notes</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://notes.zhouping.xin/2013/04/13/ubuntu12-10-e4-b8-8bpython2-7apache2-2mod-wsgi-sodjango1-4-e5-ae-89-e8-a3-85-e9-85-8d-e7-bd-ae/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Chow">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Chow's Notes">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Chow's Notes" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ubuntu12.10 下python2.7  apache2.2 mod_wsgi.so django 1.4安装配置
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2013-04-13T07:44:00+08:00">
+                2013-04-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2013/04/13/ubuntu12-10-e4-b8-8bpython2-7apache2-2mod-wsgi-sodjango1-4-e5-ae-89-e8-a3-85-e9-85-8d-e7-bd-ae/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/04/13/ubuntu12-10-e4-b8-8bpython2-7apache2-2mod-wsgi-sodjango1-4-e5-ae-89-e8-a3-85-e9-85-8d-e7-bd-ae/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>1.&#x5B89;&#x88C5;apache</p>
+<p>sudo apt-get install apache2&#x542F;&#x52A8;apache&#x670D;&#x52A1;sudo service apache2 start</p>
+<p>&#x505C;&#x6B62;sudo service apache2 stop&#x91CD;&#x542F;sudo service apache2 restart</p>
+<p>&#x542F;&#x52A8;&#x6D4B;&#x8BD5;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x8F93;&#x5165;<a href="http://localhost" target="_blank" rel="external">http://localhost</a></p>
+<p>&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x4F4D;&#x7F6E;</p>
+<p>&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x662F;</p>
+<p><strong>/usr/sbin/apache2</strong></p>
+<p>&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x662F;&#x5728;</p>
+<p><strong>/etc/apache2</strong></p>
+<p>&#x7F51;&#x7AD9;(web)&#x6587;&#x4EF6;&#x662F;&#x5728;&#xFF1A;</p>
+<p><strong>/var/www</strong></p>
+<p>&#x8FD9;&#x4E2A;&#x5F53;&#x7136;&#x4F60;&#x53EF;&#x4EE5;&#x914D;&#x7F6E;&#xFF0C;&#x4FEE;&#x6539;</p>
+<p><strong>/etc/apache2/sites-available/default</strong></p>
+<p>&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x7684;&#x4E0B;&#x9762;&#x7684;&#x5B57;&#x6BB5;</p>
+<p><strong>DocumentRoot /var/www</strong></p>
+<p>&#x6BD4;&#x5982;&#x4F60;&#x6539;&#x5230;/var/temp</p>
+<p>&#x90A3;&#x4E48;&#x5C31;&#x628A;&#x8FD9;&#x884C;&#x6539;&#x6210;&#xFF1A;</p>
+<p>DocumentRoot /var/temp</p>
+<p>&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x5E76;&#x4E0D;&#x662F;&#x5728;httpd.conf&#x91CC;&#x9762;&#xFF0C;&#x800C;&#x662F;apache2.conf&#xFF0C;&#x800C;&#x8FD9;&#x91CC;&#x9762;&#x5E76;&#x6CA1;&#x6709;&#x914D;&#x7F6E;&#x6240;&#x6709;&#x7684;&#x4E1C;&#x897F;&#xFF0C;&#x5982;&#x7AEF;&#x53E3;&#x662F;&#x5728;ports.conf&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x91CC;&#x9762;&#xFF0C;&#x800C;&#x7F51;&#x7AD9;&#x7684;&#x6839;&#x76EE;&#x5F55;&#x662F;&#x5728;&#x4E0A;&#x9762;&#x7684;&#x63D0;&#x5230;&#x7684;<strong>/etc/apache2/sites-available/default</strong>&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x4E2D;&#x3002;</p>
+<p><strong>/etc/apache2/</strong>&#x4E2D;&#x867D;&#x7136;&#x4E5F;&#x6709;httpd.conf&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#xFF0C;&#x4F46;&#x662F;httpd.conf&#x91CC;&#x9762;&#x662F;&#x7A7A;&#x7684;&#xFF08;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6B64;&#x6587;&#x4EF6;&#xFF0C;&#x53EF;&#x4EE5;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#xFF09;&#xFF0C;&#x7136;&#x540E;&#x5728;&#x8FD9;&#x91CC;&#x9762;&#x52A0;&#x4E00;&#x4E9B;&#x914D;&#x7F6E;&#xFF0C;&#x518D;&#x5728;apache2.conf&#x672B;&#x5C3E;&#x52A0;&#x4E0A; Include httpd.conf&#x5C31;&#x4F1A;&#x628A;httpd.conf&#x52A0;&#x5230;&#x5B83;&#x7684;&#x6587;&#x4EF6;&#x91CC;&#x9762;&#x3002;</p>
+<p>2.&#x5B89;&#x88C5;mod_wsgi.so</p>
+<p>&#x76EE;&#x524D;unbuntu&#x63D0;&#x4F9B;&#x4E86;2&#x4E2A;&#x6E90;&#xFF0C;&#x4E00;&#x4E2A;&#x9488;&#x5BF9;2.x python&#xFF0C;&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x9488;&#x5BF9;3.x python&#xFF1A;</p>
+<p><strong>&#x547D;&#x4EE4;&#x5B89;&#x88C5;&#xFF1A;</strong></p>
+<p>libapache2-mod-wsgi - Python WSGI adapter module for Apache</p>
+<p>libapache2-mod-wsgi-py3 - Python 3 WSGI adapter module for Apache</p>
+<p><strong>&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#x5B89;&#x88C5;</strong>:</p>
+<p><a href="http://ftp.cn.debian.org/debian/pool/main/m/mod-wsgi/&#x4ECE;&#x8FD9;&#x513F;&#x4E0B;&#x8F7D;&#x5BF9;&#x5E94;&#x7684;&#x7248;&#x672C;&#x4E0B;&#x6765;&#x5C06;mod_wsgi.so&#x653E;&#x5230;" target="_blank" rel="external">http://ftp.cn.debian.org/debian/pool/main/m/mod-wsgi/&#x4ECE;&#x8FD9;&#x513F;&#x4E0B;&#x8F7D;&#x5BF9;&#x5E94;&#x7684;&#x7248;&#x672C;&#x4E0B;&#x6765;&#x5C06;mod_wsgi.so&#x653E;&#x5230;</a></p>
+<p>/usr/lib/apache2/modules&#x4E0B;&#xFF0C;&#x7136;&#x540E;&#x5C06;wsgi.conf wsgi.load&#x653E;&#x5230;/etc/apache2/mods-available</p>
+<p>&#x56E0;&#x4E3A;&#x5728;wsgi.conf&#x4E2D;&#x5DF2;&#x7ECF;&#x52A0;&#x4E0A;&#x4E86;<span class="typ">LoadModule</span><span class="pln"> wsgi_module </span>/usr/lib/apache2/modules/mod_wsgi.so &#x8FD9;&#x4E00;&#x53E5;&#xFF0C;&#x6240;&#x4EE5;apache&#x53EF;&#x4EE5;&#x52A0;&#x8F7D;mod_wsgi.so&#x4E86;</p>
+<p>2.&#x5B89;&#x88C5;django1.4</p>
+<p>wget <a href="http://www.djangoproject.com/m/releases/1.4/Django-1.4.tar.gz" target="_blank" rel="external">http://www.djangoproject.com/m/releases/1.4/Django-1.4.tar.gz</a><br>tar xzvf Django-1.4.tar.gz<br>cd Django-1.4<br>python setup.py install</p>
+<p>3.&#x914D;&#x7F6E;httpd.conf</p>
+<p>&#x57FA;&#x672C;&#x914D;&#x7F6E;</p>
+<p>&#x5728;httpd.conf&#x52A0;&#x4E0A;</p>
+<p><pre>WSGIScriptAlias / /path/to/mysite.com/mysite/wsgi.py<br>WSGIPythonPath /path/to/mysite.com</pre></p>
+<p>Order deny,allow<br>Allow from all</p>
+<p>&#x5176;&#x4ED6;&#x60C5;&#x51B5;&#x914D;&#x7F6E;&#x53EF;&#x53C2;&#x8003;&#x7684;django&#x6587;&#x6863;<a href="https://docs.djangoproject.com/en/1.4/howto/deployment/wsgi/modwsgi/&#x4E2D;&#x7684;" target="_blank" rel="external">https://docs.djangoproject.com/en/1.4/howto/deployment/wsgi/modwsgi/&#x4E2D;&#x7684;</a><br>How to use Django with Apache and mod_wsgi&#x4E00;&#x8282;</p>
+<p>&#x6CE8;&#x610F;&#x5728;&#x914D;&#x7F6E;&#x7684;&#x8FC7;&#x7A0B;&#x5F53;&#x4FEE;&#x6539;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x65F6;&#x4F1A;&#x9047;&#x5230;&#x6CA1;&#x6709;&#x6743;&#x9650;&#x65E0;&#x6CD5;&#x4FDD;&#x5B58;&#x7684;&#x60C5;&#x51B5;<br>&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x7528;sudo vim filname&#x7F16;&#x8F91;&#x4FDD;&#x5B58;,vi&#x7684;&#x7528;&#x6CD5;&#x770B;&#x53C2;&#x8003;<a href="http://www.cnblogs.com/sophine/archive/2012/04/26/2471188.html" target="_blank" rel="external">http://www.cnblogs.com/sophine/archive/2012/04/26/2471188.html</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/04/09/python-e6-97-b6-e9-97-b4-e5-87-bd-e6-95-b0-ef-bc-88-e8-bd-ac-e8-bd-bd-ef-bc-89/" rel="next" title="python时间函数  （转载）">
+                <i class="fa fa-chevron-left"></i> python时间函数  （转载）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/04/24/e7-a8-8b-e5-ba-8f-e7-9a-84-e6-9e-84-e9-80-a0-e5-92-8c-e8-a7-a3-e9-87-8a/" rel="prev" title="程序的构造和解释">
+                程序的构造和解释 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2013/04/13/ubuntu12-10-e4-b8-8bpython2-7apache2-2mod-wsgi-sodjango1-4-e5-ae-89-e8-a3-85-e9-85-8d-e7-bd-ae/"
+     data-title="ubuntu12.10 下python2.7  apache2.2 mod_wsgi.so django 1.4安装配置"
+     data-content=""
+     data-url="http://notes.zhouping.xin/2013/04/13/ubuntu12-10-e4-b8-8bpython2-7apache2-2mod-wsgi-sodjango1-4-e5-ae-89-e8-a3-85-e9-85-8d-e7-bd-ae/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2013/04/13/ubuntu12-10-e4-b8-8bpython2-7apache2-2mod-wsgi-sodjango1-4-e5-ae-89-e8-a3-85-e9-85-8d-e7-bd-ae/"
+           data-title="ubuntu12.10 下python2.7  apache2.2 mod_wsgi.so django 1.4安装配置" data-url="http://notes.zhouping.xin/2013/04/13/ubuntu12-10-e4-b8-8bpython2-7apache2-2mod-wsgi-sodjango1-4-e5-ae-89-e8-a3-85-e9-85-8d-e7-bd-ae/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Chow" />
+          <p class="site-author-name" itemprop="name">Chow</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">121</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chow</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chow-notes"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

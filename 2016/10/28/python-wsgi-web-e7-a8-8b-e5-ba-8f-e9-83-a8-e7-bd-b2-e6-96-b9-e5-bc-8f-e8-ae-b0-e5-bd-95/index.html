@@ -1,0 +1,779 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hello, World" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x7528;web.py&amp;#x6846;&amp;#x67B6;&amp;#x5199;&amp;#x7684;&amp;#x7A0B;&amp;#x5E8F;
+&amp;#x4E00;&amp;#x3001;Nginx (&amp;#x505A;&amp;#x4EE3;&amp;#x7406;)+Gunicorn(&amp;#x540E;&amp;#x7AEF;&amp;#x670D;&amp;#x52A1;&amp;#x5668;)
+&amp;#x56E0;&amp;#x4E3A;gunicorn&amp;#x662F;&amp;#x5F">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python wsgi web程序部署方式记录">
+<meta property="og:url" content="http://notes.zhouping.xin/2016/10/28/python-wsgi-web-e7-a8-8b-e5-ba-8f-e9-83-a8-e7-bd-b2-e6-96-b9-e5-bc-8f-e8-ae-b0-e5-bd-95/index.html">
+<meta property="og:site_name" content="Chow's Notes">
+<meta property="og:description" content="&amp;#x7528;web.py&amp;#x6846;&amp;#x67B6;&amp;#x5199;&amp;#x7684;&amp;#x7A0B;&amp;#x5E8F;
+&amp;#x4E00;&amp;#x3001;Nginx (&amp;#x505A;&amp;#x4EE3;&amp;#x7406;)+Gunicorn(&amp;#x540E;&amp;#x7AEF;&amp;#x670D;&amp;#x52A1;&amp;#x5668;)
+&amp;#x56E0;&amp;#x4E3A;gunicorn&amp;#x662F;&amp;#x5F">
+<meta property="og:updated_time" content="2016-12-30T16:03:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python wsgi web程序部署方式记录">
+<meta name="twitter:description" content="&amp;#x7528;web.py&amp;#x6846;&amp;#x67B6;&amp;#x5199;&amp;#x7684;&amp;#x7A0B;&amp;#x5E8F;
+&amp;#x4E00;&amp;#x3001;Nginx (&amp;#x505A;&amp;#x4EE3;&amp;#x7406;)+Gunicorn(&amp;#x540E;&amp;#x7AEF;&amp;#x670D;&amp;#x52A1;&amp;#x5668;)
+&amp;#x56E0;&amp;#x4E3A;gunicorn&amp;#x662F;&amp;#x5F">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: false,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://notes.zhouping.xin/2016/10/28/python-wsgi-web-e7-a8-8b-e5-ba-8f-e9-83-a8-e7-bd-b2-e6-96-b9-e5-bc-8f-e8-ae-b0-e5-bd-95/"/>
+
+
+
+
+
+  <title> python wsgi web程序部署方式记录 | Chow's Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Chow's Notes</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://notes.zhouping.xin/2016/10/28/python-wsgi-web-e7-a8-8b-e5-ba-8f-e9-83-a8-e7-bd-b2-e6-96-b9-e5-bc-8f-e8-ae-b0-e5-bd-95/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Chow">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Chow's Notes">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Chow's Notes" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                python wsgi web程序部署方式记录
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-28T12:30:42+08:00">
+                2016-10-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/28/python-wsgi-web-e7-a8-8b-e5-ba-8f-e9-83-a8-e7-bd-b2-e6-96-b9-e5-bc-8f-e8-ae-b0-e5-bd-95/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/28/python-wsgi-web-e7-a8-8b-e5-ba-8f-e9-83-a8-e7-bd-b2-e6-96-b9-e5-bc-8f-e8-ae-b0-e5-bd-95/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x7528;web.py&#x6846;&#x67B6;&#x5199;&#x7684;&#x7A0B;&#x5E8F;</p>
+<p>&#x4E00;&#x3001;Nginx (&#x505A;&#x4EE3;&#x7406;)+Gunicorn(&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;)</p>
+<p>&#x56E0;&#x4E3A;gunicorn&#x662F;&#x5F00;&#x542F;&#x591A;&#x4E2A;worker&#x8FDB;&#x7A0B;&#xFF0C;&#x5982;&#x679C;&#x7A0B;&#x5E8F;&#x6709;&#x4E00;&#x4E2A;&#x5168;&#x5C40;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x9700;&#x8981;&#x5B9E;&#x65F6;&#x66F4;&#x65B0;&#x8BBF;&#x95EE;&#x5171;&#x4EAB;&#xFF0C;&#x5404;&#x4E2A;&#x8FDB;&#x7A0B;&#x4E4B;&#x95F4;&#x662F;&#x4E0D;&#x80FD;&#x5171;&#x4EAB;&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x89C6;&#x60C5;&#x51B5;&#x53EA;&#x5F00;&#x4E00;&#x4E2A;worker</p>
+<p>&#x4E8C;&#x3001;Nginx(FastCGI)+Spawn-fcgi +flup</p>
+<p>nginx&#x914D;&#x7F6E;</p>
+<p>server {<br>listen 8809;<br>server_name 10.100.113.48;<br>access_log logs/wstapp_access.log;<br>error_log logs/wstapp_error.log;</p>
+<p>location /static {<br>root /var/apps/WordsServiceApp;<br>}</p>
+<p>location / {<br>include fastcgi_params;<br>include fastcgi.conf;<br>fastcgi_param PATH_INFO $fastcgi_script_name; # [2]<br>fastcgi_pass 127.0.0.1:9901;<br>}<br>}</p>
+<p>&#x542F;&#x52A8;&#x6587;&#x4EF6;&#xFF1A;</p>
+<p>web.wsgi.runwsgi = lambda func, addr=None: web.wsgi.runfcgi(func, addr)<br>app.run()</p>
+<p>&#x6216;&#x8005;</p>
+<p>import flup.server.fcgi as flups</p>
+<p>flups.WSGIServer(application, multithreaded=True, multiprocess=False, bindAddress=(&#x2018;127.0.0.1&#x2019;, 5678)).run()</p>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<p>spawn-fcgi -d /var/apps/WordsServiceApp/ -f /var/apps/WordsServiceApp/main.py -a 127.0.0.1 -p 9901 -n</p>
+<p>&#x53C2;&#x6570; n &#x663E;&#x793A;&#x7A0B;&#x5E8F;&#x6253;&#x5370;&#x4FE1;&#x606F;</p>
+<p>web.py&#x7684;session &#x5728;&#x8FD9;&#x79CD;&#x90E8;&#x7F72;&#x65B9;&#x5F0F;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x6BCF;&#x6B21;&#x8BF7;&#x6C42;session&#x4F1A;&#x5931;&#x6548;</p>
+<p>&#xA0;</p>
+<p>&#x4E09;&#x3001;Apache2 (apr,apr-util)+ mod_wsgi</p>
+<p>apr-1.5.2.tar.gz</p>
+<p>./configure &#x2013;prefix=/usr/local/apr</p>
+<p>apr-util-1.5.4</p>
+<p>./configure &#x2013;prefix=/usr/local/apr-util &#x2013;with-apr=/usr/local/apr/bin/apr-1-config</p>
+<p>httpd-2.4.23</p>
+<p>./configure &#x2013;prefix=/usr/local/apache2 &#x2013;with-apr=/usr/local/apr &#x2013;with-apr-util=/usr/local/apr-util/</p>
+<p>mod_wsgi-4.3.0</p>
+<p>centos&#x7F16;&#x8BD1;&#x5B89;&#x88C5;mod_wsgi&#x7684;&#x95EE;&#x9898;</p>
+<p>&#x5B89;&#x88C5;mod_wsgi&#x5230;apache</p>
+<p>mod_wsgi-4.3.0<br>./configure &#x2013;with-apxs=/usr/local/apache2/bin/apxs &#x2013;with-python=/usr/local/python2.7/bin/python<br>make<br>make install</p>
+<p>&#x7F16;&#x8BD1;&#x65F6; &#x5982;&#x679C;&#x62A5;&#x9519;&#xFF1A;<br>/usr/bin/ld: /usr/local/python2.7/lib/libpython2.7.a(abstract.o): relocation R_X86_64_32 against `.<br>rodata.str1.8&#x2019; can not be used when making a shared object;</p>
+<p>&#x5DF2;&#x7ECF;&#x5B89;&#x88C5;&#x7684;libpython2.7.so.1.0&#x6709;&#x95EE;&#x9898;&#xFF08;&#x6539;&#x7248;&#x672C;&#x53EF;&#x80FD;&#x662F;&#x88AB;&#x7F16;&#x8BD1;&#x6210;&#x4E86;32&#x4F4D;&#xFF09;&#xFF0C;&#x9700;&#x8981;&#x91CD;&#x65B0;&#x7F16;&#x8BD1;&#x5B89;&#x88C5;python<br>1.&#x6CE8;&#x91CA;&#x6389; python&#x6E90;&#x7801;&#x4E0B;setup.py&#x4E0B;&#x7684;&#x4E24;&#x884C;&#x4EE3;&#x7801;</p>
+<p>def detect_modules(self):</p>
+<h1 id="Ensure-that-usr-local-is-always-used"><a href="#Ensure-that-usr-local-is-always-used" class="headerlink" title="Ensure that /usr/local is always used"></a>Ensure that /usr/local is always used</h1><p>#add_dir_to_list(self.compiler.library_dirs, &#x2018;/usr/local/lib&#x2019;)</p>
+<p>#add_dir_to_list(self.compiler.include_dirs, &#x2018;/usr/local/in</p>
+<p>./configure &#x2013;prefix=/usr/local/python2.7 &#x2013;enable-shared<br>make &amp;&amp; make install<br>&#x540E;&#x4F1A;&#x5728;/usr/local/python2.7/lib&#x76EE;&#x5F55;&#x4E0B;&#x91CD;&#x65B0;&#x751F;&#x6210; libpython2.7.so.1.0&#xFF0C;<br>&#x5C06;&#x5176;&#x62F7;&#x8D1D;&#x5230;/usr/local/lib<br>/sbin/ldconfig -v</p>
+<p>&#x91CD;&#x65B0;&#x7F16;&#x8BD1; mod_wsgi</p>
+<p>&#x6700;&#x540E;&#x8F93;&#x51FA; chmod 755 /usr/local/apache2/modules/mod_wsgi.so</p>
+<p>&#x8BC1;&#x660E;&#x6210;&#x529F;</p>
+<p>==============</p>
+<p>httpd.conf&#x7684;&#x914D;&#x7F6E;(Apache&#x7248;&#x672C;Apache/2.4.23)</p>
+<p>&lt;VirtualHost *:8891&gt;</p>
+<p>WSGIScriptAlias / /var/apps/WordsServiceApp/main.py<br>Alias /static/ /var/apps/WordsServiceApp/static/</p>
+<p>ServerName 10.100.113.48</p>
+<p>#ServerName example.com</p>
+<p>#ServerAlias www.example.com</p>
+<p>&lt;Directory /var/apps/WordsServiceApp/static&gt;<br>Options Indexes FollowSymLinks<br>AllowOverride None<br>Require all granted<br>&lt;/Directory&gt;</p>
+<p>&lt;Directory /var/apps/WordsServiceApp/&gt;<br>Require all granted<br>&lt;/Directory&gt;<br>ErrorLog /var/apps/WordsServiceApp/wst_httpd.error.log<br>LogLevel warn<br>&lt;/VirtualHost&gt;</p>
+<p>&#x62A5;&#x9519;&#x627E;&#x4E0D;&#x5230;&#x6A21;&#x5757;<br>main.py&#x4E2D;&#x52A0;&#x5165;<br>import os<br>import sys<br>sys.path.append(os.path.dirname(<strong>file</strong>))#only running for in apache</p>
+<p>&#x5982;&#x679C;&#x7A0B;&#x5E8F; &#x6709;&#x7528;&#x8DEF;&#x5F84;&#xFF0C;&#x6700;&#x597D;&#x90FD;&#x7528;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;&#x3002;</p>
+<p>&#x56E0;&#x4E3A;http&#x4E5F;&#x662F;&#x542F;&#x52A8;&#x4E86;&#x591A;&#x4E2A;&#x8FDB;&#x7A0B;&#x6765;&#x5904;&#x7406;&#x8BF7;&#x6C42;&#xFF0C;&#x6240;&#x4EE5;&#x5168;&#x5C40;&#x7684;&#x5BF9;&#x8C61;&#x4E5F;&#x4E0D;&#x80FD;&#x5171;&#x4EAB;&#xFF0C;</p>
+<p>&#x4E0D;&#x4F1A;&#x9884;&#x52A0;&#x8F7D;&#x5904;&#x7406; &#xFF0C;&#x5E76;&#x4E0D;&#x4F1A;&#x968F;&#x670D;&#x52A1;&#x5668;&#x542F;&#x52A8;&#x800C;&#x6267;&#x884C;</p>
+<p>=====================</p>
+<p>&#x5BF9;&#x4E8E;&#x9700;&#x8981;&#x5168;&#x5C40;&#x5171;&#x4EAB;&#x7684;&#x7B80;&#x5355;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x5916;&#x90E8;&#x5B58;&#x50A8; &#x6BD4;&#x5982; memecached&#x7F13;&#x5B58;,redis,&#x6587;&#x4EF6;&#x3002;</p>
+<p>&#x4F46;&#x662F;&#x7C7B;&#x5B9E;&#x4F8B;&#x7684;&#x590D;&#x6742;&#x5BF9;&#x8C61;&#xFF0C;&#x8981;&#x4E48;&#x5F00;&#x4E00;&#x4E2A;&#x8FDB;&#x7A0B;&#x5904;&#x7406;&#xFF0C;&#x8981;&#x4E48; &#x6539;&#x7A0B;&#x5E8F; &#x6362;&#x79CD;&#x65B9;&#x6CD5;&#x5B9E;&#x73B0;&#x3002;</p>
+<p>&#xA0;</p>
+<p>&#x56DB;&#x3002;uwsgi</p>
+<p>&#x6CA1;&#x5B9E;&#x8DF5;&#x8FC7;</p>
+<p>&#x597D;&#x50CF; &#x8BE5;&#x670D;&#x52A1;&#x5668; &#xFF0C;&#x6709;&#x6587;&#x4EF6;&#x66F4;&#x65B0;&#xFF0C;&#x4F1A;&#x81EA;&#x52A8;&#x91CD;&#x542F;</p>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/19/mongodb-e5-91-bd-e4-bb-a4-e8-a1-8c-e5-af-bc-e5-85-a5-e5-af-bc-e5-87-ba-e6-95-b0-e6-8d-ae/" rel="next" title="mongodb命令行导入导出数据">
+                <i class="fa fa-chevron-left"></i> mongodb命令行导入导出数据
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/26/linux-e7-a8-8b-e5-ba-8f-e8-ae-be-e8-ae-a1/" rel="prev" title="Linux程序设计">
+                Linux程序设计 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/28/python-wsgi-web-e7-a8-8b-e5-ba-8f-e9-83-a8-e7-bd-b2-e6-96-b9-e5-bc-8f-e8-ae-b0-e5-bd-95/"
+     data-title="python wsgi web程序部署方式记录"
+     data-content=""
+     data-url="http://notes.zhouping.xin/2016/10/28/python-wsgi-web-e7-a8-8b-e5-ba-8f-e9-83-a8-e7-bd-b2-e6-96-b9-e5-bc-8f-e8-ae-b0-e5-bd-95/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/28/python-wsgi-web-e7-a8-8b-e5-ba-8f-e9-83-a8-e7-bd-b2-e6-96-b9-e5-bc-8f-e8-ae-b0-e5-bd-95/"
+           data-title="python wsgi web程序部署方式记录" data-url="http://notes.zhouping.xin/2016/10/28/python-wsgi-web-e7-a8-8b-e5-ba-8f-e9-83-a8-e7-bd-b2-e6-96-b9-e5-bc-8f-e8-ae-b0-e5-bd-95/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Chow" />
+          <p class="site-author-name" itemprop="name">Chow</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">121</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ensure-that-usr-local-is-always-used"><span class="nav-number">1.</span> <span class="nav-text">Ensure that /usr/local is always used</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chow</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chow-notes"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

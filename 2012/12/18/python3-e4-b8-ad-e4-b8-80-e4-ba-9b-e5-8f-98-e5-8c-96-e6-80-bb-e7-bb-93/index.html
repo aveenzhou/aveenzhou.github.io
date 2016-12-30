@@ -1,0 +1,717 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hello, World" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="1.Python 2 &amp;#x5BF9;&amp;#x4E8E;int&amp;#xFF3B;&amp;#x6574;&amp;#x578B;&amp;#xFF3D; &amp;#x548C; long&amp;#xFF3B;&amp;#x957F;&amp;#x6574;&amp;#x578B;&amp;#xFF3D; &amp;#x91C7;&amp;#x7528;&amp;#x4E0D;&amp;#x540C;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x7C7B;&amp;#x578B;&amp;#x3002;int">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python3中一些变化总结">
+<meta property="og:url" content="http://notes.zhouping.xin/2012/12/18/python3-e4-b8-ad-e4-b8-80-e4-ba-9b-e5-8f-98-e5-8c-96-e6-80-bb-e7-bb-93/index.html">
+<meta property="og:site_name" content="Chow's Notes">
+<meta property="og:description" content="1.Python 2 &amp;#x5BF9;&amp;#x4E8E;int&amp;#xFF3B;&amp;#x6574;&amp;#x578B;&amp;#xFF3D; &amp;#x548C; long&amp;#xFF3B;&amp;#x957F;&amp;#x6574;&amp;#x578B;&amp;#xFF3D; &amp;#x91C7;&amp;#x7528;&amp;#x4E0D;&amp;#x540C;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x7C7B;&amp;#x578B;&amp;#x3002;int">
+<meta property="og:updated_time" content="2016-12-30T16:03:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python3中一些变化总结">
+<meta name="twitter:description" content="1.Python 2 &amp;#x5BF9;&amp;#x4E8E;int&amp;#xFF3B;&amp;#x6574;&amp;#x578B;&amp;#xFF3D; &amp;#x548C; long&amp;#xFF3B;&amp;#x957F;&amp;#x6574;&amp;#x578B;&amp;#xFF3D; &amp;#x91C7;&amp;#x7528;&amp;#x4E0D;&amp;#x540C;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x7C7B;&amp;#x578B;&amp;#x3002;int">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: false,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://notes.zhouping.xin/2012/12/18/python3-e4-b8-ad-e4-b8-80-e4-ba-9b-e5-8f-98-e5-8c-96-e6-80-bb-e7-bb-93/"/>
+
+
+
+
+
+  <title> python3中一些变化总结 | Chow's Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Chow's Notes</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://notes.zhouping.xin/2012/12/18/python3-e4-b8-ad-e4-b8-80-e4-ba-9b-e5-8f-98-e5-8c-96-e6-80-bb-e7-bb-93/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Chow">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Chow's Notes">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Chow's Notes" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                python3中一些变化总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2012-12-18T06:20:00+08:00">
+                2012-12-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2012/12/18/python3-e4-b8-ad-e4-b8-80-e4-ba-9b-e5-8f-98-e5-8c-96-e6-80-bb-e7-bb-93/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2012/12/18/python3-e4-b8-ad-e4-b8-80-e4-ba-9b-e5-8f-98-e5-8c-96-e6-80-bb-e7-bb-93/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>1.Python 2 &#x5BF9;&#x4E8E;<code>int&#xFF3B;&#x6574;&#x578B;&#xFF3D;</code> &#x548C; <code>long&#xFF3B;&#x957F;&#x6574;&#x578B;&#xFF3D;</code> &#x91C7;&#x7528;&#x4E0D;&#x540C;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x3002;<code>int</code> &#x6570;&#x636E;&#x7C7B;&#x578B;&#x53D7;&#x5230; <code>sys.maxint</code> &#x7684;&#x9650;&#x5236;&#xFF0C;&#x56E0;&#x5E73;&#x53F0;&#x8BE5;&#x9650;&#x5236;&#x4E5F;&#x4F1A;&#x6709;&#x6240;&#x4E0D;&#x540C;&#xFF0C;&#x4F46;&#x901A;&#x5E38;&#x662F; <code>2&lt;sup&gt;32&lt;/sup&gt;-1</code>&#x3002;Python 3 &#x53EA;&#x6709;&#x4E00;&#x79CD;&#x6574;&#x6570;&#x7C7B;&#x578B;&#xFF0C;&#x5176;&#x884C;&#x4E3A;&#x65B9;&#x5F0F;&#x5F88;&#x6709;&#x70B9;&#x50CF; Python 2 &#x7684;&#x65E7; <code>long&#xFF3B;&#x957F;&#x6574;&#x6570;&#xFF3D;</code> &#x7C7B;&#x578B;&#x3002;</p>
+<p>2.&#x5728; Python 2 &#x4E2D;&#xFF0C;&#x8FD0;&#x7B97;&#x7B26; <code>/</code> &#x901A;&#x5E38;&#x8868;&#x793A;&#x6574;&#x6570;&#x9664;&#x6CD5;&#xFF0C;&#x4F46;&#x662F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5728;&#x4EE3;&#x7801;&#x4E2D;&#x52A0;&#x5165;&#x7279;&#x6B8A;&#x6307;&#x4EE4;&#xFF0C;&#x4F7F;&#x5176;&#x770B;&#x8D77;&#x6765;&#x50CF;&#x6D6E;&#x70B9;&#x9664;&#x6CD5;&#x3002;&#x5728; Python 3 &#x4E2D;&#xFF0C;<code>/</code> &#x8FD0;&#x7B97;&#x7B26;&#x603B;&#x662F;&#x8868;&#x793A;&#x6D6E;&#x70B9;&#x9664;&#x6CD5;&#x3002;</p>
+<p>3.&#x5728;Python 3&#xFF0C;&#x6240;&#x6709;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x90FD;&#x662F;&#x4F7F;&#x7528;Unicode&#x7F16;&#x7801;&#x7684;&#x5B57;&#x7B26;&#x5E8F;&#x5217;&#x3002;&#x4E0D;&#x518D;&#x5B58;&#x5728;&#x4EE5;UTF-8&#x6216;&#x8005;CP-1252&#x7F16;&#x7801;&#x7684;&#x60C5;&#x51B5;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x201C;&#x8FD9;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x662F;&#x4EE5;<abbr>utf-8</abbr>&#x7F16;&#x7801;&#x7684;&#x5417;&#xFF1F;&#x4E0D;&#x518D;&#x662F;&#x4E00;&#x4E2A;&#x6709;&#x6548;&#x95EE;&#x9898;&#x3002;&#x201D;<abbr>utf-8</abbr>&#x662F;&#x4E00;&#x79CD;&#x5C06;&#x5B57;&#x7B26;&#x7F16;&#x7801;&#x6210;&#x5B57;&#x8282;&#x5E8F;&#x5217;&#x7684;&#x65B9;&#x5F0F;&#x3002;&#x5982;&#x679C;&#x9700;&#x8981;&#x5C06;&#x5B57;&#x7B26;&#x4E32;&#x8F6C;&#x6362;&#x6210;&#x7279;&#x5B9A;&#x7F16;&#x7801;&#x7684;&#x5B57;&#x8282;&#x5E8F;&#x5217;&#xFF0C;Python 3&#x53EF;&#x4EE5;&#x4E3A;&#x4F60;&#x505A;&#x5230;&#x3002;&#x5982;&#x679C;&#x9700;&#x8981;&#x5C06;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x5E8F;&#x5217;&#x8F6C;&#x6362;&#x6210;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;Python 3&#x4E5F;&#x80FD;&#x4E3A;&#x4F60;&#x505A;&#x5230;&#x3002;&#x5B57;&#x8282;&#x5373;&#x5B57;&#x8282;&#xFF0C;&#x5E76;&#x975E;&#x5B57;&#x7B26;&#x3002;&#x5B57;&#x7B26;&#x5728;&#x8BA1;&#x7B97;&#x673A;&#x5185;&#x53EA;&#x662F;&#x4E00;&#x79CD;&#x62BD;&#x8C61;&#x3002;&#x5B57;&#x7B26;&#x4E32;&#x5219;&#x662F;&#x4E00;&#x79CD;&#x62BD;&#x8C61;&#x7684;&#x5E8F;&#x5217;&#x3002;</p>
+<p>&#x5728;Python 2&#x4E2D;&#xFF0C;&#x5B57;&#x7B26;&#x4E32;&#x662F;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x6570;&#x7EC4;&#xFF0C;&#x5B83;&#x7684;&#x5B57;&#x7B26;&#x7F16;&#x7801;&#x4FE1;&#x606F;&#x88AB;&#x5206;&#x5F00;&#x8BB0;&#x5F55;&#x7740;&#x3002;&#x5982;&#x679C;&#x60F3;&#x8981;Python 2&#x8DDF;&#x8E2A;&#x5B57;&#x7B26;&#x7F16;&#x7801;&#xFF0C;&#x4F60;&#x5F97;&#x4F7F;&#x7528;Unicode&#x7F16;&#x7801;&#x7684;&#x5B57;&#x7B26;&#x4E32;(<code>u&apos;&apos;</code>)&#x3002;&#x4F46;&#x662F;&#x5728;Python 3&#x4E2D;&#xFF0C;&#x5B57;&#x7B26;&#x4E32;&#x6C38;&#x8FDC;&#x90FD;&#x662F;Python 2&#x4E2D;&#x6240;&#x8C13;&#x7684;Unicode&#x7F16;&#x7801;&#x7684;&#x5B57;&#x7B26;&#x4E32; &#x2014; &#x5373;&#xFF0C;Unicode&#x5B57;&#x7B26;&#x6570;&#x7EC4;&#xFF08;&#x53EF;&#x80FD;&#x5B58;&#x5728;&#x53EF;&#x53D8;&#x957F;&#x5B57;&#x8282;&#xFF09;&#x3002;</p>
+<p>4.python3&#x4E2D;print&#x53EA;&#x80FD;&#x5F53;&#x51FD;&#x6570;&#x4F7F;&#x7528;</p>
+<p>5.<dfn>&#x5B57;&#x8282;</dfn>&#x5373;&#x5B57;&#x8282;&#xFF1B;&#x5B57;&#x7B26;&#x662F;&#x4E00;&#x79CD;&#x62BD;&#x8C61;&#x3002;&#x4E00;&#x4E2A;&#x4E0D;&#x53EF;&#x53D8;(immutable)&#x7684;Unicode&#x7F16;&#x7801;&#x7684;&#x5B57;&#x7B26;&#x5E8F;&#x5217;&#x53EB;&#x505A;<em>string</em>&#x3002;&#x4E00;&#x4E32;&#x7531;0&#x5230;255&#x4E4B;&#x95F4;&#x7684;&#x6570;&#x5B57;&#x7EC4;&#x6210;&#x7684;&#x5E8F;&#x5217;&#x53EB;&#x505A;<em>bytes</em>&#x5BF9;&#x8C61;&#x3002;</p>
+<p>6.<code>bytes</code>&#x5BF9;&#x8C61;&#x6709;&#x4E00;&#x4E2A;<code>&lt;dfn&gt;decode&lt;/dfn&gt;()</code>&#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x4F7F;&#x7528;&#x67D0;&#x79CD;&#x5B57;&#x7B26;&#x7F16;&#x7801;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#xFF0C;&#x7136;&#x540E;&#x4F9D;&#x7167;&#x8FD9;&#x79CD;&#x7F16;&#x7801;&#x65B9;&#x5F0F;&#x5C06;<code>bytes</code>&#x5BF9;&#x8C61;&#x8F6C;&#x6362;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;(&#x89E3;&#x7801;)&#xFF0C;&#x5BF9;&#x5E94;&#x5730;&#xFF0C;&#x5B57;&#x7B26;&#x4E32;&#x6709;&#x4E00;&#x4E2A;<code>&lt;dfn&gt;encode&lt;/dfn&gt;()</code>&#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x4E5F;&#x4F7F;&#x7528;&#x67D0;&#x79CD;&#x5B57;&#x7B26;&#x7F16;&#x7801;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#xFF0C;&#x7136;&#x540E;&#x4F9D;&#x7167;&#x5B83;&#x5C06;&#x4E32;&#x8F6C;&#x6362;&#x4E3A;<code>bytes</code>&#x5BF9;&#x8C61;&#xFF08;&#x7F16;&#x7801;&#xFF09;&#x3002;</p>
+<p>7.Python 2&#x91CC;&#xFF0C;<code>.py</code>&#x6587;&#x4EF6;<dfn>&#x9ED8;&#x8BA4;</dfn>&#x7684;&#x7F16;&#x7801;&#x65B9;&#x5F0F;&#x4E3A;<abbr>ascii</abbr>&#x3002;Python 3&#x7684;&#x6E90;&#x7801;&#x7684;&#x9ED8;&#x8BA4;&#x7F16;&#x7801;&#x65B9;&#x5F0F;&#x4E3A;<abbr>utf-8</abbr></p>
+<p>8.python2&#x8FED;&#x4EE3;&#x5668;&#x7C7B;&#x5B9E;&#x73B0;&#x7684;&#x662F;next&#x65B9;&#x6CD5;&#xFF0C;python3&#x5B9E;&#x73B0;&#x7684;&#x662F;<strong>next</strong>&#x65B9;&#x6CD5;&#x3002;iter(f) &#x8C03;&#x7528; f.<strong>iter</strong> next(f) &#x8C03;&#x7528; f.<strong>next</strong></p>
+<p>9.range(1,10)python2&#x8FD4;&#x56DE;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x5E8F;&#x5217;&#xFF0C;py3&#x8FD4;&#x56DE;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x89C6;&#x56FE;&#xFF0C;zip()&#x51FD;&#x6570;&#x7C7B;&#x4F3C;</p>
+<p>10.&#x5B57;&#x7B26;&#x4E32;&#x7684;<code>translate()</code>&#x65B9;&#x6CD5;&#xFF0C;&#x5B57;&#x7B26;&#x4E32;&#x7FFB;&#x8BD1;&#x3002;&#x5728;py2&#x4E2D;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x7531;256&#x4E2A;&#x5B57;&#x7B26;&#x7EC4;&#x6210;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x8F6C;&#x6362;&#x8868;&#xFF08;&#x901A;&#x5E38;&#x7684;&#x505A;&#x6CD5;&#x662F;&#x7528;string&#x6A21;&#x5757;&#x7684;maketrans&#x65B9;&#x6CD5;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x8F6C;&#x6362;&#x8868;&#xFF09;&#xFF0C;&#x5728;py3&#x4E2D;&#xFF0C;&#x8F6C;&#x6362;&#x8868;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x5C06;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x6620;&#x5C04;&#x5230;&#x53E6;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x7684;&#x5B57;&#x5178;&#x3002;&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;&#x201C;&#x5B57;&#x7B26;&#x201D; &#x662F;&#x4E0D;&#x6B63;&#x786E;&#x7684; &#x2014; &#x8F6C;&#x6362;&#x8868;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x5C06;&#x4E00;&#x4E2A; <em>&#x5B57;&#x8282;&#xFF08;byte)</em>&#x6620;&#x5C04;&#x5230;&#x53E6;&#x4E00;&#x4E2A;&#x3002;&#xFF0C;Python 3 &#x4E2D;&#x7684;&#x5B57;&#x8282;&#x662F;&#x6574;&#x5F62;&#x6570;&#x3002;&#x6240;&#x4EE5;&#x4E00;&#x4E2A;&#x901A;&#x5E38;&#x7684;&#x8F6C;&#x8868;&#x5982;<a><kbd class="pp"><span class="pun">{</span><span class="pln">ord</span><span class="pun">(</span><span class="str">&#x2018;A&#x2019;</span><span class="pun">):</span><span class="pln"> ord</span><span class="pun">(</span><span class="str">&#x2018;O&#x2019;</span><span class="pun">)}</span></kbd></a></p>
+<p><span class="pun">11.with &#x4EE3;&#x66FF;try&#x2026;finally..&#x89E3;&#x51B3;&#x6253;&#x5F00;&#x6587;&#x4EF6;&#x51FA;&#x73B0;&#x5F02;&#x5E38;&#x7684;&#x60C5;&#x51B5;&#x3002;<code>with</code>&#x8BED;&#x53E5;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;<dfn>&#x8FD0;&#x884C;&#x65F6;&#x73AF;&#x5883;(runtime context)</dfn></span></p>
+<p><span class="pun">12.<code>io.StringIO</code>&#x8BA9;&#x4F60;&#x80FD;&#x591F;&#x5C06;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x4F5C;&#x4E3A;&#x6587;&#x672C;&#x6587;&#x4EF6;&#x6765;&#x770B;&#x5F85;&#x3002;&#x53E6;&#x5916;&#x8FD8;&#x6709;&#x4E00;&#x4E2A;<code>io.ByteIO</code>&#x7C7B;&#xFF0C;&#x5B83;&#x5141;&#x8BB8;&#x4F60;&#x5C06;&#x5B57;&#x8282;&#x6570;&#x7EC4;&#x5F53;&#x505A;&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#x6765;&#x5904;&#x7406;&#x3002;py27&#x4E2D;StringIO&#xFF0C;&#x53EA;&#x80FD;&#x63A5;&#x6536;unicode&#x5B57;&#x7B26;&#x4E32;</span></p>
+<p><span class="pun">13.&#x7C7B;&#x5B9A;&#x4E49;&#x4E2D;&#x4E24;&#x4E2A;&#x7279;&#x6B8A;&#x7684;&#x65B9;&#x6CD5;<strong>enter</strong>()&#x5728;&#x8FDB;&#x5165;&#x4E00;&#x4E2A;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x65F6;Python&#x4F1A;&#x8C03;&#x7528;&#x5B83;&#xFF08;<em>&#x5373;</em>&#xFF0C;&#x5728;<code>with</code>&#x8BED;&#x53E5;&#x7684;&#x5F00;&#x59CB;&#x5904;&#xFF09; <strong>exit</strong>()&#x5F53;&#x79BB;&#x5F00;&#x4E00;&#x4E2A;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x65F6;&#xFF08;<em>&#x5373;</em>&#xFF0C;&#x5728;<code>with</code>&#x8BED;&#x53E5;&#x7684;&#x672B;&#x5C3E;&#xFF09;</span></p>
+<p>14.&#x7528;&#x4E8E;&#x548C;<abbr>http</abbr> web &#x670D;&#x52A1;&#x4EA4;&#x4E92;&#x7684;&#x5E93;&#xFF1A;py33&#x81EA;&#x5E26;<code>[http.client](http://docs.python.org/3.1/library/http.client.html)&#x548C;&lt;code&gt;[urllib.request](http://docs.python.org/3.1/library/urllib.request.html)&#xFF08;</code> py33<tt class="descclassname">urllib.request.</tt><tt class="descname">urlopen ,py27 urllib.urlopen),py33&#x4E2D;&#x6CA1;&#x6709;&#x4E86;urllib2,py27 &#x6CA1;&#x6709;</tt><a href="http://docs.python.org/3.1/library/http.client.html" target="_blank" rel="external">http.client</a>&#x3002;<a href="http://docs.python.org/3.1/library/http.client.html" target="_blank" rel="external"><code>http.client</code></a> &#x662F;&#x5B9E;&#x73B0;&#x4E86;<a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html" target="_blank" rel="external"><abbr>rfc</abbr> 2616</a>, <abbr>http</abbr> &#x534F;&#x8BAE;&#x7684;&#x5E95;&#x5C42;&#x5E93;<a href="http://docs.python.org/3.1/library/urllib.request.html" target="_blank" rel="external"><code>urllib.request</code></a> &#x5EFA;&#x7ACB;&#x5728;<code>http.client</code>&#x4E4B;&#x4E0A;&#x4E00;&#x4E2A;&#x62BD;&#x8C61;&#x5C42;&#x3002; &#x5B83;&#x4E3A;&#x8BBF;&#x95EE;<abbr>http</abbr> &#x548C; <abbr>ftp</abbr> &#x670D;&#x52A1;&#x5668;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E2A;&#x6807;&#x51C6;&#x7684;<abbr>api</abbr>&#xFF0C;&#x53EF;&#x4EE5;&#x81EA;&#x52A8;&#x8DDF;&#x968F;<abbr>http</abbr> &#x91CD;&#x5B9A;&#x5411;&#xFF0C; &#x5E76;&#x4E14;&#x5904;&#x7406;&#x4E86;&#x4E00;&#x4E9B;&#x5E38;&#x89C1;&#x5F62;&#x5F0F;&#x7684;<abbr>http</abbr> &#x8BA4;&#x8BC1;&#x3002;</p>
+<p><a href="http://code.google.com/p/httplib2/" target="_blank" rel="external"><code>httplib2</code></a>,&#x4E00;&#x4E2A;&#x7B2C;&#x4E09;&#x65B9;&#x7684;&#x5F00;&#x6E90;&#x5E93;,&#x5B83;&#x6BD4;<code>http.client</code>&#x66F4;&#x5B8C;&#x6574;&#x7684;&#x5B9E;&#x73B0;&#x4E86;<abbr>http</abbr>&#x534F;&#x8BAE;&#xFF0C;&#x540C;&#x65F6;&#x6BD4;<code>urllib.request</code>&#x63D0;&#x4F9B;&#x4E86;&#x66F4;&#x597D;&#x7684;&#x62BD;&#x8C61;&#x3002;<code>httplib2</code>&#x5BF9;&#x4E8E;Python 2.x &#x548C; Python 3.x&#x90FD;&#x6709;&#x5BF9;&#x5E94;&#x7684;&#x7248;&#x672C;</p>
+<p>Python&#x7684;<abbr>http</abbr>&#x5E93;&#x4E0D;&#x652F;&#x6301;&#x7F13;&#x5B58;&#xFF0C;&#x800C;<code>httplib2</code>&#x652F;&#x6301;&#x3002;</p>
+<p>Python&#x7684;<abbr>http</abbr> &#x5E93;&#x4E0D;&#x652F;&#x6301;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#x68C0;&#x67E5;&#xFF0C;&#x800C;<code>httplib2</code> &#x652F;&#x6301;&#x3002;</p>
+<p>Python&#x7684; <abbr>http</abbr>&#x5E93;&#x4E0D;&#x652F;&#x6301;&#x538B;&#x7F29;&#xFF0C;&#x4F46;<code>httplib2</code>&#x652F;&#x6301;</p>
+<p><code>urllib.request</code>&#x6A21;&#x5757;&#x5728;&#x4ECE;<abbr>http</abbr>&#x670D;&#x52A1;&#x5668;&#x6536;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x72B6;&#x6001;&#x7801;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x81EA;&#x52A8;&#x201C;&#x8DDF;&#x968F;&#x201D;&#x91CD;&#x5B9A;&#x5411;, &#x4F46;&#x5B83;&#x4E0D;&#x4F1A;&#x544A;&#x8BC9;&#x4F60;&#x5B83;&#x8FD9;&#x4E48;&#x5E72;&#x4E86;&#x3002;&#x4F60;&#x6700;&#x540E;&#x5F97;&#x5230;&#x4E86;&#x4F60;&#x8BF7;&#x6C42;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x4F46;&#x662F;&#x4F60;&#x6C38;&#x8FDC;&#x4E5F;&#x4E0D;&#x4F1A;&#x77E5;&#x9053;&#x4E0B;&#x5C42;&#x7684;&#x5E93;&#x53CB;&#x597D;&#x7684;&#x5E2E;&#x52A9;&#x4F60;&#x8DDF;&#x968F;&#x4E86;&#x91CD;&#x5B9A;&#x5411;&#x3002;&#x7ED3;&#x679C;&#x662F;&#xFF0C;&#x4F60;&#x7EE7;&#x7EED;&#x8BBF;&#x95EE;&#x65E7;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x6BCF;&#x4E00;&#x6B21;&#x4F60;&#x90FD;&#x4F1A;&#x5F97;&#x5230;&#x65B0;&#x5730;&#x5740;&#x7684;&#x91CD;&#x5B9A;&#x5411;&#xFF0C;&#x6BCF;&#x4E00;&#x6B21;<code>urllib.request</code>&#x6A21;&#x5757;&#x90FD;&#x4F1A;&#x53CB;&#x597D;&#x7684;&#x5E2E;&#x4F60;&#x8DDF;&#x968F;&#x91CD;&#x5B9A;&#x5411;&#x3002;&#x6362;&#x53E5;&#x8BDD;&#x8BF4;&#xFF0C;&#x5B83;&#x5C06;&#x6C38;&#x4E45;&#x91CD;&#x5B9A;&#x5411;&#x5F53;&#x6210;&#x4E34;&#x65F6;&#x91CD;&#x5B9A;&#x5411;&#x6765;&#x5904;&#x7406;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x4E24;&#x4E2A;&#x6765;&#x56DE;&#x800C;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#xFF0C;&#x8FD9;&#x5BF9;&#x4F60;&#x548C;&#x670D;&#x52A1;&#x5668;&#x90FD;&#x4E0D;&#x597D;&#x3002;</p>
+<p><code>httplib2</code> &#x5E2E;&#x4F60;&#x5904;&#x7406;&#x4E86;&#x6C38;&#x4E45;&#x91CD;&#x5B9A;&#x5411;&#x3002;&#x5B83;&#x4E0D;&#x4EC5;&#x4F1A;&#x544A;&#x8BC9;&#x4F60;&#x53D1;&#x751F;&#x4E86;&#x6C38;&#x4E45;&#x91CD;&#x5B9A;&#x5411;&#xFF0C;&#x800C;&#x4E14;&#x5B83;&#x4F1A;&#x5728;&#x672C;&#x5730;&#x8BB0;&#x5F55;&#x8FD9;&#x4E9B;&#x91CD;&#x5B9A;&#x5411;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x53D1;&#x9001;&#x8BF7;&#x6C42;&#x524D;&#x81EA;&#x52A8;&#x91CD;&#x5199;&#x4E3A;&#x91CD;&#x5B9A;&#x5411;&#x540E;&#x7684;<abbr>url</abbr>&#x3002;</p>
+<p><a href="http://woodpecker.org.cn/diveintopython3/http-web-services.html" target="_blank" rel="external">httplib2&#xFF1A;http://woodpecker.org.cn/diveintopython3/http-web-services.html</a></p>
+<p>15.Python 3&#x81EA;&#x5E26;&#x4E86;&#x4E00;&#x4E2A;&#x53EB;&#x505A;<code>2to3</code>&#x7684;&#x5B9E;&#x7528;&#x811A;&#x672C;&#xFF0C;&#x5B83;&#x4F7F;&#x7528;Python 2&#x7684;&#x6E90;&#x4EE3;&#x7801;&#x4F5C;&#x4E3A;&#x8F93;&#x5165;&#xFF0C;&#x7136;&#x540E;&#x5C3D;&#x5176;&#x53EF;&#x80FD;&#x5730;&#x5C06;&#x5176;&#x8F6C;&#x6362;&#x5230;Python 3&#x7684;&#x89C4;&#x8303;&#x3002;</p>
+<p>16.&#x5728;<em>Python 3&#x4E2D;&#x76F8;&#x5BF9;&#x5BFC;&#x5165;&#x7684;&#x903B;&#x8F91;&#x5DF2;&#x7ECF;&#x53D8;&#x4E86;</em>&#x3002;&#x5728;Python 2&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x53EA;&#x9700;&#x8981;<code>import constants</code>&#xFF0C;&#x7136;&#x540E;&#x5B83;&#x5C31;&#x4F1A;&#x9996;&#x5148;&#x5728;<code>chardet/</code>&#x76EE;&#x5F55;&#x4E2D;&#x67E5;&#x627E;&#x3002;&#x5728;Python 3&#x4E2D;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x5BFC;&#x5165;&#x8BED;&#x53E5;&#x9ED8;&#x8BA4;&#x4F7F;&#x7528;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;&#x3002;&#x5982;&#x679C;&#x60F3;&#x8981;&#x5728;Python 3&#x4E2D;&#x4F7F;&#x7528;&#x76F8;&#x5BF9;&#x5BFC;&#x5165;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x663E;&#x5F0F;&#x5730;&#x8BF4;&#x660E; <code>&lt;span class=&quot;kwd&quot;&gt;from &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;import&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; constants&lt;/span&gt;</code></p>
+<p>&#xA0;</p>
+<p>python2&#x4E0E;python3&#x7684;&#x533A;&#x522B;</p>
+<p><a href="http://woodpecker.org.cn/diveintopython3/porting-code-to-python-3-with-2to3.html" target="_blank" rel="external">http://woodpecker.org.cn/diveintopython3/porting-code-to-python-3-with-2to3.html</a></p>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2012/11/16/ie9-e7-9a-84css-e4-b8-93-e5-b1-9ehack/" rel="next" title="ie9的css专属hack">
+                <i class="fa fa-chevron-left"></i> ie9的css专属hack
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2012/12/21/e7-94-a8python-e5-86-99-e4-b8-80-e4-b8-aaexcel-e7-94-bb-e5-83-8f-e7-b4-a0-e5-9b-be-e8-84-9a-e6-9c-ac-e6-97-b6-e6-89-80-e7-94-a8-e5-88-b0-e7-9a-84-e4-b8-80-e4-ba-9b-e5-ba-93/" rel="prev" title="用python写一个excel画像素图脚本时所用到的一些库">
+                用python写一个excel画像素图脚本时所用到的一些库 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2012/12/18/python3-e4-b8-ad-e4-b8-80-e4-ba-9b-e5-8f-98-e5-8c-96-e6-80-bb-e7-bb-93/"
+     data-title="python3中一些变化总结"
+     data-content=""
+     data-url="http://notes.zhouping.xin/2012/12/18/python3-e4-b8-ad-e4-b8-80-e4-ba-9b-e5-8f-98-e5-8c-96-e6-80-bb-e7-bb-93/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2012/12/18/python3-e4-b8-ad-e4-b8-80-e4-ba-9b-e5-8f-98-e5-8c-96-e6-80-bb-e7-bb-93/"
+           data-title="python3中一些变化总结" data-url="http://notes.zhouping.xin/2012/12/18/python3-e4-b8-ad-e4-b8-80-e4-ba-9b-e5-8f-98-e5-8c-96-e6-80-bb-e7-bb-93/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Chow" />
+          <p class="site-author-name" itemprop="name">Chow</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">121</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chow</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chow-notes"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
