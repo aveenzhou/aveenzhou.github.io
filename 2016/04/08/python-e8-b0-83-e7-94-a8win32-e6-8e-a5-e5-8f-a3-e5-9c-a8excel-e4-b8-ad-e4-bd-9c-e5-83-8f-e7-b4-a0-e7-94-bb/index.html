@@ -70,7 +70,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hello, World" />
+  <meta name="keywords" content="PIL,脚本," />
 
 
 
@@ -86,19 +86,16 @@
 
 
 
-<meta name="description" content="&amp;#x53D6;&amp;#x4E00;&amp;#x5F20;&amp;#x56FE;&amp;#x7247;&amp;#x7684;&amp;#x6BCF;&amp;#x4E2A;&amp;#x50CF;&amp;#x7D20;&amp;#x70B9;&amp;#xFF0C;&amp;#x7136;&amp;#x540E;&amp;#x5C06;&amp;#x5176;&amp;#x63D2;&amp;#x5165;&amp;#x5230;&amp;#x5355;&amp;#x5143;&amp;#x683C;&amp;#x4E2D;
-[cc lang=&amp;quot;">
+<meta name="description" content="&amp;#x53D6;&amp;#x4E00;&amp;#x5F20;&amp;#x56FE;&amp;#x7247;&amp;#x7684;&amp;#x6BCF;&amp;#x4E2A;&amp;#x50CF;&amp;#x7D20;&amp;#x70B9;&amp;#xFF0C;&amp;#x7136;&amp;#x540E;&amp;#x5C06;&amp;#x5176;&amp;#x63D2;&amp;#x5165;&amp;#x5230;&amp;#x5355;&amp;#x5143;&amp;#x683C;&amp;#x4E2D;1234567891011121">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python调用win32接口在excel中作像素画">
 <meta property="og:url" content="http://notes.zhouping.xin/2016/04/08/python-e8-b0-83-e7-94-a8win32-e6-8e-a5-e5-8f-a3-e5-9c-a8excel-e4-b8-ad-e4-bd-9c-e5-83-8f-e7-b4-a0-e7-94-bb/index.html">
 <meta property="og:site_name" content="Chow's Notes">
-<meta property="og:description" content="&amp;#x53D6;&amp;#x4E00;&amp;#x5F20;&amp;#x56FE;&amp;#x7247;&amp;#x7684;&amp;#x6BCF;&amp;#x4E2A;&amp;#x50CF;&amp;#x7D20;&amp;#x70B9;&amp;#xFF0C;&amp;#x7136;&amp;#x540E;&amp;#x5C06;&amp;#x5176;&amp;#x63D2;&amp;#x5165;&amp;#x5230;&amp;#x5355;&amp;#x5143;&amp;#x683C;&amp;#x4E2D;
-[cc lang=&amp;quot;">
-<meta property="og:updated_time" content="2016-12-30T16:03:34.000Z">
+<meta property="og:description" content="&amp;#x53D6;&amp;#x4E00;&amp;#x5F20;&amp;#x56FE;&amp;#x7247;&amp;#x7684;&amp;#x6BCF;&amp;#x4E2A;&amp;#x50CF;&amp;#x7D20;&amp;#x70B9;&amp;#xFF0C;&amp;#x7136;&amp;#x540E;&amp;#x5C06;&amp;#x5176;&amp;#x63D2;&amp;#x5165;&amp;#x5230;&amp;#x5355;&amp;#x5143;&amp;#x683C;&amp;#x4E2D;1234567891011121">
+<meta property="og:updated_time" content="2016-12-31T05:05:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python调用win32接口在excel中作像素画">
-<meta name="twitter:description" content="&amp;#x53D6;&amp;#x4E00;&amp;#x5F20;&amp;#x56FE;&amp;#x7247;&amp;#x7684;&amp;#x6BCF;&amp;#x4E2A;&amp;#x50CF;&amp;#x7D20;&amp;#x70B9;&amp;#xFF0C;&amp;#x7136;&amp;#x540E;&amp;#x5C06;&amp;#x5176;&amp;#x63D2;&amp;#x5165;&amp;#x5230;&amp;#x5355;&amp;#x5143;&amp;#x683C;&amp;#x4E2D;
-[cc lang=&amp;quot;">
+<meta name="twitter:description" content="&amp;#x53D6;&amp;#x4E00;&amp;#x5F20;&amp;#x56FE;&amp;#x7247;&amp;#x7684;&amp;#x6BCF;&amp;#x4E2A;&amp;#x50CF;&amp;#x7D20;&amp;#x70B9;&amp;#xFF0C;&amp;#x7136;&amp;#x540E;&amp;#x5C06;&amp;#x5176;&amp;#x63D2;&amp;#x5165;&amp;#x5230;&amp;#x5355;&amp;#x5143;&amp;#x683C;&amp;#x4E2D;1234567891011121">
 
 
 
@@ -362,70 +359,7 @@
       
 
       
-        <pre>&#x53D6;&#x4E00;&#x5F20;&#x56FE;&#x7247;&#x7684;&#x6BCF;&#x4E2A;&#x50CF;&#x7D20;&#x70B9;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x5176;&#x63D2;&#x5165;&#x5230;&#x5355;&#x5143;&#x683C;&#x4E2D;
-[cc lang=&quot;Python&quot;]
-#coding=utf-8
-from PIL import Image
-import win32com.client
-import sys
-import os
-
-def getImageRGBdata(imgpath):
-    img=Image.open(imgpath)
-    width,height=img.size
-    data=img.getdata()
-    datalist=list(data)
-
-    whlist=[]
-
-    j=0
-    for i in range(height):
-        whlist.append(datalist[j:(i+1)*width])
-        j=(i+1)*width
-
-    return whlist
-
-def rgb_to_hex(rgb):
-    bgr=tuple(reversed(rgb))
-    strValue = &apos;%02x%02x%02x&apos; % bgr
-    iValue = int(strValue, 16)
-    return iValue
-
-def creatExcel(imgdata,savename):
-    xl = win32com.client.Dispatch(&quot;Excel.Application&quot;)
-    ss = xl.Workbooks.Add()
-    sh = ss.ActiveSheet
-    xl.Visible = True
-
-    for  i,line in enumerate(imgdata):
-        print &quot;draw %d line&quot; %  i
-        for j,col in enumerate(imgdata[i]):
-            sh.Cells(i+1,j+1).Interior.Color=rgb_to_hex(col)
-            sh.Cells(i+1,j+1).RowHeight=3
-            sh.Cells(i+1,j+1).ColumnWidth=0.3
-
-    curdir=os.getcwd()
-
-    ss.SaveAs(curdir+&quot;\\&quot;+savename)
-    ss.Close(False)
-    xl.Application.Quit()
-
-def main(imgpath,savename):
-    imgdata=getImageRGBdata(imgpath)
-    creatExcel(imgdata,savename)
-
-if __name__==&quot;__main__&quot;:
-    argv=sys.argv[1:]
-
-    if not argv:
-        imgpath=r&apos;E:\workspace\pytest\images\xxxxxxxxx.jpg&apos;
-        savename=r&apos;20151218.xlsx&apos;
-    else:
-        imgpath=argv[0]
-        savename=argv[1]
-    main(imgpath,savename)
-
-[/cc]</pre>
+        <h3 id="&#x53D6;&#x4E00;&#x5F20;&#x56FE;&#x7247;&#x7684;&#x6BCF;&#x4E2A;&#x50CF;&#x7D20;&#x70B9;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x5176;&#x63D2;&#x5165;&#x5230;&#x5355;&#x5143;&#x683C;&#x4E2D;"><a href="#&#x53D6;&#x4E00;&#x5F20;&#x56FE;&#x7247;&#x7684;&#x6BCF;&#x4E2A;&#x50CF;&#x7D20;&#x70B9;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x5176;&#x63D2;&#x5165;&#x5230;&#x5355;&#x5143;&#x683C;&#x4E2D;" class="headerlink" title="&#x53D6;&#x4E00;&#x5F20;&#x56FE;&#x7247;&#x7684;&#x6BCF;&#x4E2A;&#x50CF;&#x7D20;&#x70B9;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x5176;&#x63D2;&#x5165;&#x5230;&#x5355;&#x5143;&#x683C;&#x4E2D;"></a>&#x53D6;&#x4E00;&#x5F20;&#x56FE;&#x7247;&#x7684;&#x6BCF;&#x4E2A;&#x50CF;&#x7D20;&#x70B9;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x5176;&#x63D2;&#x5165;&#x5230;&#x5355;&#x5143;&#x683C;&#x4E2D;</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#coding=utf-8</span></div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"><span class="keyword">import</span> win32com.client</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> os</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getImageRGBdata</span><span class="params">(imgpath)</span>:</span></div><div class="line">	img=Image.open(imgpath)</div><div class="line">	width,height=img.size</div><div class="line">	data=img.getdata()</div><div class="line">	datalist=list(data)</div><div class="line"></div><div class="line">	whlist=[]</div><div class="line"></div><div class="line">	j=<span class="number">0</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(height):</div><div class="line">		whlist.append(datalist[j:(i+<span class="number">1</span>)*width])</div><div class="line">		j=(i+<span class="number">1</span>)*width</div><div class="line"></div><div class="line">	<span class="keyword">return</span> whlist</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">rgb_to_hex</span><span class="params">(rgb)</span>:</span></div><div class="line">	bgr=tuple(reversed(rgb))</div><div class="line">	strValue = <span class="string">&apos;%02x%02x%02x&apos;</span> % bgr</div><div class="line">	iValue = int(strValue, <span class="number">16</span>)</div><div class="line">	<span class="keyword">return</span> iValue</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">creatExcel</span><span class="params">(imgdata,savename)</span>:</span></div><div class="line">	xl = win32com.client.Dispatch(<span class="string">&quot;Excel.Application&quot;</span>)</div><div class="line">	ss = xl.Workbooks.Add()</div><div class="line">	sh = ss.ActiveSheet</div><div class="line">	xl.Visible = <span class="keyword">True</span></div><div class="line"></div><div class="line">	<span class="keyword">for</span>  i,line <span class="keyword">in</span> enumerate(imgdata):</div><div class="line">		<span class="keyword">print</span> <span class="string">&quot;draw %d line&quot;</span> %  i</div><div class="line">		<span class="keyword">for</span> j,col <span class="keyword">in</span> enumerate(imgdata[i]):</div><div class="line">			sh.Cells(i+<span class="number">1</span>,j+<span class="number">1</span>).Interior.Color=rgb_to_hex(col)</div><div class="line">			sh.Cells(i+<span class="number">1</span>,j+<span class="number">1</span>).RowHeight=<span class="number">3</span></div><div class="line">			sh.Cells(i+<span class="number">1</span>,j+<span class="number">1</span>).ColumnWidth=<span class="number">0.3</span></div><div class="line"></div><div class="line">	curdir=os.getcwd()</div><div class="line"></div><div class="line">	ss.SaveAs(curdir+<span class="string">&quot;\\&quot;</span>+savename)</div><div class="line">	ss.Close(<span class="keyword">False</span>)</div><div class="line">	xl.Application.Quit()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(imgpath,savename)</span>:</span></div><div class="line">	imgdata=getImageRGBdata(imgpath)</div><div class="line">	creatExcel(imgdata,savename)</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__==<span class="string">&quot;__main__&quot;</span>:</div><div class="line">	argv=sys.argv[<span class="number">1</span>:]</div><div class="line"></div><div class="line">	<span class="keyword">if</span> <span class="keyword">not</span> argv:</div><div class="line">		imgpath=<span class="string">r&apos;E:\workspace\pytest\images\xxxxxxxxx.jpg&apos;</span></div><div class="line">		savename=<span class="string">r&apos;20151218.xlsx&apos;</span></div><div class="line">	<span class="keyword">else</span>:</div><div class="line">		imgpath=argv[<span class="number">0</span>]</div><div class="line">		savename=argv[<span class="number">1</span>]</div><div class="line">	main(imgpath,savename)</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -445,6 +379,14 @@ if __name__==&quot;__main__&quot;:
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PIL/" rel="tag"># PIL</a>
+          
+            <a href="/tags/脚本/" rel="tag"># 脚本</a>
+          
+        </div>
       
 
       
@@ -533,8 +475,17 @@ if __name__==&quot;__main__&quot;:
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar-zp.png"
@@ -547,7 +498,7 @@ if __name__==&quot;__main__&quot;:
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">121</span>
+                <span class="site-state-item-count">122</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -565,7 +516,7 @@ if __name__==&quot;__main__&quot;:
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -601,6 +552,22 @@ if __name__==&quot;__main__&quot;:
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#取一张图片的每个像素点，然后将其插入到单元格中"><span class="nav-number">1.</span> <span class="nav-text">取一张图片的每个像素点，然后将其插入到单元格中</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
