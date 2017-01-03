@@ -70,7 +70,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Life,Notes" />
+  <meta name="keywords" content="twisted," />
 
 
 
@@ -86,22 +86,16 @@
 
 
 
-<meta name="description" content="&amp;#x6267;&amp;#x884C;&amp;#x6A21;&amp;#x578B;&amp;#xFF1A;&amp;#x540C;&amp;#x6B65;&amp;#x3001;&amp;#x591A;&amp;#x7EBF;&amp;#x7A0B;&amp;#x3001;&amp;#x5F02;&amp;#x6B65;
-&amp;#x6838;&amp;#x5FC3;&amp;#x7684;&amp;#x5FAA;&amp;#x73AF;&amp;#x4F53;reactor
-&amp;#x662F;Twisted&amp;#x4E2D;&amp;#x6700;">
+<meta name="description" content="&amp;#x6267;&amp;#x884C;&amp;#x6A21;&amp;#x578B;&amp;#xFF1A;&amp;#x540C;&amp;#x6B65;&amp;#x3001;&amp;#x591A;&amp;#x7EBF;&amp;#x7A0B;&amp;#x3001;&amp;#x5F02;&amp;#x6B65;&amp;#x6838;&amp;#x5FC3;&amp;#x7684;&amp;#x5FAA;&amp;#x73AF;&amp;#x4F53;reactor&amp;#x662F;Twisted&amp;#x4E2D;&amp;#x6700;&amp;#">
 <meta property="og:type" content="article">
 <meta property="og:title" content="twisted 框架学习">
 <meta property="og:url" content="http://notes.7days.top/2014/12/26/twisted-e6-a1-86-e6-9e-b6-e5-ad-a6-e4-b9-a0/index.html">
 <meta property="og:site_name" content="Chow's Notes">
-<meta property="og:description" content="&amp;#x6267;&amp;#x884C;&amp;#x6A21;&amp;#x578B;&amp;#xFF1A;&amp;#x540C;&amp;#x6B65;&amp;#x3001;&amp;#x591A;&amp;#x7EBF;&amp;#x7A0B;&amp;#x3001;&amp;#x5F02;&amp;#x6B65;
-&amp;#x6838;&amp;#x5FC3;&amp;#x7684;&amp;#x5FAA;&amp;#x73AF;&amp;#x4F53;reactor
-&amp;#x662F;Twisted&amp;#x4E2D;&amp;#x6700;">
-<meta property="og:updated_time" content="2016-12-30T16:03:34.000Z">
+<meta property="og:description" content="&amp;#x6267;&amp;#x884C;&amp;#x6A21;&amp;#x578B;&amp;#xFF1A;&amp;#x540C;&amp;#x6B65;&amp;#x3001;&amp;#x591A;&amp;#x7EBF;&amp;#x7A0B;&amp;#x3001;&amp;#x5F02;&amp;#x6B65;&amp;#x6838;&amp;#x5FC3;&amp;#x7684;&amp;#x5FAA;&amp;#x73AF;&amp;#x4F53;reactor&amp;#x662F;Twisted&amp;#x4E2D;&amp;#x6700;&amp;#">
+<meta property="og:updated_time" content="2017-01-03T02:32:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="twisted 框架学习">
-<meta name="twitter:description" content="&amp;#x6267;&amp;#x884C;&amp;#x6A21;&amp;#x578B;&amp;#xFF1A;&amp;#x540C;&amp;#x6B65;&amp;#x3001;&amp;#x591A;&amp;#x7EBF;&amp;#x7A0B;&amp;#x3001;&amp;#x5F02;&amp;#x6B65;
-&amp;#x6838;&amp;#x5FC3;&amp;#x7684;&amp;#x5FAA;&amp;#x73AF;&amp;#x4F53;reactor
-&amp;#x662F;Twisted&amp;#x4E2D;&amp;#x6700;">
+<meta name="twitter:description" content="&amp;#x6267;&amp;#x884C;&amp;#x6A21;&amp;#x578B;&amp;#xFF1A;&amp;#x540C;&amp;#x6B65;&amp;#x3001;&amp;#x591A;&amp;#x7EBF;&amp;#x7A0B;&amp;#x3001;&amp;#x5F02;&amp;#x6B65;&amp;#x6838;&amp;#x5FC3;&amp;#x7684;&amp;#x5FAA;&amp;#x73AF;&amp;#x4F53;reactor&amp;#x662F;Twisted&amp;#x4E2D;&amp;#x6700;&amp;#">
 
 
 
@@ -365,27 +359,18 @@
       
 
       
-        <p>&#x6267;&#x884C;&#x6A21;&#x578B;&#xFF1A;&#x540C;&#x6B65;&#x3001;&#x591A;&#x7EBF;&#x7A0B;&#x3001;&#x5F02;&#x6B65;</p>
-<p><strong>&#x6838;&#x5FC3;&#x7684;&#x5FAA;&#x73AF;&#x4F53;reactor</strong></p>
-<p>&#x662F;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Twisted</span>&#x4E2D;&#x6700;&#x91CD;&#x8981;&#x7684;&#xFF0C;&#x5728;&#x6BCF;&#x4E2A;&#x901A;&#x8FC7;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Twisted</span>&#x642D;&#x5EFA;&#x8D77;&#x6765;&#x7684;&#x7A0B;&#x5E8F;&#x4E2D;&#x5FC3;&#x5904;&#xFF0C;&#x4E0D;&#x7BA1;&#x4F60;&#x8FD9;&#x4E2A;&#x7A0B;&#x5E8F;&#x6709;&#x591A;&#x5C11;&#x5C42;&#xFF0C;&#x603B;&#x4F1A;&#x6709;&#x4E00;&#x4E2A;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">reactor</span>&#x5FAA;&#x73AF;&#x5728;&#x4E0D;&#x505C;&#x6B62;&#x5730;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x7684;&#x8FD0;&#x884C;</p>
-<p><strong>Transports</strong></p>
-<p><span style="font-family: &apos;DejaVu Serif&apos;, serif;">Transports</span>&#x62BD;&#x8C61;&#x662F;&#x901A;&#x8FC7;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Twisted</span>&#x4E2D;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">interfaces</span>&#x6A21;&#x5757;&#x4E2D;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">ITransport</span>&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x7684;&#x3002;&#x4E00;&#x4E2A;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Twisted</span>&#x7684;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Transport</span>&#x4EE3;&#x8868;&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x6536;&#x53D1;&#x5B57;&#x8282;&#x7684;&#x5355;&#x6761;&#x8FDE;&#x63A5;&#x3002;</p>
-<p><strong>Protocols</strong></p>
-<p><span style="font-family: &apos;DejaVu Serif&apos;, serif;">Twisted</span>&#x7684;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Protocols</span>&#x62BD;&#x8C61;&#x7531;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">interfaces</span>&#x6A21;&#x5757;&#x4E2D;&#x7684;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">IProtocol</span>&#x5B9A;&#x4E49;&#x3002;&#x4E5F;&#x8BB8;&#x4F60;&#x5DF2;&#x7ECF;&#x60F3;&#x5230;&#xFF0C;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Protocol</span>&#x5BF9;&#x8C61;&#x5B9E;&#x73B0;&#x534F;&#x8BAE;&#x5185;&#x5BB9;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x4E00;&#x4E2A;&#x5177;&#x4F53;&#x7684;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Twisted</span>&#x7684;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Protocol</span>&#x7684;&#x5B9E;&#x73B0;&#x5E94;&#x8BE5;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x5177;&#x4F53;&#x7F51;&#x7EDC;&#x534F;&#x8BAE;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x50CF;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">FTP</span>&#x3001;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">IMAP</span>&#x6216;&#x5176;&#x5B83;&#x6211;&#x4EEC;&#x81EA;&#x5DF1;&#x89C4;&#x5B9A;&#x7684;&#x534F;&#x8BAE;&#x3002;</p>
-<p><span style="font-family: &apos;DejaVu Serif&apos;, serif;"><strong>Protocol Factories</strong></span></p>
-<p>&#x6BCF;&#x4E2A;&#x8FDE;&#x63A5;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x81EA;&#x5DF1;&#x7684;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Portocol</span>&#xFF0C;&#x800C;&#x4E14;&#x8FD9;&#x4E2A;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Protocol</span>&#x662F;&#x6211;&#x4EEC;&#x81EA;&#x5DF1;&#x5B9A;&#x4E49;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;&#x3002;&#x7531;&#x4E8E;&#x6211;&#x4EEC;&#x4F1A;&#x5C06;&#x521B;&#x5EFA;&#x8FDE;&#x63A5;&#x7684;&#x5DE5;&#x4F5C;&#x4EA4;&#x7ED9;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Twisted</span>&#x6765;&#x5B8C;&#x6210;&#xFF0C;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Twisted</span>&#x9700;&#x8981;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#x6765;&#x4E3A;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x8FDE;&#x63A5;&#x5236;&#x5B9A;&#x4E00;&#x4E2A;&#x5408;&#x9002;&#x7684;&#x534F;&#x8BAE;&#x3002;&#x5236;&#x5B9A;&#x534F;&#x8BAE;&#x5C31;&#x662F;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Protocol Factories</span>&#x7684; &#x5DE5;&#x4F5C;&#x4E86;&#x3002;</p>
-<p>&#x4E5F;&#x8BB8;&#x4F60;&#x5DF2;&#x7ECF;&#x731C;&#x5230;&#x4E86;&#xFF0C;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Protocol Factory</span>&#x7684;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">API</span>&#x7531;<span style="font-family: &apos;DejaVu Serif&apos;, serif;"><span style="color: #225588;"><span style="font-family: Verdana, Tahoma, &apos;BitStream vera Sans&apos;, Arial, Helvetica, sans-serif;">IProtocolFactory</span></span></span>&#x6765;&#x5B9A;&#x4E49;&#xFF0C;&#x540C;&#x6837;&#x5728;<span style="font-family: &apos;DejaVu Serif&apos;, serif;"><code>&lt;span style=&quot;color: #225588;&quot;&gt;&lt;span style=&quot;font-family: Verdana, Tahoma, &apos;BitStream vera Sans&apos;, Arial, Helvetica, sans-serif;&quot;&gt;interfaces&lt;/span&gt;&lt;/span&gt;</code></span>&#x6A21;&#x5757;&#x4E2D;&#x3002;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Protocol Factory</span>&#x5C31;&#x662F;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Factory</span>&#x6A21;&#x5F0F;&#x7684;&#x4E00;&#x4E2A;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x3002;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">buildProtocol</span>&#x65B9;&#x6CD5;&#x5728;&#x6BCF;&#x6B21;&#x88AB;&#x8C03;&#x7528;&#x65F6;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x65B0;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Protocol</span>&#x5B9E;&#x4F8B;&#x3002;&#x5B83;&#x5C31;&#x662F;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Twisted</span>&#x7528;&#x6765;&#x4E3A;&#x65B0;&#x8FDE;&#x63A5;&#x521B;&#x5EFA;&#x65B0;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Protocol</span>&#x5B9E;&#x4F8B;&#x7684;&#x65B9;&#x6CD5;</p>
-<p>&#xA0;</p>
-<p><strong>&#x56DE;&#x8C03;&#x662F;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Twisted</span>&#x5F02;&#x6B65;&#x7F16;&#x7A0B;&#x4E2D;&#x7684;&#x57FA;&#x7840;&#x3002;</strong></p>
-<p>&#x9664;&#x4E86;&#x4E0E;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">reactor</span>&#x4EA4;&#x4E92;&#x5916;&#xFF0C;&#x56DE;&#x8C03;&#x53EF;&#x4EE5;&#x5B89;&#x63D2;&#x5728;&#x4EFB;&#x4F55;&#x6211;&#x4EEC;&#x5199;&#x7684;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Twisted</span>&#x7ED3;&#x6784;&#x5185;&#x3002;&#x56E0;&#x6B64;&#x5728;&#x4F7F;&#x7528;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Twisted</span>&#x6216;&#x5176;&#x5B83;&#x57FA;&#x4E8E;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">reactor</span>&#x7684;&#x5F02;&#x6B65;&#x7F16;&#x7A0B;&#x4F53;&#x7CFB;&#x65F6;&#xFF0C;&#x90FD;&#x610F;&#x5473;&#x9700;&#x8981;&#x5C06;&#x6211;&#x4EEC;&#x7684;&#x4EE3;&#x7801;&#x7EC4;&#x7EC7;&#x6210;&#x4E00;&#x7CFB;&#x5217;&#x7531;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">reactor</span>&#x5FAA;&#x73AF;&#x53EF;&#x4EE5;&#x6FC0;&#x6D3B;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x94FE;&#x3002;</p>
-<p>&#xA0;</p>
-<p>&#x5728;&#x5F02;&#x6B65;&#x7A0B;&#x5E8F;&#x4E2D;&#x5904;&#x7406;&#x9519;&#x8BEF;&#x662F;&#x76F8;&#x5F53;&#x91CD;&#x8981;&#x7684;&#xFF0C;&#x751A;&#x81F3;&#x6709;&#x4E9B;&#x4E25;&#x5CFB;&#x3002;&#x4E5F;&#x53EF;&#x4EE5;&#x8BF4;&#x5728;&#x5F02;&#x6B65;&#x7A0B;&#x5E8F;&#x4E2D;&#x5904;&#x7406;&#x9519;&#x8BEF;&#x4FE1;&#x606F;&#x6BD4;&#x5904;&#x7406;&#x6B63;&#x5E38;&#x7684;&#x4FE1;&#x606F;&#x8981;&#x91CD;&#x8981;&#x7684;&#x591A;&#xFF0C;&#x8FD9;&#x662F;&#x56E0;&#x4E3A;&#x9519;&#x8BEF;&#x4F1A;&#x4EE5;&#x591A;&#x79CD;&#x65B9;&#x5F0F;&#x51FA;&#x73B0;&#xFF0C;&#x800C;&#x6B63;&#x786E;&#x7684;&#x7ED3;&#x679C;&#x51FA;&#x73B0;&#x7684;&#x65B9;&#x5F0F;&#x662F;&#x552F;&#x4E00;&#x7684;&#x3002;&#x5F53;&#x4F7F;&#x7528;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">Twisted</span>&#x7F16;&#x7A0B;&#x65F6;&#x5FD8;&#x8BB0;&#x5904;&#x7406;&#x5F02;&#x5E38;&#x662F;&#x4E00;&#x4E2A;&#x5E38;&#x72AF;&#x7684;&#x9519;&#x8BEF;&#x3002;</p>
-<p>&#x5F02;&#x6B65;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">deferred</span>&#xFF0C;&#x5BF9;&#x7528;&#x6237;&#x610F;&#x5473;&#x7740;&#xFF1A;</p>
-<p><span style="color: #000000; font-size: 12px;">&#x6211;&#x662F;&#x4E00;&#x4E2A;&#x5F02;&#x6B65;&#x51FD;&#x6570;&#x3002;&#x4E0D;&#x7BA1;&#x4F60;&#x60F3;&#x8981;&#x4EC0;&#x4E48;&#xFF0C;&#x53EF;&#x80FD;&#x73B0;&#x5728;&#x9A6C;&#x4E0A;&#x90FD;&#x5F97;&#x4E0D;&#x5230;&#x3002;&#x4F46;&#x5F53;&#x7ED3;&#x679C;&#x6765;&#x5230;&#x65F6;&#xFF0C;&#x6211;&#x4F1A;&#x6FC0;&#x6D3B;&#x8FD9;&#x4E2A;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">deferred</span>&#x7684;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">callback</span>&#x94FE;&#x5E76;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x3002;&#x6216;&#x8005;&#x5F53;&#x51FA;&#x9519;&#x65F6;&#xFF0C;&#x76F8;&#x5E94;&#x5730;&#x6FC0;&#x6D3B;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">errback</span>&#x94FE;&#x5E76;&#x8FD4;&#x56DE;&#x51FA;&#x9519;&#x4FE1;&#x606F;&#x3002;</span></p>
-<p><span style="font-size: 12px;">&#x5F53;&#x7136;&#xFF0C;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x662F;&#x4E0D;&#x80FD;&#x968F;&#x610F;&#x6FC0;&#x6D3B;&#x8FD9;&#x4E2A;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">deferred</span>&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x5DF2;&#x7ECF;&#x8FD4;&#x56DE;&#x4E86;&#x3002;&#x4F46;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x5DF2;&#x7ECF;&#x542F;&#x52A8;&#x4E86;&#x4E00;&#x7CFB;&#x5217;&#x4E8B;&#x4EF6;&#xFF0C;&#x8FD9;&#x4E9B;&#x4E8B;&#x4EF6;&#x6700;&#x7EC8;&#x5C06;&#x4F1A;&#x6FC0;&#x6D3B;&#x8FD9;&#x4E2A;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">deferred</span>&#x3002;</span></p>
-<p><span style="font-size: 12px;">&#x56E0;&#x6B64;&#xFF0C;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">deferred</span>&#x662F;&#x4E3A;&#x9002;&#x5E94;&#x5F02;&#x6B65;&#x6A21;&#x5F0F;&#x7684;&#x4E00;&#x79CD;&#x5EF6;&#x8FDF;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x7684;&#x65B9;&#x5F0F;&#x3002;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;<span style="font-family: &apos;DejaVu Serif&apos;, serif;">deferred</span>&#x610F;&#x5473;&#x7740;&#x5176;&#x662F;&#x5F02;&#x6B65;&#x7684;&#xFF0C;&#x4EE3;&#x8868;&#x7740;&#x5C06;&#x6765;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x4E5F;&#x662F;&#x5BF9;&#x5C06;&#x6765;&#x80FD;&#x591F;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x7684;&#x4E00;&#x79CD;&#x627F;&#x8BFA;&#x3002;</span></p>
-<p><strong>&#x5F53;&#x4F60;&#x4F7F;&#x7528;</strong><span style="font-family: &apos;DejaVu Serif&apos;, serif;"><strong>Deferred</strong></span><strong>&#x65F6;&#xFF0C;&#x4F60;&#x4ECD;&#x7136;&#x5728;&#x4F7F;&#x7528;&#x56DE;&#x8C03;&#xFF0C;&#x5B83;&#x4EEC;&#x4ECD;&#x7136;&#x7531;</strong><span style="font-family: &apos;DejaVu Serif&apos;, serif;"><strong>reactor</strong></span><strong>&#x6765;&#x8C03;&#x7528;&#x3002;</strong></p>
-<p><span style="font-family: &apos;DejaVu Serif&apos;, serif;">Deferred</span>&#x53EA;&#x662F;&#x89E3;&#x51B3;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x7BA1;&#x7406;&#x95EE;&#x9898;&#x7684;&#x4E00;&#x79CD;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x3002;&#x5B83;&#x5E76;&#x4E0D;&#x4E00;&#x79CD;&#x66FF;&#x4EE3;&#x56DE;&#x8C03;&#x65B9;&#x5F0F;&#x4E5F;&#x4E0D;&#x80FD;&#x5C06;&#x963B;&#x585E;&#x5F0F;&#x7684;&#x56DE;&#x8C03;&#x53D8;&#x6210;&#x975E;&#x963B;&#x585E;&#x5F0F;&#x56DE;&#x8C03;&#x7684;</p>
+        <h2 id="&#x6267;&#x884C;&#x6A21;&#x578B;&#xFF1A;&#x540C;&#x6B65;&#x3001;&#x591A;&#x7EBF;&#x7A0B;&#x3001;&#x5F02;&#x6B65;"><a href="#&#x6267;&#x884C;&#x6A21;&#x578B;&#xFF1A;&#x540C;&#x6B65;&#x3001;&#x591A;&#x7EBF;&#x7A0B;&#x3001;&#x5F02;&#x6B65;" class="headerlink" title="&#x6267;&#x884C;&#x6A21;&#x578B;&#xFF1A;&#x540C;&#x6B65;&#x3001;&#x591A;&#x7EBF;&#x7A0B;&#x3001;&#x5F02;&#x6B65;"></a>&#x6267;&#x884C;&#x6A21;&#x578B;&#xFF1A;&#x540C;&#x6B65;&#x3001;&#x591A;&#x7EBF;&#x7A0B;&#x3001;&#x5F02;&#x6B65;</h2><h3 id="&#x6838;&#x5FC3;&#x7684;&#x5FAA;&#x73AF;&#x4F53;reactor"><a href="#&#x6838;&#x5FC3;&#x7684;&#x5FAA;&#x73AF;&#x4F53;reactor" class="headerlink" title="&#x6838;&#x5FC3;&#x7684;&#x5FAA;&#x73AF;&#x4F53;reactor"></a><strong>&#x6838;&#x5FC3;&#x7684;&#x5FAA;&#x73AF;&#x4F53;reactor</strong></h3><p>&#x662F;Twisted&#x4E2D;&#x6700;&#x91CD;&#x8981;&#x7684;&#xFF0C;&#x5728;&#x6BCF;&#x4E2A;&#x901A;&#x8FC7;Twisted&#x642D;&#x5EFA;&#x8D77;&#x6765;&#x7684;&#x7A0B;&#x5E8F;&#x4E2D;&#x5FC3;&#x5904;&#xFF0C;&#x4E0D;&#x7BA1;&#x4F60;&#x8FD9;&#x4E2A;&#x7A0B;&#x5E8F;&#x6709;&#x591A;&#x5C11;&#x5C42;&#xFF0C;&#x603B;&#x4F1A;&#x6709;&#x4E00;&#x4E2A;reactor&#x5FAA;&#x73AF;&#x5728;&#x4E0D;&#x505C;&#x6B62;&#x5730;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x7684;&#x8FD0;&#x884C;</p>
+<h3 id="Transports"><a href="#Transports" class="headerlink" title="Transports"></a><strong>Transports</strong></h3><p>Transports&#x62BD;&#x8C61;&#x662F;&#x901A;&#x8FC7;Twisted&#x4E2D;interfaces&#x6A21;&#x5757;&#x4E2D;ITransport&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x7684;&#x3002;&#x4E00;&#x4E2A;Twisted&#x7684;Transport&#x4EE3;&#x8868;&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x6536;&#x53D1;&#x5B57;&#x8282;&#x7684;&#x5355;&#x6761;&#x8FDE;&#x63A5;&#x3002;</p>
+<h3 id="Protocols"><a href="#Protocols" class="headerlink" title="Protocols"></a><strong>Protocols</strong></h3><p>Twisted&#x7684;Protocols&#x62BD;&#x8C61;&#x7531;interfaces&#x6A21;&#x5757;&#x4E2D;&#x7684;IProtocol&#x5B9A;&#x4E49;&#x3002;&#x4E5F;&#x8BB8;&#x4F60;&#x5DF2;&#x7ECF;&#x60F3;&#x5230;&#xFF0C;Protocol&#x5BF9;&#x8C61;&#x5B9E;&#x73B0;&#x534F;&#x8BAE;&#x5185;&#x5BB9;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x4E00;&#x4E2A;&#x5177;&#x4F53;&#x7684;Twisted&#x7684;Protocol&#x7684;&#x5B9E;&#x73B0;&#x5E94;&#x8BE5;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x5177;&#x4F53;&#x7F51;&#x7EDC;&#x534F;&#x8BAE;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x50CF;FTP&#x3001;IMAP&#x6216;&#x5176;&#x5B83;&#x6211;&#x4EEC;&#x81EA;&#x5DF1;&#x89C4;&#x5B9A;&#x7684;&#x534F;&#x8BAE;&#x3002;</p>
+<h3 id="Protocol-Factories"><a href="#Protocol-Factories" class="headerlink" title="Protocol Factories"></a><strong>Protocol Factories</strong></h3><p>&#x6BCF;&#x4E2A;&#x8FDE;&#x63A5;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x81EA;&#x5DF1;&#x7684;Portocol&#xFF0C;&#x800C;&#x4E14;&#x8FD9;&#x4E2A;Protocol&#x662F;&#x6211;&#x4EEC;&#x81EA;&#x5DF1;&#x5B9A;&#x4E49;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;&#x3002;&#x7531;&#x4E8E;&#x6211;&#x4EEC;&#x4F1A;&#x5C06;&#x521B;&#x5EFA;&#x8FDE;&#x63A5;&#x7684;&#x5DE5;&#x4F5C;&#x4EA4;&#x7ED9;Twisted&#x6765;&#x5B8C;&#x6210;&#xFF0C;Twisted&#x9700;&#x8981;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#x6765;&#x4E3A;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x8FDE;&#x63A5;&#x5236;&#x5B9A;&#x4E00;&#x4E2A;&#x5408;&#x9002;&#x7684;&#x534F;&#x8BAE;&#x3002;&#x5236;&#x5B9A;&#x534F;&#x8BAE;&#x5C31;&#x662F;Protocol Factories&#x7684; &#x5DE5;&#x4F5C;&#x4E86;&#x3002;<br>&#x4E5F;&#x8BB8;&#x4F60;&#x5DF2;&#x7ECF;&#x731C;&#x5230;&#x4E86;&#xFF0C;Protocol Factory&#x7684;API&#x7531;IProtocolFactory&#x6765;&#x5B9A;&#x4E49;&#xFF0C;&#x540C;&#x6837;&#x5728;interfaces&#x6A21;&#x5757;&#x4E2D;&#x3002;Protocol Factory&#x5C31;&#x662F;Factory&#x6A21;&#x5F0F;&#x7684;&#x4E00;&#x4E2A;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x3002;buildProtocol&#x65B9;&#x6CD5;&#x5728;&#x6BCF;&#x6B21;&#x88AB;&#x8C03;&#x7528;&#x65F6;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x65B0;Protocol&#x5B9E;&#x4F8B;&#x3002;&#x5B83;&#x5C31;&#x662F;Twisted&#x7528;&#x6765;&#x4E3A;&#x65B0;&#x8FDE;&#x63A5;&#x521B;&#x5EFA;&#x65B0;Protocol&#x5B9E;&#x4F8B;&#x7684;&#x65B9;&#x6CD5;</p>
+<h3 id="&#x56DE;&#x8C03;&#x662F;Twisted&#x5F02;&#x6B65;&#x7F16;&#x7A0B;&#x4E2D;&#x7684;&#x57FA;&#x7840;"><a href="#&#x56DE;&#x8C03;&#x662F;Twisted&#x5F02;&#x6B65;&#x7F16;&#x7A0B;&#x4E2D;&#x7684;&#x57FA;&#x7840;" class="headerlink" title="&#x56DE;&#x8C03;&#x662F;Twisted&#x5F02;&#x6B65;&#x7F16;&#x7A0B;&#x4E2D;&#x7684;&#x57FA;&#x7840;"></a><strong>&#x56DE;&#x8C03;&#x662F;Twisted&#x5F02;&#x6B65;&#x7F16;&#x7A0B;&#x4E2D;&#x7684;&#x57FA;&#x7840;</strong></h3><p>&#x9664;&#x4E86;&#x4E0E;reactor&#x4EA4;&#x4E92;&#x5916;&#xFF0C;&#x56DE;&#x8C03;&#x53EF;&#x4EE5;&#x5B89;&#x63D2;&#x5728;&#x4EFB;&#x4F55;&#x6211;&#x4EEC;&#x5199;&#x7684;Twisted&#x7ED3;&#x6784;&#x5185;&#x3002;&#x56E0;&#x6B64;&#x5728;&#x4F7F;&#x7528;Twisted&#x6216;&#x5176;&#x5B83;&#x57FA;&#x4E8E;reactor&#x7684;&#x5F02;&#x6B65;&#x7F16;&#x7A0B;&#x4F53;&#x7CFB;&#x65F6;&#xFF0C;&#x90FD;&#x610F;&#x5473;&#x9700;&#x8981;&#x5C06;&#x6211;&#x4EEC;&#x7684;&#x4EE3;&#x7801;&#x7EC4;&#x7EC7;&#x6210;&#x4E00;&#x7CFB;&#x5217;&#x7531;reactor&#x5FAA;&#x73AF;&#x53EF;&#x4EE5;&#x6FC0;&#x6D3B;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x94FE;&#x3002;  </p>
+<p>&#x5728;&#x5F02;&#x6B65;&#x7A0B;&#x5E8F;&#x4E2D;&#x5904;&#x7406;&#x9519;&#x8BEF;&#x662F;&#x76F8;&#x5F53;&#x91CD;&#x8981;&#x7684;&#xFF0C;&#x751A;&#x81F3;&#x6709;&#x4E9B;&#x4E25;&#x5CFB;&#x3002;&#x4E5F;&#x53EF;&#x4EE5;&#x8BF4;&#x5728;&#x5F02;&#x6B65;&#x7A0B;&#x5E8F;&#x4E2D;&#x5904;&#x7406;&#x9519;&#x8BEF;&#x4FE1;&#x606F;&#x6BD4;&#x5904;&#x7406;&#x6B63;&#x5E38;&#x7684;&#x4FE1;&#x606F;&#x8981;&#x91CD;&#x8981;&#x7684;&#x591A;&#xFF0C;&#x8FD9;&#x662F;&#x56E0;&#x4E3A;&#x9519;&#x8BEF;&#x4F1A;&#x4EE5;&#x591A;&#x79CD;&#x65B9;&#x5F0F;&#x51FA;&#x73B0;&#xFF0C;&#x800C;&#x6B63;&#x786E;&#x7684;&#x7ED3;&#x679C;&#x51FA;&#x73B0;&#x7684;&#x65B9;&#x5F0F;&#x662F;&#x552F;&#x4E00;&#x7684;&#x3002;&#x5F53;&#x4F7F;&#x7528;Twisted&#x7F16;&#x7A0B;&#x65F6;&#x5FD8;&#x8BB0;&#x5904;&#x7406;&#x5F02;&#x5E38;&#x662F;&#x4E00;&#x4E2A;&#x5E38;&#x72AF;&#x7684;&#x9519;&#x8BEF;&#x3002;  </p>
+<p>&#x5F02;&#x6B65;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;deferred&#xFF0C;&#x5BF9;&#x7528;&#x6237;&#x610F;&#x5473;&#x7740;&#xFF1A;</p>
+<p>&#x6211;&#x662F;&#x4E00;&#x4E2A;&#x5F02;&#x6B65;&#x51FD;&#x6570;&#x3002;&#x4E0D;&#x7BA1;&#x4F60;&#x60F3;&#x8981;&#x4EC0;&#x4E48;&#xFF0C;&#x53EF;&#x80FD;&#x73B0;&#x5728;&#x9A6C;&#x4E0A;&#x90FD;&#x5F97;&#x4E0D;&#x5230;&#x3002;&#x4F46;&#x5F53;&#x7ED3;&#x679C;&#x6765;&#x5230;&#x65F6;&#xFF0C;&#x6211;&#x4F1A;&#x6FC0;&#x6D3B;&#x8FD9;&#x4E2A;deferred&#x7684;callback&#x94FE;&#x5E76;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x3002;&#x6216;&#x8005;&#x5F53;&#x51FA;&#x9519;&#x65F6;&#xFF0C;&#x76F8;&#x5E94;&#x5730;&#x6FC0;&#x6D3B;errback&#x94FE;&#x5E76;&#x8FD4;&#x56DE;&#x51FA;&#x9519;&#x4FE1;&#x606F;&#x3002;</p>
+<p>&#x5F53;&#x7136;&#xFF0C;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x662F;&#x4E0D;&#x80FD;&#x968F;&#x610F;&#x6FC0;&#x6D3B;&#x8FD9;&#x4E2A;deferred&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x5DF2;&#x7ECF;&#x8FD4;&#x56DE;&#x4E86;&#x3002;&#x4F46;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x5DF2;&#x7ECF;&#x542F;&#x52A8;&#x4E86;&#x4E00;&#x7CFB;&#x5217;&#x4E8B;&#x4EF6;&#xFF0C;&#x8FD9;&#x4E9B;&#x4E8B;&#x4EF6;&#x6700;&#x7EC8;&#x5C06;&#x4F1A;&#x6FC0;&#x6D3B;&#x8FD9;&#x4E2A;deferred&#x3002;</p>
+<p>&#x56E0;&#x6B64;&#xFF0C;deferred&#x662F;&#x4E3A;&#x9002;&#x5E94;&#x5F02;&#x6B65;&#x6A21;&#x5F0F;&#x7684;&#x4E00;&#x79CD;&#x5EF6;&#x8FDF;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x7684;&#x65B9;&#x5F0F;&#x3002;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;deferred&#x610F;&#x5473;&#x7740;&#x5176;&#x662F;&#x5F02;&#x6B65;&#x7684;&#xFF0C;&#x4EE3;&#x8868;&#x7740;&#x5C06;&#x6765;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x4E5F;&#x662F;&#x5BF9;&#x5C06;&#x6765;&#x80FD;&#x591F;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x7684;&#x4E00;&#x79CD;&#x627F;&#x8BFA;&#x3002;</p>
+<p><strong>&#x5F53;&#x4F60;&#x4F7F;&#x7528;Deferred&#x65F6;&#xFF0C;&#x4F60;&#x4ECD;&#x7136;&#x5728;&#x4F7F;&#x7528;&#x56DE;&#x8C03;&#xFF0C;&#x5B83;&#x4EEC;&#x4ECD;&#x7136;&#x7531;reactor&#x6765;&#x8C03;&#x7528;&#x3002;</strong></p>
+<p>Deferred&#x53EA;&#x662F;&#x89E3;&#x51B3;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x7BA1;&#x7406;&#x95EE;&#x9898;&#x7684;&#x4E00;&#x79CD;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x3002;&#x5B83;&#x5E76;&#x4E0D;&#x4E00;&#x79CD;&#x66FF;&#x4EE3;&#x56DE;&#x8C03;&#x65B9;&#x5F0F;&#x4E5F;&#x4E0D;&#x80FD;&#x5C06;&#x963B;&#x585E;&#x5F0F;&#x7684;&#x56DE;&#x8C03;&#x53D8;&#x6210;&#x975E;&#x963B;&#x585E;&#x5F0F;&#x56DE;&#x8C03;&#x7684;</p>
 
       
     </div>
@@ -406,6 +391,12 @@
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/twisted/" rel="tag"># twisted</a>
+          
+        </div>
       
 
       
@@ -494,8 +485,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -526,7 +526,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -562,6 +562,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#执行模型：同步、多线程、异步"><span class="nav-number">1.</span> <span class="nav-text">执行模型：同步、多线程、异步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#核心的循环体reactor"><span class="nav-number">1.1.</span> <span class="nav-text">核心的循环体reactor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transports"><span class="nav-number">1.2.</span> <span class="nav-text">Transports</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Protocols"><span class="nav-number">1.3.</span> <span class="nav-text">Protocols</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Protocol-Factories"><span class="nav-number">1.4.</span> <span class="nav-text">Protocol Factories</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回调是Twisted异步编程中的基础"><span class="nav-number">1.5.</span> <span class="nav-text">回调是Twisted异步编程中的基础</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

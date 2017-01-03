@@ -70,7 +70,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Life,Notes" />
+  <meta name="keywords" content="freetds,pymssql," />
 
 
 
@@ -86,25 +86,22 @@
 
 
 
-<meta name="description" content="&amp;#xA0;
-&amp;#x5173;&amp;#x4E8E; freetds pymssql &amp;#x7684;&amp;#x5B89;&amp;#x88C5;&amp;#x90E8;&amp;#x7F72;&amp;#x4E00;&amp;#x3001;&amp;#x5B89;&amp;#x88C5;&amp;#xFF1A;
-(freetds-0.91 pymssql 2.0.1)
-&amp;#x5982;&amp;#x679C;&amp;#x8981;&amp;#x5728;linux&amp;#x673A;&amp;#x56">
+<meta name="description" content="&amp;#x5173;&amp;#x4E8E; freetds pymssql &amp;#x7684;&amp;#x5B89;&amp;#x88C5;&amp;#x90E8;&amp;#x7F72;
+&amp;#x4E00;&amp;#x3001;&amp;#x5B89;&amp;#x88C5;&amp;#xFF1A;(freetds-0.91 pymssql 2.0.1)
+&amp;#x5982;&amp;#x679C;&amp;#x8981;&amp;#x5728;linux&amp;#x673A;&amp;#x5668; &amp;#x">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于 freetds pymssql 的安装部署">
 <meta property="og:url" content="http://notes.7days.top/2015/04/27/e5-85-b3-e4-ba-8efreetdspymssql-e7-9a-84-e5-ae-89-e8-a3-85-e9-83-a8-e7-bd-b2/index.html">
 <meta property="og:site_name" content="Chow's Notes">
-<meta property="og:description" content="&amp;#xA0;
-&amp;#x5173;&amp;#x4E8E; freetds pymssql &amp;#x7684;&amp;#x5B89;&amp;#x88C5;&amp;#x90E8;&amp;#x7F72;&amp;#x4E00;&amp;#x3001;&amp;#x5B89;&amp;#x88C5;&amp;#xFF1A;
-(freetds-0.91 pymssql 2.0.1)
-&amp;#x5982;&amp;#x679C;&amp;#x8981;&amp;#x5728;linux&amp;#x673A;&amp;#x56">
-<meta property="og:updated_time" content="2016-12-30T16:03:34.000Z">
+<meta property="og:description" content="&amp;#x5173;&amp;#x4E8E; freetds pymssql &amp;#x7684;&amp;#x5B89;&amp;#x88C5;&amp;#x90E8;&amp;#x7F72;
+&amp;#x4E00;&amp;#x3001;&amp;#x5B89;&amp;#x88C5;&amp;#xFF1A;(freetds-0.91 pymssql 2.0.1)
+&amp;#x5982;&amp;#x679C;&amp;#x8981;&amp;#x5728;linux&amp;#x673A;&amp;#x5668; &amp;#x">
+<meta property="og:updated_time" content="2017-01-03T01:52:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于 freetds pymssql 的安装部署">
-<meta name="twitter:description" content="&amp;#xA0;
-&amp;#x5173;&amp;#x4E8E; freetds pymssql &amp;#x7684;&amp;#x5B89;&amp;#x88C5;&amp;#x90E8;&amp;#x7F72;&amp;#x4E00;&amp;#x3001;&amp;#x5B89;&amp;#x88C5;&amp;#xFF1A;
-(freetds-0.91 pymssql 2.0.1)
-&amp;#x5982;&amp;#x679C;&amp;#x8981;&amp;#x5728;linux&amp;#x673A;&amp;#x56">
+<meta name="twitter:description" content="&amp;#x5173;&amp;#x4E8E; freetds pymssql &amp;#x7684;&amp;#x5B89;&amp;#x88C5;&amp;#x90E8;&amp;#x7F72;
+&amp;#x4E00;&amp;#x3001;&amp;#x5B89;&amp;#x88C5;&amp;#xFF1A;(freetds-0.91 pymssql 2.0.1)
+&amp;#x5982;&amp;#x679C;&amp;#x8981;&amp;#x5728;linux&amp;#x673A;&amp;#x5668; &amp;#x">
 
 
 
@@ -368,23 +365,16 @@
       
 
       
-        <p>&#xA0;</p>
-<p>&#x5173;&#x4E8E; freetds pymssql &#x7684;&#x5B89;&#x88C5;&#x90E8;&#x7F72;<br>&#x4E00;&#x3001;&#x5B89;&#x88C5;&#xFF1A;</p>
-<p>(freetds-0.91 pymssql 2.0.1)</p>
-<p>&#x5982;&#x679C;&#x8981;&#x5728;linux&#x673A;&#x5668; &#x8FDE;mysqlsever</p>
-<p>1.&#x9700;&#x8981;&#x5B89;&#x88C5;freetds<br>./configure<br>make &amp;&amp; make install</p>
-<p>&#x6D4B;&#x8BD5;<br>tsql -C&#x67E5;&#x770B;&#x5B89;&#x88C5;&#x7684;&#x7248;&#x672C;<br>tsql -H 10.20.17.102 -p 1433 -U sa -P &#x201C;password&#x201D; -D DBANME &#x8FDE;&#x63A5;mysqlserver<br>&gt; SELECT TOP 1 * FROM tablename<br>&gt; go</p>
-<p>2.python&#x7A0B;&#x5E8F;&#x9700;&#x8981;&#x7528;&#x5230;pymssql</p>
-<p>&#x5B89;&#x88C5;&#x597D;&#x53EF;&#x4EE5;&#x6D4B;&#x8BD5;&#x4E0B;<br>conn=pymssql.connect(host=&#x2019;&#x2019;,database=&#x2019;&#x2019;,user=&#x2019;&#x2019;,password=&#x2019;&#x2019;,charset=&#x201D;UTF-8&#x201D;)<br>cur=conn.cursor()<br>cur.execute(&#x201C;SELECT TOP 1 * FROM tablename&#x201D;)<br>for i in cur.fetchall():<br>print i</p>
-<p>conn.close()</p>
-<p>&#xA0;</p>
-<p>&#x4E8C;&#x3001;&#x53EF;&#x80FD;&#x51FA;&#x73B0;&#x7684;&#x95EE;&#x9898;</p>
-<p>1.&#x5982;&#x679C;&#x662F;&#x5148;&#x5B89;&#x88C5;&#x7684;pymmsql,&#x540E;&#x5B89;&#x88C5;&#x7684;freetds</p>
-<p>&#x5728;import pymssql&#x65F6;<br>&#x53EF;&#x80FD;&#x62A5;&#x9519; &#x201C;ImportError: libsybdb.so.5: cannot open shared object file: No such file or directory&#x201D;</p>
+        <p>&#x5173;&#x4E8E; freetds pymssql &#x7684;&#x5B89;&#x88C5;&#x90E8;&#x7F72;</p>
+<h2 id="&#x4E00;&#x3001;&#x5B89;&#x88C5;&#xFF1A;"><a href="#&#x4E00;&#x3001;&#x5B89;&#x88C5;&#xFF1A;" class="headerlink" title="&#x4E00;&#x3001;&#x5B89;&#x88C5;&#xFF1A;"></a>&#x4E00;&#x3001;&#x5B89;&#x88C5;&#xFF1A;</h2><p>(freetds-0.91 pymssql 2.0.1)</p>
+<p>&#x5982;&#x679C;&#x8981;&#x5728;linux&#x673A;&#x5668; &#x8FDE;&#x63A5;mysqlsever</p>
+<h3 id="1-&#x9700;&#x8981;&#x5B89;&#x88C5;freetds"><a href="#1-&#x9700;&#x8981;&#x5B89;&#x88C5;freetds" class="headerlink" title="1.&#x9700;&#x8981;&#x5B89;&#x88C5;freetds"></a>1.&#x9700;&#x8981;&#x5B89;&#x88C5;freetds</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">./configure</div><div class="line">make &amp;amp;&amp;amp; make install</div></pre></td></tr></table></figure>
+<p>&#x6D4B;&#x8BD5;<br>tsql -C&#x67E5;&#x770B;&#x5B89;&#x88C5;&#x7684;&#x7248;&#x672C;<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">tsql -H 10.20.17.102 -p 1433 -U sa -P <span class="string">&quot;password&quot;</span> -D DBANME &#x8FDE;&#x63A5;mysqlserver</div><div class="line">&gt; SELECT TOP 1 * FROM tablename</div><div class="line">&gt; go</div></pre></td></tr></table></figure></p>
+<h3 id="2-python&#x7A0B;&#x5E8F;&#x9700;&#x8981;&#x7528;&#x5230;pymssql"><a href="#2-python&#x7A0B;&#x5E8F;&#x9700;&#x8981;&#x7528;&#x5230;pymssql" class="headerlink" title="2.python&#x7A0B;&#x5E8F;&#x9700;&#x8981;&#x7528;&#x5230;pymssql"></a>2.python&#x7A0B;&#x5E8F;&#x9700;&#x8981;&#x7528;&#x5230;pymssql</h3><p>&#x5B89;&#x88C5;&#x597D;&#x53EF;&#x4EE5;&#x6D4B;&#x8BD5;&#x4E0B;<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">conn=pymssql.connect(host=<span class="string">&apos;&apos;</span>,database=<span class="string">&apos;&apos;</span>,user=<span class="string">&apos;&apos;</span>,password=<span class="string">&apos;&apos;</span>,charset=<span class="string">&quot;UTF-8&quot;</span>)</div><div class="line">cur=conn.cursor()</div><div class="line">cur.execute(<span class="string">&quot;SELECT TOP 1 * FROM tablename&quot;</span>)</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> cur.fetchall():</div><div class="line"><span class="keyword">print</span> i</div><div class="line"></div><div class="line">conn.close()</div></pre></td></tr></table></figure></p>
+<h2 id="&#x4E8C;&#x3001;&#x53EF;&#x80FD;&#x51FA;&#x73B0;&#x7684;&#x95EE;&#x9898;"><a href="#&#x4E8C;&#x3001;&#x53EF;&#x80FD;&#x51FA;&#x73B0;&#x7684;&#x95EE;&#x9898;" class="headerlink" title="&#x4E8C;&#x3001;&#x53EF;&#x80FD;&#x51FA;&#x73B0;&#x7684;&#x95EE;&#x9898;"></a>&#x4E8C;&#x3001;&#x53EF;&#x80FD;&#x51FA;&#x73B0;&#x7684;&#x95EE;&#x9898;</h2><h3 id="1-&#x5982;&#x679C;&#x662F;&#x5148;&#x5B89;&#x88C5;&#x7684;pymmsql-&#x540E;&#x5B89;&#x88C5;&#x7684;freetds"><a href="#1-&#x5982;&#x679C;&#x662F;&#x5148;&#x5B89;&#x88C5;&#x7684;pymmsql-&#x540E;&#x5B89;&#x88C5;&#x7684;freetds" class="headerlink" title="1.&#x5982;&#x679C;&#x662F;&#x5148;&#x5B89;&#x88C5;&#x7684;pymmsql,&#x540E;&#x5B89;&#x88C5;&#x7684;freetds"></a>1.&#x5982;&#x679C;&#x662F;&#x5148;&#x5B89;&#x88C5;&#x7684;pymmsql,&#x540E;&#x5B89;&#x88C5;&#x7684;freetds</h3><p>&#x5728;import pymssql&#x65F6;<br>&#x53EF;&#x80FD;&#x62A5;&#x9519;<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x201C;ImportError: libsybdb.so<span class="number">.5</span>: cannot open shared object file: No such file <span class="keyword">or</span> directory&#x201D;</div></pre></td></tr></table></figure></p>
 <p>&#x9700;&#x8981;&#x91CD;&#x65B0;&#x88C5;&#x4E0B;pymssql</p>
 <p>&#x4ECD;&#x7136;&#x62A5;&#x9519;<br>&#x53EF;&#x4EE5;&#x66F4;&#x65B0;ldconfig</p>
-<p><strong>2. &#x5982;&#x679C;&#x5728;&#x4F7F;&#x7528;freetds&#x662F;&#x4FEE;&#x6539;&#x4E86;freetds.conf&#x7684;&#x8BDD;&#xFF0C;&#x6216;&#x8005;&#x5176;&#x4ED6;&#x539F;&#x56E0;</strong></p>
-<p><strong>&#x5BFC;&#x81F4;&#x5728;&#x7528;pymssql &#x67E5;&#x8BE2;mysqlserver&#x8868;&#x4E2D;&#x7684;&#x65E5;&#x671F;&#x5B57;&#x6BB5;&#x65F6;</strong></p>
+<h3 id="2-&#x5982;&#x679C;&#x5728;&#x4F7F;&#x7528;freetds&#x662F;&#x4FEE;&#x6539;&#x4E86;freetds-conf&#x7684;&#x8BDD;&#xFF0C;&#x6216;&#x8005;&#x5176;&#x4ED6;&#x539F;&#x56E0;"><a href="#2-&#x5982;&#x679C;&#x5728;&#x4F7F;&#x7528;freetds&#x662F;&#x4FEE;&#x6539;&#x4E86;freetds-conf&#x7684;&#x8BDD;&#xFF0C;&#x6216;&#x8005;&#x5176;&#x4ED6;&#x539F;&#x56E0;" class="headerlink" title="2. &#x5982;&#x679C;&#x5728;&#x4F7F;&#x7528;freetds&#x662F;&#x4FEE;&#x6539;&#x4E86;freetds.conf&#x7684;&#x8BDD;&#xFF0C;&#x6216;&#x8005;&#x5176;&#x4ED6;&#x539F;&#x56E0;"></a>2. &#x5982;&#x679C;&#x5728;&#x4F7F;&#x7528;freetds&#x662F;&#x4FEE;&#x6539;&#x4E86;freetds.conf&#x7684;&#x8BDD;&#xFF0C;&#x6216;&#x8005;&#x5176;&#x4ED6;&#x539F;&#x56E0;</h3><p><strong>&#x5BFC;&#x81F4;&#x5728;&#x7528;pymssql &#x67E5;&#x8BE2;mysqlserver&#x8868;&#x4E2D;&#x7684;&#x65E5;&#x671F;&#x5B57;&#x6BB5;&#x65F6;</strong></p>
 <p><strong>&#x62A5;&#x9519; &#x201C;in _mssql.MSSQLConnection.convert_db_value (_mssql.c:7862)</strong><br><strong> ValueError: month must be in 1..12&#x201D;</strong></p>
 <p><strong>&#x89E3;&#x51B3;&#x65B9;&#x6CD5;&#xFF1A;</strong><br><strong>&#x76F4;&#x63A5;&#x5C06;&#x5148;&#x524D;&#x5B89;&#x88C5;&#x7684; freetds &#x5378;&#x8F7D;&#x5E72;&#x51C0;</strong><br><strong>&#x5207;&#x6362;&#x5230;&#x7F16;&#x8BD1;&#x76EE;&#x5F55; make uninstall</strong></p>
 <p><strong>&#x624B;&#x52A8;&#x5220;&#x9664; rm -rf freetds&#x5B89;&#x88C5;&#x7684;&#x76EE;&#x5F55;&#xFF0C;&#x4EE5;&#x53CA;tsql</strong><br><strong>&#x786E;&#x4FDD;tsql&#x4E0D;&#x80FD;&#x7528;</strong></p>
@@ -409,6 +399,14 @@
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/freetds/" rel="tag"># freetds</a>
+          
+            <a href="/tags/pymssql/" rel="tag"># pymssql</a>
+          
+        </div>
       
 
       
@@ -497,8 +495,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -529,7 +536,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -565,6 +572,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、安装："><span class="nav-number">1.</span> <span class="nav-text">一、安装：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-需要安装freetds"><span class="nav-number">1.1.</span> <span class="nav-text">1.需要安装freetds</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-python程序需要用到pymssql"><span class="nav-number">1.2.</span> <span class="nav-text">2.python程序需要用到pymssql</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、可能出现的问题"><span class="nav-number">2.</span> <span class="nav-text">二、可能出现的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-如果是先安装的pymmsql-后安装的freetds"><span class="nav-number">2.1.</span> <span class="nav-text">1.如果是先安装的pymmsql,后安装的freetds</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-如果在使用freetds是修改了freetds-conf的话，或者其他原因"><span class="nav-number">2.2.</span> <span class="nav-text">2. 如果在使用freetds是修改了freetds.conf的话，或者其他原因</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
