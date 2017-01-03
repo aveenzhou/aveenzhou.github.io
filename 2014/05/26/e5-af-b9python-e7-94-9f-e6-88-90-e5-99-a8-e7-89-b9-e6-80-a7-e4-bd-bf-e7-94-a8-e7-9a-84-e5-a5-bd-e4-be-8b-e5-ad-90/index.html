@@ -70,7 +70,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Life,Notes" />
+  <meta name="keywords" content="python生成器," />
 
 
 
@@ -86,16 +86,16 @@
 
 
 
-<meta name="description" content="1 1.&amp;#x5BF9;&amp;#x5E8F;&amp;#x5217;&amp;#x8FDB;&amp;#x884C;&amp;#x5206;&amp;#x7EC4;&amp;#x7684;&amp;#x51FD;&amp;#x6570;&amp;#xFF08;&amp;#x6458;&amp;#x81EA;web.py&amp;#x6E90;&amp;#x7801;utils.py&amp;#x6587;&amp;#x4EF6;&amp;#x4E2D;&amp;#xFF09; 2 def group(seq, size): 3">
+<meta name="description" content="1.&amp;#x5BF9;&amp;#x5E8F;&amp;#x5217;&amp;#x8FDB;&amp;#x884C;&amp;#x5206;&amp;#x7EC4;&amp;#x7684;&amp;#x51FD;&amp;#x6570;&amp;#xFF08;&amp;#x6458;&amp;#x81EA;web.py&amp;#x6E90;&amp;#x7801;utils.py&amp;#x6587;&amp;#x4EF6;&amp;#x4E2D;&amp;#xFF09;12345678910111213141516171819202">
 <meta property="og:type" content="article">
 <meta property="og:title" content="对python生成器特性使用的好例子">
 <meta property="og:url" content="http://notes.7days.top/2014/05/26/e5-af-b9python-e7-94-9f-e6-88-90-e5-99-a8-e7-89-b9-e6-80-a7-e4-bd-bf-e7-94-a8-e7-9a-84-e5-a5-bd-e4-be-8b-e5-ad-90/index.html">
 <meta property="og:site_name" content="Chow's Notes">
-<meta property="og:description" content="1 1.&amp;#x5BF9;&amp;#x5E8F;&amp;#x5217;&amp;#x8FDB;&amp;#x884C;&amp;#x5206;&amp;#x7EC4;&amp;#x7684;&amp;#x51FD;&amp;#x6570;&amp;#xFF08;&amp;#x6458;&amp;#x81EA;web.py&amp;#x6E90;&amp;#x7801;utils.py&amp;#x6587;&amp;#x4EF6;&amp;#x4E2D;&amp;#xFF09; 2 def group(seq, size): 3">
-<meta property="og:updated_time" content="2016-12-30T16:03:34.000Z">
+<meta property="og:description" content="1.&amp;#x5BF9;&amp;#x5E8F;&amp;#x5217;&amp;#x8FDB;&amp;#x884C;&amp;#x5206;&amp;#x7EC4;&amp;#x7684;&amp;#x51FD;&amp;#x6570;&amp;#xFF08;&amp;#x6458;&amp;#x81EA;web.py&amp;#x6E90;&amp;#x7801;utils.py&amp;#x6587;&amp;#x4EF6;&amp;#x4E2D;&amp;#xFF09;12345678910111213141516171819202">
+<meta property="og:updated_time" content="2017-01-03T04:33:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对python生成器特性使用的好例子">
-<meta name="twitter:description" content="1 1.&amp;#x5BF9;&amp;#x5E8F;&amp;#x5217;&amp;#x8FDB;&amp;#x884C;&amp;#x5206;&amp;#x7EC4;&amp;#x7684;&amp;#x51FD;&amp;#x6570;&amp;#xFF08;&amp;#x6458;&amp;#x81EA;web.py&amp;#x6E90;&amp;#x7801;utils.py&amp;#x6587;&amp;#x4EF6;&amp;#x4E2D;&amp;#xFF09; 2 def group(seq, size): 3">
+<meta name="twitter:description" content="1.&amp;#x5BF9;&amp;#x5E8F;&amp;#x5217;&amp;#x8FDB;&amp;#x884C;&amp;#x5206;&amp;#x7EC4;&amp;#x7684;&amp;#x51FD;&amp;#x6570;&amp;#xFF08;&amp;#x6458;&amp;#x81EA;web.py&amp;#x6E90;&amp;#x7801;utils.py&amp;#x6587;&amp;#x4EF6;&amp;#x4E2D;&amp;#xFF09;12345678910111213141516171819202">
 
 
 
@@ -359,8 +359,7 @@
       
 
       
-        <p><div class="cnblogs_code"></div></p>
-<p><pre><span style="color: #008080;"> 1</span> 1<span style="color: #000000;">.&#x5BF9;&#x5E8F;&#x5217;&#x8FDB;&#x884C;&#x5206;&#x7EC4;&#x7684;&#x51FD;&#x6570;&#xFF08;&#x6458;&#x81EA;web.py&#x6E90;&#x7801;utils.py&#x6587;&#x4EF6;&#x4E2D;&#xFF09;<br></span><span style="color: #008080;"> 2</span> <span style="color: #0000ff;">def</span><span style="color: #000000;"> group(seq, size):<br></span><span style="color: #008080;"> 3</span>     <span style="color: #800000;">&#x201C;&#x201D;&#x201D;</span><br><span style="color: #008080;"> 4</span> <span style="color: #800000;">    Returns an iterator over a series of lists of length size from iterable.<br></span><span style="color: #008080;"> 5</span><br><span style="color: #008080;"> 6</span> <span style="color: #800000;">        &gt;&gt;&gt; list(group([1,2,3,4], 2))<br></span><span style="color: #008080;"> 7</span> <span style="color: #800000;">        [[1, 2], [3, 4]]<br></span><span style="color: #008080;"> 8</span> <span style="color: #800000;">        &gt;&gt;&gt; list(group([1,2,3,4,5], 2))<br></span><span style="color: #008080;"> 9</span> <span style="color: #800000;">        [[1, 2], [3, 4], [5]]<br></span><span style="color: #008080;">10</span>     <span style="color: #800000;">&#x201C;&#x201D;&#x201D;</span><br><span style="color: #008080;">11</span>     <span style="color: #0000ff;">def</span><span style="color: #000000;"> take(seq, n):<br></span><span style="color: #008080;">12</span>         <span style="color: #0000ff;">for</span> i <span style="color: #0000ff;">in</span><span style="color: #000000;"> xrange(n):<br></span><span style="color: #008080;">13</span>             <span style="color: #0000ff;">yield</span> seq.next() <span style="color: #008000;">#</span><span style="color: #008000;">&#x5F53;seq&#x8FED;&#x4EE3;&#x5230;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x76F4;&#x5230;&#x6CA1;&#x6709;&#x65F6;&#xFF0C;&#x629B;&#x51FA;StopIteration&#x88AB;&#x5916;&#x5C42;&#x7684;list&#xFF08;&#xFF09;&#x6355;&#x83B7;</span><br><span style="color: #008080;">14</span>     <span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span> hasattr(seq, <span style="color: #800000;">&#x2018;</span><span style="color: #800000;">next</span><span style="color: #800000;">&#x2018;</span><span style="color: #000000;">):<br></span><span style="color: #008080;">15</span>          seq =<span style="color: #000000;"> iter(seq)<br></span><span style="color: #008080;">16</span>     <span style="color: #0000ff;">while</span><span style="color: #000000;"> True:<br></span><span style="color: #008080;">17</span>         inger=<span style="color: #000000;">take(seq, size)<br></span><span style="color: #008080;">18</span>         x =<span style="color: #000000;"> list(inger)<br></span><span style="color: #008080;">19</span>         <span style="color: #0000ff;">if</span><span style="color: #000000;"> x:<br></span><span style="color: #008080;">20</span>               <span style="color: #0000ff;">yield</span><span style="color: #000000;"> x<br></span><span style="color: #008080;">21</span>         <span style="color: #0000ff;">else</span><span style="color: #000000;">:<br></span><span style="color: #008080;">22</span>               <span style="color: #0000ff;">break</span></pre><br><br>&#xA0;</p>
+        <p>1.&#x5BF9;&#x5E8F;&#x5217;&#x8FDB;&#x884C;&#x5206;&#x7EC4;&#x7684;&#x51FD;&#x6570;&#xFF08;&#x6458;&#x81EA;web.py&#x6E90;&#x7801;utils.py&#x6587;&#x4EF6;&#x4E2D;&#xFF09;<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">group</span><span class="params">(seq, size)</span>:</span> </div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line">    Returns an iterator over a series of lists of length size from iterable.</div><div class="line"></div><div class="line">        &gt;&gt;&gt; list(group([1,2,3,4], 2))</div><div class="line">        [[1, 2], [3, 4]]</div><div class="line">        &gt;&gt;&gt; list(group([1,2,3,4,5], 2))</div><div class="line">        [[1, 2], [3, 4], [5]]</div><div class="line">    &quot;&quot;&quot;</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">take</span><span class="params">(seq, n)</span>:</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> xrange(n):</div><div class="line">            <span class="keyword">yield</span> seq.next() <span class="comment">#&#x5F53;seq&#x8FED;&#x4EE3;&#x5230;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x76F4;&#x5230;&#x6CA1;&#x6709;&#x65F6;&#xFF0C;&#x629B;&#x51FA;StopIteration&#x88AB;&#x5916;&#x5C42;&#x7684;list&#xFF08;&#xFF09;&#x6355;&#x83B7;</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> hasattr(seq, <span class="string">&apos;next&apos;</span>):</div><div class="line">         seq = iter(seq) </div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:  </div><div class="line">        inger=take(seq, size) </div><div class="line">        x = list(inger) </div><div class="line">        <span class="keyword">if</span> x: </div><div class="line">              <span class="keyword">yield</span> x </div><div class="line">        <span class="keyword">else</span>: </div><div class="line">              <span class="keyword">break</span></div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -381,6 +380,12 @@
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python生成器/" rel="tag"># python生成器</a>
+          
+        </div>
       
 
       
@@ -501,7 +506,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
