@@ -1151,9 +1151,7 @@ math.h&#x5934;&#x6587;&#x4EF6;&#x5305;&#x542B;&#x5404;&#x79CD;&#x6570;&#x5B66;&#
       
         
           
-          &#x53EF;&#x4EE5;&#x8BA9;&#x4E00;&#x4E2A;&#x5E26;&#x53C2;&#x6570;&#x51FD;&#x6570;&#xFF0C;&#x4F20;&#x9012;&#x5E76;&#x4EE5;&#x65E0;&#x53C2;&#x8C03;&#x7528;
-
- 1 def test(a): 2     print a 3 4 5 a=test 6 # 7 #a() 8 a=897987 910 fun=lambda : test(a)1112 fun()&#xA0;
+          &#x53EF;&#x4EE5;&#x8BA9;&#x4E00;&#x4E2A;&#x5E26;&#x53C2;&#x6570;&#x51FD;&#x6570;&#xFF0C;&#x4F20;&#x9012;&#x5E76;&#x4EE5;&#x65E0;&#x53C2;&#x8C03;&#x7528;1234567891011def test(a):    print aa=test#a()a=897987fun=lambda : test(a)fun()
 
           
           <!--noindex-->
@@ -1789,10 +1787,8 @@ math.h&#x5934;&#x6587;&#x4EF6;&#x5305;&#x542B;&#x5404;&#x79CD;&#x6570;&#x5B66;&#
       
         
           
-          &#xA0;
-
- 1 #!/usr/bin/python 2 import socket 3 import fcntl 4 import struct 5 def get_ip_address(ifname): 6     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 7     return socket.inet_ntoa(fcntl.ioctl( 8                                                         s.fileno(), 9                                                         0x8915, # SIOCGIFADDR10                                                         struct.pack(&#x2018;256s&#x2018;,ifname[:15])11                                     
-          ...
+          12345678910111213#!/usr/bin/pythonimport socketimport fcntlimport structdef get_ip_address(ifname):s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)return socket.inet_ntoa(fcntl.ioctl(								 s.fileno(),								 0x8915, # SIOCGIFADDR								 struct.pack(&#x2018;256s&#x2018;,ifname[:15])							  )[20:24])#get_ip_address(&#x2018;lo&#x2019;)&#x73AF;&#x56DE;&#x5730;&#x5740;#get_ip_address(&#x2018;eth0&#x2019;)&#x4E3B;&#x673A;ip&#x5730;&#x5740;
+          
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/12/22/python-e8-8e-b7-e5-8f-96-e6-9c-ac-e6-9c-baip-e5-9c-b0-e5-9d-80-e7-9a-84-e6-96-b9-e6-b3-95-ef-bc-88unix-e5-b9-b3-e5-8f-b0-ef-bc-89/#more" rel="contents">
@@ -1892,7 +1888,7 @@ math.h&#x5934;&#x6587;&#x4EF6;&#x5305;&#x542B;&#x5404;&#x79CD;&#x6570;&#x5B66;&#
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -70,7 +70,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Life,Notes" />
+  <meta name="keywords" content="socket," />
 
 
 
@@ -86,22 +86,16 @@
 
 
 
-<meta name="description" content="&amp;#xA0;
-
- 1 #!/usr/bin/python 2 import socket 3 import fcntl 4 import struct 5 def get_ip_address(ifname): 6     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 7     return socket.inet_ntoa(fcntl">
+<meta name="description" content="12345678910111213#!/usr/bin/pythonimport socketimport fcntlimport structdef get_ip_address(ifname):s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)return socket.inet_ntoa(fcntl.ioctl(								 s.fi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python 获取本机ip地址的方法（Unix 平台）">
 <meta property="og:url" content="http://notes.7days.top/2014/12/22/python-e8-8e-b7-e5-8f-96-e6-9c-ac-e6-9c-baip-e5-9c-b0-e5-9d-80-e7-9a-84-e6-96-b9-e6-b3-95-ef-bc-88unix-e5-b9-b3-e5-8f-b0-ef-bc-89/index.html">
 <meta property="og:site_name" content="Chow's Notes">
-<meta property="og:description" content="&amp;#xA0;
-
- 1 #!/usr/bin/python 2 import socket 3 import fcntl 4 import struct 5 def get_ip_address(ifname): 6     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 7     return socket.inet_ntoa(fcntl">
-<meta property="og:updated_time" content="2016-12-30T16:03:34.000Z">
+<meta property="og:description" content="12345678910111213#!/usr/bin/pythonimport socketimport fcntlimport structdef get_ip_address(ifname):s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)return socket.inet_ntoa(fcntl.ioctl(								 s.fi">
+<meta property="og:updated_time" content="2017-01-03T02:44:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python 获取本机ip地址的方法（Unix 平台）">
-<meta name="twitter:description" content="&amp;#xA0;
-
- 1 #!/usr/bin/python 2 import socket 3 import fcntl 4 import struct 5 def get_ip_address(ifname): 6     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 7     return socket.inet_ntoa(fcntl">
+<meta name="twitter:description" content="12345678910111213#!/usr/bin/pythonimport socketimport fcntlimport structdef get_ip_address(ifname):s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)return socket.inet_ntoa(fcntl.ioctl(								 s.fi">
 
 
 
@@ -365,11 +359,7 @@
       
 
       
-        <p>&#xA0;</p>
-<p><div class="cnblogs_code"></div></p>
-<p><pre><span style="color: #008080;"> 1</span> <span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/python</span><br><span style="color: #008080;"> 2</span> <span style="color: #0000ff;">import</span><span style="color: #000000;"> socket<br></span><span style="color: #008080;"> 3</span> <span style="color: #0000ff;">import</span><span style="color: #000000;"> fcntl<br></span><span style="color: #008080;"> 4</span> <span style="color: #0000ff;">import</span><span style="color: #000000;"> struct<br></span><span style="color: #008080;"> 5</span> <span style="color: #0000ff;">def</span><span style="color: #000000;"> get_ip_address(ifname):<br></span><span style="color: #008080;"> 6</span>     s =<span style="color: #000000;"> socket.socket(socket.AF_INET, socket.SOCK_DGRAM)<br></span><span style="color: #008080;"> 7</span>     <span style="color: #0000ff;">return</span><span style="color: #000000;"> socket.inet_ntoa(fcntl.ioctl(<br></span><span style="color: #008080;"> 8</span> <span style="color: #000000;">                                                        s.fileno(),<br></span><span style="color: #008080;"> 9</span>                                                         0x8915, <span style="color: #008000;">#</span><span style="color: #008000;"> SIOCGIFADDR</span><br><span style="color: #008080;">10</span>                                                         struct.pack(<span style="color: #800000;">&#x2018;</span><span style="color: #800000;">256s</span><span style="color: #800000;">&#x2018;</span>,ifname[:15<span style="color: #000000;">])<br></span><span style="color: #008080;">11</span>                                                      )[20:24<span style="color: #000000;">])<br></span><span style="color: #008080;">12</span> <span style="color: #008000;">#</span><span style="color: #008000;">get_ip_address(&#x2018;lo&#x2019;)&#x73AF;&#x56DE;&#x5730;&#x5740;</span><br><span style="color: #008080;">13</span> <span style="color: #008000;">#</span><span style="color: #008000;">get_ip_address(&#x2018;eth0&#x2019;)&#x4E3B;&#x673A;ip&#x5730;&#x5740;</span></pre><br><br>&#xA0;</p>
-<p>&#xA0;</p>
-
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="keyword">import</span> socket</div><div class="line"><span class="keyword">import</span> fcntl</div><div class="line"><span class="keyword">import</span> struct</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_ip_address</span><span class="params">(ifname)</span>:</span></div><div class="line">s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)</div><div class="line"><span class="keyword">return</span> socket.inet_ntoa(fcntl.ioctl(</div><div class="line">								 s.fileno(),</div><div class="line">								 <span class="number">0x8915</span>, <span class="comment"># SIOCGIFADDR</span></div><div class="line">								 struct.pack(&#x2018;<span class="number">256</span>s&#x2018;,ifname[:<span class="number">15</span>])</div><div class="line">							  )[<span class="number">20</span>:<span class="number">24</span>])</div><div class="line"><span class="comment">#get_ip_address(&#x2018;lo&#x2019;)&#x73AF;&#x56DE;&#x5730;&#x5740;</span></div><div class="line"><span class="comment">#get_ip_address(&#x2018;eth0&#x2019;)&#x4E3B;&#x673A;ip&#x5730;&#x5740;</span></div></pre></td></tr></table></figure>
       
     </div>
 
@@ -389,6 +379,12 @@
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/socket/" rel="tag"># socket</a>
+          
+        </div>
       
 
       
@@ -509,7 +505,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
