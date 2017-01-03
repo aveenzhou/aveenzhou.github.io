@@ -70,7 +70,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Life,Notes" />
+  <meta name="keywords" content="urllib," />
 
 
 
@@ -96,15 +96,12 @@ urllib.urlopen(URL,[,data])
 <meta property="og:description" content="urllib&amp;#xFF1A;&amp;#x7F16;&amp;#x7801;&amp;#x53C2;&amp;#x6570;&amp;#x79BB;&amp;#x4E0D;&amp;#x5F00;urllib&amp;#xFF0C;urllib.urlencode,
 urllib.urlopen(URL,[,data])
 &amp;#x652F;&amp;#x6301;POST&amp;#xFF0C;&amp;#x6839;&amp;#x636E;&amp;#x53C2;&amp;#x6570;&amp;#x533A;&amp;#">
-<meta property="og:image" content="http://www.zhouping.xin/wp-content/uploads/2016/04/ContractedBlock.gif">
-<meta property="og:image" content="http://www.zhouping.xin/wp-content/uploads/2016/04/ExpandedBlockStart.gif">
-<meta property="og:updated_time" content="2016-12-30T16:03:34.000Z">
+<meta property="og:updated_time" content="2017-01-03T03:54:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="urllib,urlib2与httplib,urllib3">
 <meta name="twitter:description" content="urllib&amp;#xFF1A;&amp;#x7F16;&amp;#x7801;&amp;#x53C2;&amp;#x6570;&amp;#x79BB;&amp;#x4E0D;&amp;#x5F00;urllib&amp;#xFF0C;urllib.urlencode,
 urllib.urlopen(URL,[,data])
 &amp;#x652F;&amp;#x6301;POST&amp;#xFF0C;&amp;#x6839;&amp;#x636E;&amp;#x53C2;&amp;#x6570;&amp;#x533A;&amp;#">
-<meta name="twitter:image" content="http://www.zhouping.xin/wp-content/uploads/2016/04/ContractedBlock.gif">
 
 
 
@@ -371,25 +368,12 @@ urllib.urlopen(URL,[,data])
         <p>urllib&#xFF1A;&#x7F16;&#x7801;&#x53C2;&#x6570;&#x79BB;&#x4E0D;&#x5F00;urllib&#xFF0C;urllib.urlencode,</p>
 <p>urllib.urlopen(URL,[,data])</p>
 <p>&#x652F;&#x6301;POST&#xFF0C;&#x6839;&#x636E;&#x53C2;&#x6570;&#x533A;&#x5206;post&#x6216;&#x8005;get</p>
-<p>&#xA0;</p>
 <p>urllib2&#xFF1A;&#x53D1;&#x9001;url&#x8BF7;&#x6C42;&#xFF0C;&#x53EF;&#x6DFB;&#x52A0;http&#x8BF7;&#x6C42;&#x5934;&#x5B57;&#x6BB5;&#xFF0C;&#x4F46;&#x662F;&#x6DFB;&#x52A0;Cookie&#x5934;&#x5B57;&#x6BB5;&#x65E0;&#x6548;</p>
 <p>httplib: &#x53EF;&#x4EE5;&#x53D1;&#x9001;cookie&#x5B57;&#x6BB5;&#xFF0C;</p>
-<div class="cnblogs_code">
-
-<p><img src="http://www.zhouping.xin/wp-content/uploads/2016/04/ContractedBlock.gif" alt=""><img src="http://www.zhouping.xin/wp-content/uploads/2016/04/ExpandedBlockStart.gif" alt=""></p>
-<p><div id="cnblogs_code_open_f5d27f94-9154-4a34-a79d-3d83f610aba7" class="cnblogs_code_hide"></div></p>
-<p><pre><span style="color: #008080;"> 1</span> <span style="color: #0000ff;">def</span> getRead(page=1<span style="color: #000000;">):<br></span><span style="color: #008080;"> 2</span><br><span style="color: #008080;"> 3</span>     url=<span style="color: #800000;">&#x201C;</span><span style="color: #800000;"><a href="http://cn.ae.aliexpress.com/wssellercrm/ajax_ws_seller_crm_list.htm" target="_blank" rel="external">http://cn.ae.aliexpress.com/wssellercrm/ajax_ws_seller_crm_list.htm</a></span><span style="color: #800000;">&#x201C;</span><br><span style="color: #008080;"> 4</span>     query_data=urllib.urlencode({<span style="color: #800000;">&#x2018;</span><span style="color: #800000;">orderBy</span><span style="color: #800000;">&#x2018;</span>:<span style="color: #800000;">&#x2018;</span><span style="color: #800000;">tradeTotalFund</span><span style="color: #800000;">&#x2018;</span><span style="color: #000000;">,<br></span><span style="color: #008080;"> 5</span>                                  <span style="color: #800000;">&#x2018;</span><span style="color: #800000;">orderType</span><span style="color: #800000;">&#x2018;</span>:<span style="color: #800000;">&#x2018;</span><span style="color: #800000;">desc</span><span style="color: #800000;">&#x2018;</span><span style="color: #000000;">,<br></span><span style="color: #008080;"> 6</span>                                  <span style="color: #800000;">&#x2018;</span><span style="color: #800000;">currentPage</span><span style="color: #800000;">&#x2018;</span>:<span style="color: #800000;">&#x2018;</span><span style="color: #800000;">%s</span><span style="color: #800000;">&#x2018;</span> %<span style="color: #000000;"> page<br></span><span style="color: #008080;"> 7</span> <span style="color: #000000;">                                 })<br></span><span style="color: #008080;"> 8</span><br><span style="color: #008080;"> 9</span>     headers={<span style="color: #800000;">&#x2018;</span><span style="color: #800000;">Cookie</span><span style="color: #800000;">&#x2018;</span><span style="color: #000000;">:\<br></span><span style="color: #008080;">10</span>              <span style="color: #800000;">&#x2018;</span><span style="color: #800000;">acs_usuc_t=acs_rt=0552311d078047e49628c29bae7c5510; ali_apache_id=113.108.202.203.1411525480759.841347.4; xman_us_t=x_lid=cn1501352204&amp;sign=y&amp;x_user=o8anv3hmlnvnCLyPLqx730tq76bwCDtOxL56lzQjUvk=&amp;need_popup=y; xman_f=J/g6ytFi9Zx/qPq2GKORwwSTfOyc11nLAZ5D2t0QcHLpWriunNxyySSUfp0TcTSc0XzOc93b/LaWDSeXmBT/S5oWGPl0c2YHSO1Ze8wNBwSHf0LQhXNA07nALRuAwChR9JqjEtGVKN2Xf/MFGK690sZtLSPXKyk5kk2uMkjn+n96YD1P6h0J3dv1bpr01gZmnIOUVbdNpCDZ+bTWIu3ZcapoLwh4SIZ6eibzNti48s6vs2UbzUmK7DMYrk8YVglLU1k2ky7sXPfn9o+SheNk/Odlvke+YRhWs4xqbUuW4rbrWQRMPjeGHEnMmjfm74SD+ihymHPTnhuq2YvyEdrxgW2nRheHtoXL; <strong>utma=3375712.1054749006.1411533102.1411533102.1411533102.1; </strong>utmc=3375712; __utmz=3375712.1411533102.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); aep_history=keywords%5E%0Akeywords%09%0A%0Aproduct_selloffer%5E%0Aproduct_selloffer%092044496155; xman_t=Q+lWZ5g2zA5zJ5yM2wr4KngA3sXe8EPhLC1g87NvKawi3WpwpddgJ9ElJWqoGlg4bdxj5A8E/OcAypHLVoEWaA15M+wL23Ip+2HKC3bSo/YJD0KpEEBhfUUIP6dIhLuoGaxb7sYFPB8Ft+U59SlhZxA/cUX/EhiW0ZybZP645cm/dmfuUv91sX48GNbW+5hxHTi3ZidjE3VFfA0jaS4cj2Db0MpQ+FcNxirCgAHqYZfVyx2q4dJDvUXjzeJ8Q6GYnriPRV638yWtCm+41TsAQeWU8wQkeiNzkS1PkWy2oF07VmoiBq/fN2gG27W12YwyFD0FErWTRhBg6G6+7iKkuzXqfdOhuv+zzZUpupVc4ol+DRgdLmLKuDundnKCJ8D+0oYfnV0fQI4sdyB746IrFLro9grrKP95J/RbrAdJtUYoDXEcUb7Dc2l3awf1UqGXU81CDIHxULXYD3XIIUX0qthV4NQ3b3AITuVGVNsURl4riMK0gK7o4lsYWA3N+IXhkj7iZCPffbgr7UmRAMrD1ybaJs2gY7tl3Pc6PqG0497LnzK6bp98z2vOiJ1sAjqK8WwtM4dSYxCB4TbPzMbfB+82qVAU73J6DBc34PJlgbW/If6U+ra3RNGldPsjwQH0gxEIt6iRi2zen0x9kXva2FAiwPcKvBvh6hW6f2opod8=; JSESSIONID=A003C292DF818CF827DCE0DB85DE80C0; ali_apache_track=mt=3|ms=|mid=cn1501352204; ali_apache_tracktmp=W_signed=Y; xman_us_f=x_l=1&amp;x_locale=zh_CN&amp;no_popup_today=n&amp;x_user=CN|Aveen|Chow|cnfm|205829874&amp;x_regin=CN&amp;aep_site=glo&amp;last_popup_time=1411525493024; intl_locale=zh_CN; aep_usuc_f=region=CN&amp;site=glo&amp;c_tp=USD; intl_common_forever=0MBh06hlQ3PAQrC0FHvbHnfPGdeIGm6rwfpHuYOZdNAmAhxKvGVqQA==; acs_t=qW7Yrx/HyH7fy1xJei1OVEY0QdTXxudiltRlU+AP6iYm+pgfaF/Guj2wkKf7SiZb</span><span style="color: #800000;">&#x2018;</span><br><span style="color: #008080;">11</span> <span style="color: #000000;">             }<br></span><span style="color: #008080;">12</span>     client=httplib.HTTPConnection(<span style="color: #800000;">&#x2018;</span><span style="color: #800000;">cn.ae.aliexpress.com</span><span style="color: #800000;">&#x2018;</span>,80<span style="color: #000000;">)<br></span><span style="color: #008080;">13</span>     req_url=<span style="color: #800000;">&#x201C;</span><span style="color: #800000;">?</span><span style="color: #800000;">&#x201C;</span>.join((<span style="color: #800000;">&#x2018;</span><span style="color: #800000;">/wssellercrm/ajax_ws_seller_crm_list.htm</span><span style="color: #800000;">&#x2018;</span><span style="color: #000000;">,query_data))<br></span><span style="color: #008080;">14</span>     <span style="color: #0000ff;">print</span><span style="color: #000000;"> req_url<br></span><span style="color: #008080;">15</span>     client.request(<span style="color: #800000;">&#x2018;</span><span style="color: #800000;">GET</span><span style="color: #800000;">&#x2018;</span>,req_url,headers=<span style="color: #000000;">headers)<br></span><span style="color: #008080;">16</span><br><span style="color: #008080;">17</span>     response =<span style="color: #000000;"> client.getresponse()<br></span><span style="color: #008080;">18</span><br><span style="color: #008080;">19</span>     <span style="color: #0000ff;">print</span><span style="color: #000000;"> response.status<br></span><span style="color: #008080;">20</span>     <span style="color: #0000ff;">print</span><span style="color: #000000;"> response.reason<br></span><span style="color: #008080;">21</span>     cont =<span style="color: #000000;"> response.read()<br></span><span style="color: #008080;">22</span> <span style="color: #008000;">#</span><span style="color: #008000;">    print cont</span><br><span style="color: #008080;">23</span>     <span style="color: #0000ff;">return</span> reg.findall(cont)</pre><br></p></div><br><span class="cnblogs_code_collapse">View Code</span><p></p>
-<p><br>&#xA0;</p>
-<p><span style="line-height: 1.5;">urllib3&#xFF1A;&#x53EF;&#x4EE5;&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A;&#x8FDE;&#x63A5;&#x6C60;,&#x5177;&#x5907;post&#x6587;&#x4EF6;&#x529F;&#x80FD;</span></p>
-<p>&#xA0;</p>
-<p>http=urllib3.PoolManager()<br>res=http.request(&#x2018;GET&#x2019;,URL,data)</p>
-<p>&#xA0;</p>
-<p>http=urllib3.PoolManager()</p>
-<p>res=http.request(&#x2018;POST&#x2019;,TOKEN_URL,req_args,encode_multipart=False)</p>
-<p><strong>#&#x5982;&#x679C;&#x8BF7;&#x6C42;&#x54CD;&#x5E94;&#x62A5; Bad Request / Bad content type &#x4FE1;&#x606F;&#x65F6;</strong></p>
-<p><strong>&#x9700;&#x8981;&#x8BBE;&#x7F6E;&#x53C2;&#x6570;encode_multipart=False</strong></p>
-<p><span style="line-height: 1.5;"> </span></p>
-<p>&#xA0;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">def getRead(page=1):</div><div class="line"></div><div class="line">    url=&#x201C;http://cn.ae.aliexpress.com/wssellercrm/ajax_ws_seller_crm_list.htm&#x201C;</div><div class="line">    query_data=urllib.urlencode({&#x2018;orderBy&#x2018;:&#x2018;tradeTotalFund&#x2018;,</div><div class="line">                                 &#x2018;orderType&#x2018;:&#x2018;desc&#x2018;,</div><div class="line">                                 &#x2018;currentPage&#x2018;:&#x2018;%s&#x2018; % page</div><div class="line">                                 })</div><div class="line"></div><div class="line">    headers={&#x2018;Cookie&#x2018;:\</div><div class="line">             &#x2018;acs_usuc_t=acs_rt=0552311d078047e49628c29bae7c5510; ali_apache_id=113.108.202.203.1411525480759.841347.4; xman_us_t=x_lid=cn1501352204&amp;sign=y&amp;x_user=o8anv3hmlnvnCLyPLqx730tq76bwCDtOxL56lzQjUvk=&amp;need_popup=y; xman_f=J/g6ytFi9Zx/qPq2GKORwwSTfOyc11nLAZ5D2t0QcHLpWriunNxyySSUfp0TcTSc0XzOc93b/LaWDSeXmBT/S5oWGPl0c2YHSO1Ze8wNBwSHf0LQhXNA07nALRuAwChR9JqjEtGVKN2Xf/MFGK690sZtLSPXKyk5kk2uMkjn+n96YD1P6h0J3dv1bpr01gZmnIOUVbdNpCDZ+bTWIu3ZcapoLwh4SIZ6eibzNti48s6vs2UbzUmK7DMYrk8YVglLU1k2ky7sXPfn9o+SheNk/Odlvke+YRhWs4xqbUuW4rbrWQRMPjeGHEnMmjfm74SD+ihymHPTnhuq2YvyEdrxgW2nRheHtoXL; utma=3375712.1054749006.1411533102.1411533102.1411533102.1; utmc=3375712; __utmz=3375712.1411533102.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); aep_history=keywords%5E%0Akeywords%09%0A%0Aproduct_selloffer%5E%0Aproduct_selloffer%092044496155; xman_t=Q+lWZ5g2zA5zJ5yM2wr4KngA3sXe8EPhLC1g87NvKawi3WpwpddgJ9ElJWqoGlg4bdxj5A8E/OcAypHLVoEWaA15M+wL23Ip+2HKC3bSo/YJD0KpEEBhfUUIP6dIhLuoGaxb7sYFPB8Ft+U59SlhZxA/cUX/EhiW0ZybZP645cm/dmfuUv91sX48GNbW+5hxHTi3ZidjE3VFfA0jaS4cj2Db0MpQ+FcNxirCgAHqYZfVyx2q4dJDvUXjzeJ8Q6GYnriPRV638yWtCm+41TsAQeWU8wQkeiNzkS1PkWy2oF07VmoiBq/fN2gG27W12YwyFD0FErWTRhBg6G6+7iKkuzXqfdOhuv+zzZUpupVc4ol+DRgdLmLKuDundnKCJ8D+0oYfnV0fQI4sdyB746IrFLro9grrKP95J/RbrAdJtUYoDXEcUb7Dc2l3awf1UqGXU81CDIHxULXYD3XIIUX0qthV4NQ3b3AITuVGVNsURl4riMK0gK7o4lsYWA3N+IXhkj7iZCPffbgr7UmRAMrD1ybaJs2gY7tl3Pc6PqG0497LnzK6bp98z2vOiJ1sAjqK8WwtM4dSYxCB4TbPzMbfB+82qVAU73J6DBc34PJlgbW/If6U+ra3RNGldPsjwQH0gxEIt6iRi2zen0x9kXva2FAiwPcKvBvh6hW6f2opod8=; JSESSIONID=A003C292DF818CF827DCE0DB85DE80C0; ali_apache_track=mt=3|ms=|mid=cn1501352204; ali_apache_tracktmp=W_signed=Y; xman_us_f=x_l=1&amp;x_locale=zh_CN&amp;no_popup_today=n&amp;x_user=CN|Aveen|Chow|cnfm|205829874&amp;x_regin=CN&amp;aep_site=glo&amp;last_popup_time=1411525493024; intl_locale=zh_CN; aep_usuc_f=region=CN&amp;site=glo&amp;c_tp=USD; intl_common_forever=0MBh06hlQ3PAQrC0FHvbHnfPGdeIGm6rwfpHuYOZdNAmAhxKvGVqQA==; acs_t=qW7Yrx/HyH7fy1xJei1OVEY0QdTXxudiltRlU+AP6iYm+pgfaF/Guj2wkKf7SiZb&#x2018;</div><div class="line">             }</div><div class="line">    client=httplib.HTTPConnection(&#x2018;cn.ae.aliexpress.com&#x2018;,80)</div><div class="line">    req_url=&#x201C;?&#x201C;.join((&#x2018;/wssellercrm/ajax_ws_seller_crm_list.htm&#x2018;,query_data))</div><div class="line">    print req_url</div><div class="line">    client.request(&#x2018;GET&#x2018;,req_url,headers=headers)</div><div class="line"></div><div class="line">    response = client.getresponse()</div><div class="line"></div><div class="line">    print response.status</div><div class="line">    print response.reason</div><div class="line">    cont = response.read()</div><div class="line">#    print cont</div><div class="line">    return reg.findall(cont)</div></pre></td></tr></table></figure>
+<p>urllib3&#xFF1A;&#x53EF;&#x4EE5;&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A;&#x8FDE;&#x63A5;&#x6C60;,&#x5177;&#x5907;post&#x6587;&#x4EF6;&#x529F;&#x80FD;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">http=urllib3.PoolManager()</div><div class="line">res=http.request(&#x2018;GET&#x2019;,URL,data)</div><div class="line"></div><div class="line">http=urllib3.PoolManager()</div><div class="line">res=http.request(&#x2018;POST&#x2019;,TOKEN_URL,req_args,encode_multipart=<span class="keyword">False</span>)</div></pre></td></tr></table></figure>
+<p><strong>&#x5982;&#x679C;&#x8BF7;&#x6C42;&#x54CD;&#x5E94;&#x62A5; Bad Request / Bad content type &#x4FE1;&#x606F;&#x65F6;</strong><br>&#x9700;&#x8981;&#x8BBE;&#x7F6E;&#x53C2;&#x6570;encode_multipart=False</p>
 
       
     </div>
@@ -410,6 +394,12 @@ urllib.urlopen(URL,[,data])
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/urllib/" rel="tag"># urllib</a>
+          
+        </div>
       
 
       
@@ -530,7 +520,7 @@ urllib.urlopen(URL,[,data])
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
