@@ -94,7 +94,7 @@ repr&amp;#x521B;&amp;#x5EFA;&amp;#x4E00;&amp;#x4E2A;&amp;#x5B57;&amp;#x7B26;&amp
 <meta property="og:site_name" content="Chow's Notes">
 <meta property="og:description" content="1.repr&amp;#x548C;str&amp;#x7684;&amp;#x533A;&amp;#x522B;
 repr&amp;#x521B;&amp;#x5EFA;&amp;#x4E00;&amp;#x4E2A;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#xFF0C;&amp;#x4EE5;&amp;#x5408;&amp;#x6CD5;&amp;#x7684;python&amp;#x8868;&amp;#x8FBE;&amp;#x5F0F;&amp;#x7684;&amp;#x5F62;&amp;#x5F0F;&amp;#x6">
-<meta property="og:updated_time" content="2016-12-30T16:03:34.000Z">
+<meta property="og:updated_time" content="2017-01-03T08:05:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python中的一些小技巧（持续添加）">
 <meta name="twitter:description" content="1.repr&amp;#x548C;str&amp;#x7684;&amp;#x533A;&amp;#x522B;
@@ -365,9 +365,8 @@ repr&amp;#x521B;&amp;#x5EFA;&amp;#x4E00;&amp;#x4E2A;&amp;#x5B57;&amp;#x7B26;&amp
         <p>1.repr&#x548C;str&#x7684;&#x533A;&#x522B;</p>
 <p>repr&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x4EE5;&#x5408;&#x6CD5;&#x7684;python&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x5F62;&#x5F0F;&#x6765;&#x8868;&#x793A;&#x503C;</p>
 <p>str&#x8F6C;&#x6362;&#x4E3A;&#x7528;&#x6237;&#x66F4;&#x6613;&#x7406;&#x89E3;&#x7684;&#x5F62;&#x5F0F;&#x7684;&#x5B57;&#x7B26;&#x4E32;,str&#x662F;&#x4E00;&#x79CD;&#x7C7B;&#x578B;</p>
-<p>&#x4F8B;&#x5982;</p>
-<p><div class="cnblogs_code"></div></p>
-<p><pre><span style="color: #0000ff;">print</span> repr(1000L<span style="color: #000000;">)<br></span>1000L<br><span style="color: #0000ff;">print</span> str(1000L<span style="color: #000000;">)<br></span>1000</pre><br><br>2.input &#x548C;raw_input</p>
+<p>&#x4F8B;&#x5982;<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> repr(<span class="number">1000L</span>)</div><div class="line"><span class="number">1000L</span></div><div class="line"><span class="keyword">print</span> str(<span class="number">1000L</span>)</div><div class="line"><span class="number">1000</span></div></pre></td></tr></table></figure></p>
+<p>2.input &#x548C;raw_input</p>
 <p>input&#x4F1A;&#x5047;&#x8BBE;&#x7528;&#x6237;&#x8F93;&#x5165;&#x7684;&#x662F;&#x5408;&#x6CD5;&#x7684;python&#x8868;&#x8FBE;&#x5F0F;&#xFF0C;</p>
 <p>raw_input&#x4F1A;&#x628A;&#x7528;&#x6237;&#x6240;&#x6709;&#x7684;&#x8F93;&#x5165;&#x5F53;&#x505A;&#x539F;&#x59CB;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x5373;&#x5B57;&#x9762;&#x4E0A;&#x7684;</p>
 <p>3.None&#xFF0C;python&#x4E2D;Null&#x5BF9;&#x8C61;</p>
@@ -410,10 +409,7 @@ repr&amp;#x521B;&amp;#x5EFA;&amp;#x4E00;&amp;#x4E2A;&amp;#x5B57;&amp;#x7B26;&amp
 <p>35.<strong>base</strong>&#x7C7B;&#x5C5E;&#x6027; &#x5305;&#x542B;&#x5176;&#x7236;&#x7C7B;&#x7684;&#x96C6;&#x5408;&#x7684;&#x5143;&#x7956;</p>
 <p>36.&#x91CD;&#x5199;<strong>init</strong>&#x4E0D;&#x4F1A;&#x8986;&#x76D6;&#x81EA;&#x52A8;&#x8C03;&#x7528;&#x57FA;&#x7C7B;&#x7684;<strong>init</strong> p383</p>
 <p>37. &#x4ECE;&#x6807;&#x51C6;&#x7C7B;&#x578B;&#x4E2D;&#x6D3E;&#x751F;&#x7C7B;</p>
-<p>&#x4E0D;&#x53EF;&#x53D8;&#x7C7B;&#x578B;&#x7684;&#x4F8B;&#x5B50;</p>
-<p>class RoundFloat(float):</p>
-<p>def <strong>new</strong>(cls,val):</p>
-<p>return super(RoundFloat,cls).<strong>new</strong>(cls,round(val,2))</p>
+<p>&#x4E0D;&#x53EF;&#x53D8;&#x7C7B;&#x578B;&#x7684;&#x4F8B;&#x5B50;<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">RoundFloat</span><span class="params">(float)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__new__</span><span class="params">(cls,val)</span>:</span></div><div class="line">		<span class="keyword">return</span> super(RoundFloat,cls).__new__(cls,round(val,<span class="number">2</span>))</div></pre></td></tr></table></figure></p>
 <p>38.issubclass()&#x5224;&#x65AD;&#x4E00;&#x4E2A;&#x7C7B;&#x662F;&#x5426;&#x662F;&#x53E6;&#x4E00;&#x4E2A;&#x7C7B;&#x7684;&#x5B50;&#x7C7B;</p>
 <p>39.isinstance()&#x5224;&#x65AD;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x662F;&#x5426;&#x662F;&#x53E6;&#x4E00;&#x4E2A;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;</p>
 <p>40.hasattr(),getattr(),setattr(),delattr()</p>
@@ -429,8 +425,6 @@ repr&amp;#x521B;&amp;#x5EFA;&amp;#x4E00;&amp;#x4E2A;&amp;#x5B57;&amp;#x7B26;&amp
 <p>52.compile(&#x2018;code str&#x2019;,&#x2019;&#x5B58;&#x653E;&#x4EE3;&#x7801;&#x5BF9;&#x8C61;&#x7684;&#x6587;&#x4EF6;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x901A;&#x5E38;&#x4E3A;&#x7A7A;&#x4E32;&#x2019;,&#x2019;eval/single/exec&#x2019;)&#x5141;&#x8BB8;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x523B;&#x8FC5;&#x901F;&#x751F;&#x6210;&#x4EE3;&#x7801;&#x5BF9;&#x8C61;&#xFF08;&#x5B57;&#x8282;&#x4EE3;&#x7801;&#x9884;&#x7F16;&#x8BD1;&#xFF09;&#xFF0C;&#x7136;&#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x7528;exec &#x8BED;&#x53E5;&#x6216;&#x5185;&#x5EFA;&#x51FD;&#x6570;eval()&#x6765;&#x6267;&#x884C;&#x8FD9;&#x4E9B;&#x5BF9;&#x8C61;&#x6216;&#x8005;&#x5BF9;&#x4ED6;&#x4EEC;&#x8FDB;&#x884C;&#x6C42;&#x503C;</p>
 <p>53.input()&#x76F8;&#x5F53;&#x4E8E;eval(raw_input())</p>
 <p>&#x2026;</p>
-<p>&#xA0;</p>
-<p>&#xA0;</p>
 
       
     </div>
