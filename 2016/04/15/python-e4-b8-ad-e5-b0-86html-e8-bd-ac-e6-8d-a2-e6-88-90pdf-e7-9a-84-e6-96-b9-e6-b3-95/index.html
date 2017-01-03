@@ -70,7 +70,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Life,Notes" />
+  <meta name="keywords" content="pdf,html," />
 
 
 
@@ -86,19 +86,16 @@
 
 
 
-<meta name="description" content="1.&amp;#x4F7F;&amp;#x7528;&amp;#x5728;&amp;#x7EBF;&amp;#x7684;&amp;#x63A5;&amp;#x53E3;&amp;#xFF0C;&amp;#x4F46;&amp;#x662F;&amp;#x57FA;&amp;#x672C;&amp;#x8981;&amp;#x6536;&amp;#x8D39;&amp;#x548C;&amp;#x9650;&amp;#x5236;&amp;#x8C03;&amp;#x7528;&amp;#x6B21;&amp;#x6570;
-&amp;#x4F8B;&amp;#x5982;&amp;#xFF">
+<meta name="description" content="1.&amp;#x4F7F;&amp;#x7528;&amp;#x5728;&amp;#x7EBF;&amp;#x7684;&amp;#x63A5;&amp;#x53E3;&amp;#xFF0C;&amp;#x4F46;&amp;#x662F;&amp;#x57FA;&amp;#x672C;&amp;#x8981;&amp;#x6536;&amp;#x8D39;&amp;#x548C;&amp;#x9650;&amp;#x5236;&amp;#x8C03;&amp;#x7528;&amp;#x6B21;&amp;#x6570;&amp;#x4F8B;&amp;#x5982;&amp;#xFF1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python中将html转换成pdf的方法">
 <meta property="og:url" content="http://notes.7days.top/2016/04/15/python-e4-b8-ad-e5-b0-86html-e8-bd-ac-e6-8d-a2-e6-88-90pdf-e7-9a-84-e6-96-b9-e6-b3-95/index.html">
 <meta property="og:site_name" content="Chow's Notes">
-<meta property="og:description" content="1.&amp;#x4F7F;&amp;#x7528;&amp;#x5728;&amp;#x7EBF;&amp;#x7684;&amp;#x63A5;&amp;#x53E3;&amp;#xFF0C;&amp;#x4F46;&amp;#x662F;&amp;#x57FA;&amp;#x672C;&amp;#x8981;&amp;#x6536;&amp;#x8D39;&amp;#x548C;&amp;#x9650;&amp;#x5236;&amp;#x8C03;&amp;#x7528;&amp;#x6B21;&amp;#x6570;
-&amp;#x4F8B;&amp;#x5982;&amp;#xFF">
-<meta property="og:updated_time" content="2016-12-30T16:03:34.000Z">
+<meta property="og:description" content="1.&amp;#x4F7F;&amp;#x7528;&amp;#x5728;&amp;#x7EBF;&amp;#x7684;&amp;#x63A5;&amp;#x53E3;&amp;#xFF0C;&amp;#x4F46;&amp;#x662F;&amp;#x57FA;&amp;#x672C;&amp;#x8981;&amp;#x6536;&amp;#x8D39;&amp;#x548C;&amp;#x9650;&amp;#x5236;&amp;#x8C03;&amp;#x7528;&amp;#x6B21;&amp;#x6570;&amp;#x4F8B;&amp;#x5982;&amp;#xFF1">
+<meta property="og:updated_time" content="2017-01-03T01:41:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python中将html转换成pdf的方法">
-<meta name="twitter:description" content="1.&amp;#x4F7F;&amp;#x7528;&amp;#x5728;&amp;#x7EBF;&amp;#x7684;&amp;#x63A5;&amp;#x53E3;&amp;#xFF0C;&amp;#x4F46;&amp;#x662F;&amp;#x57FA;&amp;#x672C;&amp;#x8981;&amp;#x6536;&amp;#x8D39;&amp;#x548C;&amp;#x9650;&amp;#x5236;&amp;#x8C03;&amp;#x7528;&amp;#x6B21;&amp;#x6570;
-&amp;#x4F8B;&amp;#x5982;&amp;#xFF">
+<meta name="twitter:description" content="1.&amp;#x4F7F;&amp;#x7528;&amp;#x5728;&amp;#x7EBF;&amp;#x7684;&amp;#x63A5;&amp;#x53E3;&amp;#xFF0C;&amp;#x4F46;&amp;#x662F;&amp;#x57FA;&amp;#x672C;&amp;#x8981;&amp;#x6536;&amp;#x8D39;&amp;#x548C;&amp;#x9650;&amp;#x5236;&amp;#x8C03;&amp;#x7528;&amp;#x6B21;&amp;#x6570;&amp;#x4F8B;&amp;#x5982;&amp;#xFF1">
 
 
 
@@ -362,16 +359,11 @@
       
 
       
-        <p>1.&#x4F7F;&#x7528;&#x5728;&#x7EBF;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x4F46;&#x662F;&#x57FA;&#x672C;&#x8981;&#x6536;&#x8D39;&#x548C;&#x9650;&#x5236;&#x8C03;&#x7528;&#x6B21;&#x6570;</p>
-<p>&#x4F8B;&#x5982;&#xFF1A;pdfcrowd</p>
+        <h2 id="1-&#x4F7F;&#x7528;&#x5728;&#x7EBF;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x4F46;&#x662F;&#x57FA;&#x672C;&#x8981;&#x6536;&#x8D39;&#x548C;&#x9650;&#x5236;&#x8C03;&#x7528;&#x6B21;&#x6570;"><a href="#1-&#x4F7F;&#x7528;&#x5728;&#x7EBF;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x4F46;&#x662F;&#x57FA;&#x672C;&#x8981;&#x6536;&#x8D39;&#x548C;&#x9650;&#x5236;&#x8C03;&#x7528;&#x6B21;&#x6570;" class="headerlink" title="1.&#x4F7F;&#x7528;&#x5728;&#x7EBF;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x4F46;&#x662F;&#x57FA;&#x672C;&#x8981;&#x6536;&#x8D39;&#x548C;&#x9650;&#x5236;&#x8C03;&#x7528;&#x6B21;&#x6570;"></a>1.&#x4F7F;&#x7528;&#x5728;&#x7EBF;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x4F46;&#x662F;&#x57FA;&#x672C;&#x8981;&#x6536;&#x8D39;&#x548C;&#x9650;&#x5236;&#x8C03;&#x7528;&#x6B21;&#x6570;</h2><p>&#x4F8B;&#x5982;&#xFF1A;pdfcrowd</p>
 <p>&#x63A5;&#x53E3;&#x5730;&#x5740;&#xFF1A;<a href="https://pdfcrowd.com/html-to-pdf-api/" target="_blank" rel="external">https://pdfcrowd.com/html-to-pdf-api/</a></p>
-<p>2.xhtml2pdf</p>
-<p>&#x6E90;&#x7801;&#x5730;&#x5740; &#xFF1A;<a href="https://github.com/xhtml2pdf/xhtml2pdf" target="_blank" rel="external">https://github.com/xhtml2pdf/xhtml2pdf</a></p>
-<p>[cc lang=&#x201D;Python&#x201D;]<br>import xhtml2pdf.pisa as pisa<br>dest=&#x2019;test.pdf&#x2019;<br>f=open(&#x2018;shiptemp_1.html&#x2019;)<br>data=f.read()<br>print data<br>pdf = pisa.CreatePDF(<br>data,<br>file(dest, &#x201C;wb&#x201D;)<br>)</p>
-<p>[/cc]</p>
-<p>&#xA0;</p>
-<p>3.Python-PDFKit: HTML to PDF wrapper</p>
-<p><a href="https://github.com/JazzCore/python-pdfkit" target="_blank" rel="external">https://github.com/JazzCore/python-pdfkit</a></p>
+<h2 id="2-xhtml2pdf"><a href="#2-xhtml2pdf" class="headerlink" title="2.xhtml2pdf"></a>2.xhtml2pdf</h2><p>&#x6E90;&#x7801;&#x5730;&#x5740; &#xFF1A;<a href="https://github.com/xhtml2pdf/xhtml2pdf" target="_blank" rel="external">https://github.com/xhtml2pdf/xhtml2pdf</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> xhtml2pdf.pisa <span class="keyword">as</span> pisa</div><div class="line">dest=<span class="string">&apos;test.pdf&apos;</span></div><div class="line">f=open(<span class="string">&apos;shiptemp_1.html&apos;</span>)</div><div class="line">data=f.read()</div><div class="line"><span class="keyword">print</span> data</div><div class="line">pdf = pisa.CreatePDF(</div><div class="line">data,</div><div class="line">file(dest, <span class="string">&quot;wb&quot;</span>)</div><div class="line">)</div></pre></td></tr></table></figure>
+<h2 id="3-Python-PDFKit-HTML-to-PDF-wrapper"><a href="#3-Python-PDFKit-HTML-to-PDF-wrapper" class="headerlink" title="3.Python-PDFKit: HTML to PDF wrapper"></a>3.Python-PDFKit: HTML to PDF wrapper</h2><p><a href="https://github.com/JazzCore/python-pdfkit" target="_blank" rel="external">https://github.com/JazzCore/python-pdfkit</a></p>
 <p>&#x4F9D;&#x8D56;&#x7684;&#x73AF;&#x5883;&#xFF0C;&#x5B89;&#x88C5;&#x7A0D;&#x5FAE;&#x590D;&#x6742;&#xFF0C;&#x4F46;&#x529F;&#x80FD;&#x5F3A;&#x5927;</p>
 
       
@@ -393,6 +385,14 @@
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/pdf/" rel="tag"># pdf</a>
+          
+            <a href="/tags/html/" rel="tag"># html</a>
+          
+        </div>
       
 
       
@@ -481,8 +481,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -513,7 +522,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -549,6 +558,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-使用在线的接口，但是基本要收费和限制调用次数"><span class="nav-number">1.</span> <span class="nav-text">1.使用在线的接口，但是基本要收费和限制调用次数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-xhtml2pdf"><span class="nav-number">2.</span> <span class="nav-text">2.xhtml2pdf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Python-PDFKit-HTML-to-PDF-wrapper"><span class="nav-number">3.</span> <span class="nav-text">3.Python-PDFKit: HTML to PDF wrapper</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
