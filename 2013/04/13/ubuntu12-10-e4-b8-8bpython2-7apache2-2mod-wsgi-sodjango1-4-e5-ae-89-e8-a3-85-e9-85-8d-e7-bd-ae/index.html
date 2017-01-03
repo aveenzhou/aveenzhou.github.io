@@ -70,7 +70,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Life,Notes" />
+  <meta name="keywords" content="部署,ubuntu," />
 
 
 
@@ -86,22 +86,25 @@
 
 
 
-<meta name="description" content="1.&amp;#x5B89;&amp;#x88C5;apache
-sudo apt-get install apache2&amp;#x542F;&amp;#x52A8;apache&amp;#x670D;&amp;#x52A1;sudo service apache2 start
-&amp;#x505C;&amp;#x6B62;sudo service apache2 stop&amp;#x91CD;&amp;#x542F;sudo service apache2 rest">
+<meta name="description" content="1.&amp;#x5B89;&amp;#x88C5;apache1sudo apt-get install apache2
+&amp;#x542F;&amp;#x52A8;apache&amp;#x670D;&amp;#x52A1;1sudo service apache2 start
+&amp;#x505C;&amp;#x6B62;1sudo service apache2 stop
+&amp;#x91CD;&amp;#x542F;1sudo service apache2">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ubuntu12.10 下python2.7  apache2.2 mod_wsgi.so django 1.4安装配置">
 <meta property="og:url" content="http://notes.7days.top/2013/04/13/ubuntu12-10-e4-b8-8bpython2-7apache2-2mod-wsgi-sodjango1-4-e5-ae-89-e8-a3-85-e9-85-8d-e7-bd-ae/index.html">
 <meta property="og:site_name" content="Chow's Notes">
-<meta property="og:description" content="1.&amp;#x5B89;&amp;#x88C5;apache
-sudo apt-get install apache2&amp;#x542F;&amp;#x52A8;apache&amp;#x670D;&amp;#x52A1;sudo service apache2 start
-&amp;#x505C;&amp;#x6B62;sudo service apache2 stop&amp;#x91CD;&amp;#x542F;sudo service apache2 rest">
-<meta property="og:updated_time" content="2016-12-30T16:03:34.000Z">
+<meta property="og:description" content="1.&amp;#x5B89;&amp;#x88C5;apache1sudo apt-get install apache2
+&amp;#x542F;&amp;#x52A8;apache&amp;#x670D;&amp;#x52A1;1sudo service apache2 start
+&amp;#x505C;&amp;#x6B62;1sudo service apache2 stop
+&amp;#x91CD;&amp;#x542F;1sudo service apache2">
+<meta property="og:updated_time" content="2017-01-03T06:36:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ubuntu12.10 下python2.7  apache2.2 mod_wsgi.so django 1.4安装配置">
-<meta name="twitter:description" content="1.&amp;#x5B89;&amp;#x88C5;apache
-sudo apt-get install apache2&amp;#x542F;&amp;#x52A8;apache&amp;#x670D;&amp;#x52A1;sudo service apache2 start
-&amp;#x505C;&amp;#x6B62;sudo service apache2 stop&amp;#x91CD;&amp;#x542F;sudo service apache2 rest">
+<meta name="twitter:description" content="1.&amp;#x5B89;&amp;#x88C5;apache1sudo apt-get install apache2
+&amp;#x542F;&amp;#x52A8;apache&amp;#x670D;&amp;#x52A1;1sudo service apache2 start
+&amp;#x505C;&amp;#x6B62;1sudo service apache2 stop
+&amp;#x91CD;&amp;#x542F;1sudo service apache2">
 
 
 
@@ -365,18 +368,16 @@ sudo apt-get install apache2&amp;#x542F;&amp;#x52A8;apache&amp;#x670D;&amp;#x52A
       
 
       
-        <p>1.&#x5B89;&#x88C5;apache</p>
-<p>sudo apt-get install apache2&#x542F;&#x52A8;apache&#x670D;&#x52A1;sudo service apache2 start</p>
-<p>&#x505C;&#x6B62;sudo service apache2 stop&#x91CD;&#x542F;sudo service apache2 restart</p>
+        <h3 id="1-&#x5B89;&#x88C5;apache"><a href="#1-&#x5B89;&#x88C5;apache" class="headerlink" title="1.&#x5B89;&#x88C5;apache"></a>1.&#x5B89;&#x88C5;apache</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install apache2</div></pre></td></tr></table></figure>
+<p>&#x542F;&#x52A8;apache&#x670D;&#x52A1;<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo service apache2 start</div></pre></td></tr></table></figure></p>
+<p>&#x505C;&#x6B62;<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo service apache2 stop</div></pre></td></tr></table></figure></p>
+<p>&#x91CD;&#x542F;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo service apache2 restart</div></pre></td></tr></table></figure></p>
 <p>&#x542F;&#x52A8;&#x6D4B;&#x8BD5;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x8F93;&#x5165;<a href="http://localhost" target="_blank" rel="external">http://localhost</a></p>
 <p>&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x4F4D;&#x7F6E;</p>
-<p>&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x662F;</p>
-<p><strong>/usr/sbin/apache2</strong></p>
-<p>&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x662F;&#x5728;</p>
-<p><strong>/etc/apache2</strong></p>
-<p>&#x7F51;&#x7AD9;(web)&#x6587;&#x4EF6;&#x662F;&#x5728;&#xFF1A;</p>
-<p><strong>/var/www</strong></p>
-<p>&#x8FD9;&#x4E2A;&#x5F53;&#x7136;&#x4F60;&#x53EF;&#x4EE5;&#x914D;&#x7F6E;&#xFF0C;&#x4FEE;&#x6539;</p>
+<p>&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x662F;<br><strong>/usr/sbin/apache2</strong></p>
+<p>&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x662F;&#x5728;<br><strong>/etc/apache2</strong></p>
+<p>&#x7F51;&#x7AD9;(web)&#x6587;&#x4EF6;&#x662F;&#x5728;&#xFF1A;<br><strong>/var/www</strong></p>
+<p>&#x8FD9;&#x4E2A;&#x53EF;&#x4EE5;&#x914D;&#x7F6E;&#xFF0C;&#x4FEE;&#x6539;</p>
 <p><strong>/etc/apache2/sites-available/default</strong></p>
 <p>&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x7684;&#x4E0B;&#x9762;&#x7684;&#x5B57;&#x6BB5;</p>
 <p><strong>DocumentRoot /var/www</strong></p>
@@ -385,22 +386,15 @@ sudo apt-get install apache2&amp;#x542F;&amp;#x52A8;apache&amp;#x670D;&amp;#x52A
 <p>DocumentRoot /var/temp</p>
 <p>&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x5E76;&#x4E0D;&#x662F;&#x5728;httpd.conf&#x91CC;&#x9762;&#xFF0C;&#x800C;&#x662F;apache2.conf&#xFF0C;&#x800C;&#x8FD9;&#x91CC;&#x9762;&#x5E76;&#x6CA1;&#x6709;&#x914D;&#x7F6E;&#x6240;&#x6709;&#x7684;&#x4E1C;&#x897F;&#xFF0C;&#x5982;&#x7AEF;&#x53E3;&#x662F;&#x5728;ports.conf&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x91CC;&#x9762;&#xFF0C;&#x800C;&#x7F51;&#x7AD9;&#x7684;&#x6839;&#x76EE;&#x5F55;&#x662F;&#x5728;&#x4E0A;&#x9762;&#x7684;&#x63D0;&#x5230;&#x7684;<strong>/etc/apache2/sites-available/default</strong>&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x4E2D;&#x3002;</p>
 <p><strong>/etc/apache2/</strong>&#x4E2D;&#x867D;&#x7136;&#x4E5F;&#x6709;httpd.conf&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#xFF0C;&#x4F46;&#x662F;httpd.conf&#x91CC;&#x9762;&#x662F;&#x7A7A;&#x7684;&#xFF08;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6B64;&#x6587;&#x4EF6;&#xFF0C;&#x53EF;&#x4EE5;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#xFF09;&#xFF0C;&#x7136;&#x540E;&#x5728;&#x8FD9;&#x91CC;&#x9762;&#x52A0;&#x4E00;&#x4E9B;&#x914D;&#x7F6E;&#xFF0C;&#x518D;&#x5728;apache2.conf&#x672B;&#x5C3E;&#x52A0;&#x4E0A; Include httpd.conf&#x5C31;&#x4F1A;&#x628A;httpd.conf&#x52A0;&#x5230;&#x5B83;&#x7684;&#x6587;&#x4EF6;&#x91CC;&#x9762;&#x3002;</p>
-<p>2.&#x5B89;&#x88C5;mod_wsgi.so</p>
-<p>&#x76EE;&#x524D;unbuntu&#x63D0;&#x4F9B;&#x4E86;2&#x4E2A;&#x6E90;&#xFF0C;&#x4E00;&#x4E2A;&#x9488;&#x5BF9;2.x python&#xFF0C;&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x9488;&#x5BF9;3.x python&#xFF1A;</p>
-<p><strong>&#x547D;&#x4EE4;&#x5B89;&#x88C5;&#xFF1A;</strong></p>
-<p>libapache2-mod-wsgi - Python WSGI adapter module for Apache</p>
-<p>libapache2-mod-wsgi-py3 - Python 3 WSGI adapter module for Apache</p>
+<h3 id="2-&#x5B89;&#x88C5;mod-wsgi-so"><a href="#2-&#x5B89;&#x88C5;mod-wsgi-so" class="headerlink" title="2.&#x5B89;&#x88C5;mod_wsgi.so"></a>2.&#x5B89;&#x88C5;mod_wsgi.so</h3><p>&#x76EE;&#x524D;unbuntu&#x63D0;&#x4F9B;&#x4E86;2&#x4E2A;&#x6E90;&#xFF0C;&#x4E00;&#x4E2A;&#x9488;&#x5BF9;2.x python&#xFF0C;&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x9488;&#x5BF9;3.x python&#xFF1A;</p>
+<p><strong>&#x547D;&#x4EE4;&#x5B89;&#x88C5;&#xFF1A;</strong><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">libapache2-mod-wsgi - Python WSGI adapter module <span class="keyword">for</span> Apache</div><div class="line"></div><div class="line">libapache2-mod-wsgi-py3 - Python 3 WSGI adapter module <span class="keyword">for</span> Apache</div></pre></td></tr></table></figure></p>
 <p><strong>&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#x5B89;&#x88C5;</strong>:</p>
-<p><a href="http://ftp.cn.debian.org/debian/pool/main/m/mod-wsgi/&#x4ECE;&#x8FD9;&#x513F;&#x4E0B;&#x8F7D;&#x5BF9;&#x5E94;&#x7684;&#x7248;&#x672C;&#x4E0B;&#x6765;&#x5C06;mod_wsgi.so&#x653E;&#x5230;" target="_blank" rel="external">http://ftp.cn.debian.org/debian/pool/main/m/mod-wsgi/&#x4ECE;&#x8FD9;&#x513F;&#x4E0B;&#x8F7D;&#x5BF9;&#x5E94;&#x7684;&#x7248;&#x672C;&#x4E0B;&#x6765;&#x5C06;mod_wsgi.so&#x653E;&#x5230;</a></p>
+<p><a href="http://ftp.cn.debian.org/debian/pool/main/m/mod-wsgi/" target="_blank" rel="external">http://ftp.cn.debian.org/debian/pool/main/m/mod-wsgi/</a> &#x4ECE;&#x8FD9;&#x513F;&#x4E0B;&#x8F7D;&#x5BF9;&#x5E94;&#x7684;&#x7248;&#x672C;&#x4E0B;&#x6765;&#x5C06;mod_wsgi.so&#x653E;&#x5230;</p>
 <p>/usr/lib/apache2/modules&#x4E0B;&#xFF0C;&#x7136;&#x540E;&#x5C06;wsgi.conf wsgi.load&#x653E;&#x5230;/etc/apache2/mods-available</p>
-<p>&#x56E0;&#x4E3A;&#x5728;wsgi.conf&#x4E2D;&#x5DF2;&#x7ECF;&#x52A0;&#x4E0A;&#x4E86;<span class="typ">LoadModule</span><span class="pln"> wsgi_module </span>/usr/lib/apache2/modules/mod_wsgi.so &#x8FD9;&#x4E00;&#x53E5;&#xFF0C;&#x6240;&#x4EE5;apache&#x53EF;&#x4EE5;&#x52A0;&#x8F7D;mod_wsgi.so&#x4E86;</p>
-<p>2.&#x5B89;&#x88C5;django1.4</p>
-<p>wget <a href="http://www.djangoproject.com/m/releases/1.4/Django-1.4.tar.gz" target="_blank" rel="external">http://www.djangoproject.com/m/releases/1.4/Django-1.4.tar.gz</a><br>tar xzvf Django-1.4.tar.gz<br>cd Django-1.4<br>python setup.py install</p>
-<p>3.&#x914D;&#x7F6E;httpd.conf</p>
-<p>&#x57FA;&#x672C;&#x914D;&#x7F6E;</p>
-<p>&#x5728;httpd.conf&#x52A0;&#x4E0A;</p>
-<p><pre>WSGIScriptAlias / /path/to/mysite.com/mysite/wsgi.py<br>WSGIPythonPath /path/to/mysite.com</pre></p>
-<p>Order deny,allow<br>Allow from all</p>
+<p>&#x56E0;&#x4E3A;&#x5728;wsgi.conf&#x4E2D;&#x5DF2;&#x7ECF;&#x52A0;&#x4E0A;&#x4E86;<br>LoadModule wsgi_module /usr/lib/apache2/modules/mod_wsgi.so &#x8FD9;&#x4E00;&#x53E5;&#xFF0C;&#x6240;&#x4EE5;apache&#x53EF;&#x4EE5;&#x52A0;&#x8F7D;mod_wsgi.so&#x4E86;</p>
+<h3 id="3-&#x5B89;&#x88C5;django1-4"><a href="#3-&#x5B89;&#x88C5;django1-4" class="headerlink" title="3.&#x5B89;&#x88C5;django1.4"></a>3.&#x5B89;&#x88C5;django1.4</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">wget http://www.djangoproject.com/m/releases/1.4/Django-1.4.tar.gz</div><div class="line">tar xzvf Django-1.4.tar.gz</div><div class="line"><span class="built_in">cd</span> Django-1.4</div><div class="line">python setup.py install</div></pre></td></tr></table></figure>
+<h3 id="4-&#x914D;&#x7F6E;httpd-conf"><a href="#4-&#x914D;&#x7F6E;httpd-conf" class="headerlink" title="4.&#x914D;&#x7F6E;httpd.conf"></a>4.&#x914D;&#x7F6E;httpd.conf</h3><p>&#x57FA;&#x672C;&#x914D;&#x7F6E;</p>
+<p>&#x5728;httpd.conf&#x52A0;&#x4E0A;<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">WSGIScriptAlias / /path/to/mysite.com/mysite/wsgi.py</div><div class="line">WSGIPythonPath /path/to/mysite.com</div><div class="line"></div><div class="line">Order deny,allow</div><div class="line">Allow from all</div></pre></td></tr></table></figure></p>
 <p>&#x5176;&#x4ED6;&#x60C5;&#x51B5;&#x914D;&#x7F6E;&#x53EF;&#x53C2;&#x8003;&#x7684;django&#x6587;&#x6863;<a href="https://docs.djangoproject.com/en/1.4/howto/deployment/wsgi/modwsgi/&#x4E2D;&#x7684;" target="_blank" rel="external">https://docs.djangoproject.com/en/1.4/howto/deployment/wsgi/modwsgi/&#x4E2D;&#x7684;</a><br>How to use Django with Apache and mod_wsgi&#x4E00;&#x8282;</p>
 <p>&#x6CE8;&#x610F;&#x5728;&#x914D;&#x7F6E;&#x7684;&#x8FC7;&#x7A0B;&#x5F53;&#x4FEE;&#x6539;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x65F6;&#x4F1A;&#x9047;&#x5230;&#x6CA1;&#x6709;&#x6743;&#x9650;&#x65E0;&#x6CD5;&#x4FDD;&#x5B58;&#x7684;&#x60C5;&#x51B5;<br>&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x7528;sudo vim filname&#x7F16;&#x8F91;&#x4FDD;&#x5B58;,vi&#x7684;&#x7528;&#x6CD5;&#x770B;&#x53C2;&#x8003;<a href="http://www.cnblogs.com/sophine/archive/2012/04/26/2471188.html" target="_blank" rel="external">http://www.cnblogs.com/sophine/archive/2012/04/26/2471188.html</a></p>
 
@@ -423,6 +417,14 @@ sudo apt-get install apache2&amp;#x542F;&amp;#x52A8;apache&amp;#x670D;&amp;#x52A
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/部署/" rel="tag"># 部署</a>
+          
+            <a href="/tags/ubuntu/" rel="tag"># ubuntu</a>
+          
+        </div>
       
 
       
@@ -511,8 +513,17 @@ sudo apt-get install apache2&amp;#x542F;&amp;#x52A8;apache&amp;#x670D;&amp;#x52A
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -543,7 +554,7 @@ sudo apt-get install apache2&amp;#x542F;&amp;#x52A8;apache&amp;#x670D;&amp;#x52A
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -579,6 +590,22 @@ sudo apt-get install apache2&amp;#x542F;&amp;#x52A8;apache&amp;#x670D;&amp;#x52A
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装apache"><span class="nav-number">1.</span> <span class="nav-text">1.安装apache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装mod-wsgi-so"><span class="nav-number">2.</span> <span class="nav-text">2.安装mod_wsgi.so</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-安装django1-4"><span class="nav-number">3.</span> <span class="nav-text">3.安装django1.4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-配置httpd-conf"><span class="nav-number">4.</span> <span class="nav-text">4.配置httpd.conf</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

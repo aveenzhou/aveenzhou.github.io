@@ -70,7 +70,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Life,Notes" />
+  <meta name="keywords" content="python," />
 
 
 
@@ -86,16 +86,16 @@
 
 
 
-<meta name="description" content="&amp;gt;&amp;gt;&amp;gt; d1 = dict(a = 1, b = 2)&amp;gt;&amp;gt;&amp;gt; d2 = dict(b = 2, c = 3)&amp;gt;&amp;gt;&amp;gt; d1 &amp;amp; d2 # &amp;#x5B57;&amp;#x5178;&amp;#x4E0D;&amp;#x2F40;&amp;#x652F;&amp;#x6301;&amp;#x8BE5;&amp;#x64CD;&amp;#x4F5C;Traceback (most recent call">
+<meta name="description" content="1234567891011121314151617181920&amp;gt;&amp;gt;&amp;gt; d1 = dict(a = 1, b = 2)&amp;gt;&amp;gt;&amp;gt; d2 = dict(b = 2, c = 3)&amp;gt;&amp;gt;&amp;gt; d1 &amp;amp; d2 # &amp;#x5B57;&amp;#x5178;&amp;#x4E0D;&amp;#x2F40;&amp;#x652F;&amp;#x6301;&amp;#x8BE5;&amp;#x64CD;&amp;#x4F5">
 <meta property="og:type" content="article">
 <meta property="og:title" content="对字典作集合操作">
 <meta property="og:url" content="http://notes.7days.top/2014/04/30/e5-af-b9-e5-ad-97-e5-85-b8-e4-bd-9c-e9-9b-86-e5-90-88-e6-93-8d-e4-bd-9c/index.html">
 <meta property="og:site_name" content="Chow's Notes">
-<meta property="og:description" content="&amp;gt;&amp;gt;&amp;gt; d1 = dict(a = 1, b = 2)&amp;gt;&amp;gt;&amp;gt; d2 = dict(b = 2, c = 3)&amp;gt;&amp;gt;&amp;gt; d1 &amp;amp; d2 # &amp;#x5B57;&amp;#x5178;&amp;#x4E0D;&amp;#x2F40;&amp;#x652F;&amp;#x6301;&amp;#x8BE5;&amp;#x64CD;&amp;#x4F5C;Traceback (most recent call">
-<meta property="og:updated_time" content="2016-12-30T16:03:34.000Z">
+<meta property="og:description" content="1234567891011121314151617181920&amp;gt;&amp;gt;&amp;gt; d1 = dict(a = 1, b = 2)&amp;gt;&amp;gt;&amp;gt; d2 = dict(b = 2, c = 3)&amp;gt;&amp;gt;&amp;gt; d1 &amp;amp; d2 # &amp;#x5B57;&amp;#x5178;&amp;#x4E0D;&amp;#x2F40;&amp;#x652F;&amp;#x6301;&amp;#x8BE5;&amp;#x64CD;&amp;#x4F5">
+<meta property="og:updated_time" content="2017-01-03T06:18:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对字典作集合操作">
-<meta name="twitter:description" content="&amp;gt;&amp;gt;&amp;gt; d1 = dict(a = 1, b = 2)&amp;gt;&amp;gt;&amp;gt; d2 = dict(b = 2, c = 3)&amp;gt;&amp;gt;&amp;gt; d1 &amp;amp; d2 # &amp;#x5B57;&amp;#x5178;&amp;#x4E0D;&amp;#x2F40;&amp;#x652F;&amp;#x6301;&amp;#x8BE5;&amp;#x64CD;&amp;#x4F5C;Traceback (most recent call">
+<meta name="twitter:description" content="1234567891011121314151617181920&amp;gt;&amp;gt;&amp;gt; d1 = dict(a = 1, b = 2)&amp;gt;&amp;gt;&amp;gt; d2 = dict(b = 2, c = 3)&amp;gt;&amp;gt;&amp;gt; d1 &amp;amp; d2 # &amp;#x5B57;&amp;#x5178;&amp;#x4E0D;&amp;#x2F40;&amp;#x652F;&amp;#x6301;&amp;#x8BE5;&amp;#x64CD;&amp;#x4F5">
 
 
 
@@ -359,9 +359,7 @@
       
 
       
-        <p><div class="cnblogs_code"></div></p>
-<p><pre>&gt;&gt;&gt; d1 = dict(a = 1, b = 2<span style="color: #000000;">)<br></span>&gt;&gt;&gt; d2 = dict(b = 2, c = 3<span style="color: #000000;">)<br></span>&gt;&gt;&gt; d1 &amp; d2 <span style="color: #008000;">#</span><span style="color: #008000;"> &#x5B57;&#x5178;&#x4E0D;&#x2F40;&#x652F;&#x6301;&#x8BE5;&#x64CD;&#x4F5C;</span><br><span style="color: #000000;">Traceback (most recent call last):<br>  File </span><span style="color: #800000;">&#x201C;</span><span style="color: #800000;">&#x201C;</span>, line 1, <span style="color: #0000ff;">in</span> <span style="color: #000000;"><br>TypeError: unsupported operand type(s) </span><span style="color: #0000ff;">for</span> &amp;: <span style="color: #800000;">&#x2018;</span><span style="color: #800000;">dict</span><span style="color: #800000;">&#x2018;</span> <span style="color: #0000ff;">and</span> <span style="color: #800000;">&#x2018;</span><span style="color: #800000;">dict</span><span style="color: #800000;">&#x2018;</span><br>&gt;&gt;&gt; v1 =<span style="color: #000000;"> d1.viewitems()<br></span>&gt;&gt;&gt; v2 =<span style="color: #000000;"> d2.viewitems()<br></span>&gt;&gt;&gt; v1 &amp; v2 <span style="color: #008000;">#</span><span style="color: #008000;"> &#x4EA4;&#x96C6;</span><br>set([(<span style="color: #800000;">&#x2018;</span><span style="color: #800000;">b</span><span style="color: #800000;">&#x2018;</span>, 2<span style="color: #000000;">)])<br></span>&gt;&gt;&gt; dict(v1 &amp; v2) <span style="color: #008000;">#</span><span style="color: #008000;"> &#x53EF;&#x4EE5;&#x8F6C;&#x5316;&#x4E3A;&#x5B57;&#x5178;</span><br>{<span style="color: #800000;">&#x2018;</span><span style="color: #800000;">b</span><span style="color: #800000;">&#x2018;</span>: 2<span style="color: #000000;">}<br></span>&gt;&gt;&gt; v1 | v2 <span style="color: #008000;">#</span><span style="color: #008000;"> &#x5E76;&#x96C6;</span><br>set([(<span style="color: #800000;">&#x2018;</span><span style="color: #800000;">a</span><span style="color: #800000;">&#x2018;</span>, 1), (<span style="color: #800000;">&#x2018;</span><span style="color: #800000;">b</span><span style="color: #800000;">&#x2018;</span>, 2), (<span style="color: #800000;">&#x2018;</span><span style="color: #800000;">c</span><span style="color: #800000;">&#x2018;</span>, 3<span style="color: #000000;">)])<br></span>&gt;&gt;&gt; v1 - v2 <span style="color: #008000;">#</span><span style="color: #008000;">&#x5DEE;&#x96C6;(&#x4EC5;v1&#x6709;,v2&#x6CA1;&#x6709;&#x7684;)</span><br>set([(<span style="color: #800000;">&#x2018;</span><span style="color: #800000;">a</span><span style="color: #800000;">&#x2018;</span>, 1<span style="color: #000000;">)])<br></span>&gt;&gt;&gt; v1 ^ v2 <span style="color: #008000;">#</span><span style="color: #008000;"> &#x5BF9;&#x79F0;&#x5DEE;&#x96C6; (&#x4E0D;&#x4F1A;&#x540C;&#x65F6;&#x51FA;&#x73B0;&#x5728; v1 &#x548C; v2 &#x4E2D;)</span><br>set([(<span style="color: #800000;">&#x2018;</span><span style="color: #800000;">a</span><span style="color: #800000;">&#x2018;</span>, 1), (<span style="color: #800000;">&#x2018;</span><span style="color: #800000;">c</span><span style="color: #800000;">&#x2018;</span>, 3<span style="color: #000000;">)])<br></span>&gt;&gt;&gt; (<span style="color: #800000;">&#x2018;</span><span style="color: #800000;">a</span><span style="color: #800000;">&#x2018;</span>, 1) <span style="color: #0000ff;">in</span> v1 <span style="color: #008000;">#</span><span style="color: #008000;">&#x5224;&#x65AD;</span><br>True</pre><br><br>&#xA0;</p>
-
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; d1 = dict(a = 1, b = 2)</div><div class="line">&gt;&gt;&gt; d2 = dict(b = 2, c = 3)</div><div class="line">&gt;&gt;&gt; d1 &amp; d2 <span class="comment"># &#x5B57;&#x5178;&#x4E0D;&#x2F40;&#x652F;&#x6301;&#x8BE5;&#x64CD;&#x4F5C;</span></div><div class="line">Traceback (most recent call last):</div><div class="line">  File &#x201C;&#x201C;, line 1, <span class="keyword">in</span> </div><div class="line">TypeError: unsupported operand <span class="built_in">type</span>(s) <span class="keyword">for</span> &amp;: &#x2018;dict&#x2018; and &#x2018;dict&#x2018;</div><div class="line">&gt;&gt;&gt; v1 = d1.viewitems()</div><div class="line">&gt;&gt;&gt; v2 = d2.viewitems()</div><div class="line">&gt;&gt;&gt; v1 &amp; v2 <span class="comment"># &#x4EA4;&#x96C6;</span></div><div class="line"><span class="built_in">set</span>([(&#x2018;b&#x2018;, 2)])</div><div class="line">&gt;&gt;&gt; dict(v1 &amp; v2) <span class="comment"># &#x53EF;&#x4EE5;&#x8F6C;&#x5316;&#x4E3A;&#x5B57;&#x5178;</span></div><div class="line">{&#x2018;b&#x2018;: 2}</div><div class="line">&gt;&gt;&gt; v1 | v2 <span class="comment"># &#x5E76;&#x96C6;</span></div><div class="line"><span class="built_in">set</span>([(&#x2018;a&#x2018;, 1), (&#x2018;b&#x2018;, 2), (&#x2018;c&#x2018;, 3)])</div><div class="line">&gt;&gt;&gt; v1 - v2 <span class="comment">#&#x5DEE;&#x96C6;(&#x4EC5;v1&#x6709;,v2&#x6CA1;&#x6709;&#x7684;)</span></div><div class="line"><span class="built_in">set</span>([(&#x2018;a&#x2018;, 1)])</div><div class="line">&gt;&gt;&gt; v1 ^ v2 <span class="comment"># &#x5BF9;&#x79F0;&#x5DEE;&#x96C6; (&#x4E0D;&#x4F1A;&#x540C;&#x65F6;&#x51FA;&#x73B0;&#x5728; v1 &#x548C; v2 &#x4E2D;)</span></div><div class="line"><span class="built_in">set</span>([(&#x2018;a&#x2018;, 1), (&#x2018;c&#x2018;, 3)])</div><div class="line">&gt;&gt;&gt; (&#x2018;a&#x2018;, 1) <span class="keyword">in</span> v1 <span class="comment">#&#x5224;&#x65AD;</span></div><div class="line">True</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -381,6 +379,12 @@
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
       
 
       
@@ -501,7 +505,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

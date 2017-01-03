@@ -70,7 +70,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Life,Notes" />
+  <meta name="keywords" content="python," />
 
 
 
@@ -86,22 +86,16 @@
 
 
 
-<meta name="description" content="from contextlib import contextmanager
-@contextmanagerdef tag(name):    print &amp;#x201C;&amp;lt;%s&amp;gt;&amp;#x201C; % name    yield    print &amp;#x201C;&amp;lt;%s/&amp;gt;&amp;#x201C; % name
-with tag(&amp;#x201C;h1&amp;#x201C;):    pr">
+<meta name="description" content="12345678910from contextlib import contextmanager@contextmanagerdef tag(name):    print &amp;quot;&amp;lt;%s&amp;gt;&amp;quot; % name    yield    print &amp;quot;&amp;lt;%s/&amp;gt;&amp;quot; % name    with tag(&amp;quot;h1&amp;quot;):    pr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="contextlib上下文管理器">
 <meta property="og:url" content="http://notes.7days.top/2014/04/04/contextlib-e4-b8-8a-e4-b8-8b-e6-96-87-e7-ae-a1-e7-90-86-e5-99-a8/index.html">
 <meta property="og:site_name" content="Chow's Notes">
-<meta property="og:description" content="from contextlib import contextmanager
-@contextmanagerdef tag(name):    print &amp;#x201C;&amp;lt;%s&amp;gt;&amp;#x201C; % name    yield    print &amp;#x201C;&amp;lt;%s/&amp;gt;&amp;#x201C; % name
-with tag(&amp;#x201C;h1&amp;#x201C;):    pr">
-<meta property="og:updated_time" content="2016-12-30T16:03:34.000Z">
+<meta property="og:description" content="12345678910from contextlib import contextmanager@contextmanagerdef tag(name):    print &amp;quot;&amp;lt;%s&amp;gt;&amp;quot; % name    yield    print &amp;quot;&amp;lt;%s/&amp;gt;&amp;quot; % name    with tag(&amp;quot;h1&amp;quot;):    pr">
+<meta property="og:updated_time" content="2017-01-03T06:25:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="contextlib上下文管理器">
-<meta name="twitter:description" content="from contextlib import contextmanager
-@contextmanagerdef tag(name):    print &amp;#x201C;&amp;lt;%s&amp;gt;&amp;#x201C; % name    yield    print &amp;#x201C;&amp;lt;%s/&amp;gt;&amp;#x201C; % name
-with tag(&amp;#x201C;h1&amp;#x201C;):    pr">
+<meta name="twitter:description" content="12345678910from contextlib import contextmanager@contextmanagerdef tag(name):    print &amp;quot;&amp;lt;%s&amp;gt;&amp;quot; % name    yield    print &amp;quot;&amp;lt;%s/&amp;gt;&amp;quot; % name    with tag(&amp;quot;h1&amp;quot;):    pr">
 
 
 
@@ -365,16 +359,9 @@ with tag(&amp;#x201C;h1&amp;#x201C;):    pr">
       
 
       
-        <p><div class="cnblogs_code"></div></p>
-<p><pre><span style="color: #0000ff;">from</span> contextlib <span style="color: #0000ff;">import</span><span style="color: #000000;"> contextmanager</span></pre></p>
-<p>@contextmanager<br><span style="color: #0000ff;">def</span><span style="color: #000000;"> tag(name):<br>    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">&#x201C;</span><span style="color: #800000;">&lt;%s&gt;</span><span style="color: #800000;">&#x201C;</span> %<span style="color: #000000;"> name<br>    </span><span style="color: #0000ff;">yield</span><br>    <span style="color: #0000ff;">print</span> <span style="color: #800000;">&#x201C;</span><span style="color: #800000;">&lt;%s/&gt;</span><span style="color: #800000;">&#x201C;</span> %<span style="color: #000000;"> name</span></p>
-<p>with tag(<span style="color: #800000;">&#x201C;</span><span style="color: #800000;">h1</span><span style="color: #800000;">&#x201C;</span><span style="color: #000000;">):<br>    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">&#x201C;</span><span style="color: #800000;">name</span><span style="color: #800000;">&#x201C;</span></p>
-<p>######test#########</p>
-<p>#@contextmanager<br>def tag(name):<br>print &#x201C;&lt;%s&gt;&#x201D; % name<br>yield 123<br>print &#x201C;&lt;%s/&gt;&#x201D; % name</p>
-<p>#with tag(&#x201C;h1&#x201D;):</p>
-<h1 id="print-&#x201C;name&#x201D;"><a href="#print-&#x201C;name&#x201D;" class="headerlink" title="print &#x201C;name&#x201D;"></a>print &#x201C;name&#x201D;</h1><p><pre></pre><br>t=tag(&#x201C;h1&#x201D;)</p>
-<p><pre></pre><br>print next(t)<br>next(t)</p>
-<p><pre><span style="color: #800000;"> </span></pre><br><br>&#x5728;&#x4E00;&#x4E9B;&#x64CD;&#x4F5C;&#x4E4B;&#x524D;&#x548C;&#x4E4B;&#x540E;&#x505A;&#x5904;&#x7406;&#xFF0C;&#x901A;&#x8FC7;&#x8BBF;&#x95EE;&#x53EA;&#x751F;&#x6210;&#x4E00;&#x6B21;&#x7684;&#x751F;&#x6210;&#x5668;&#x5B9E;&#x73B0;&#xFF0C;&#x7B2C;&#x4E00;&#x6B21;&#x8C03;&#x7528; gen.next() &#x4F1A;&#x6267;&#x884C;yield&#x524D;&#x9762;&#x7684;&#x8BED;&#x53E5;&#xFF0C;&#x7B2C;&#x4E8C;&#x6B21;&#x8C03;&#x7528;gen.next()&#x6267;&#x884C;yield&#x540E;&#x9762;&#x7684;&#x8BED;&#x53E5;&#xFF0C;&#x5E76;&#x629B;&#x51FA;</p>
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> contextlib <span class="keyword">import</span> contextmanager</div><div class="line"></div><div class="line"><span class="meta">@contextmanager</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">tag</span><span class="params">(name)</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">&quot;&lt;%s&gt;&quot;</span> % name</div><div class="line">    <span class="keyword">yield</span></div><div class="line">    <span class="keyword">print</span> <span class="string">&quot;&lt;%s/&gt;&quot;</span> % name</div><div class="line">    </div><div class="line"><span class="keyword">with</span> tag(<span class="string">&quot;h1&quot;</span>):</div><div class="line">    <span class="keyword">print</span> <span class="string">&quot;name&quot;</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#@contextmanager</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">tag</span><span class="params">(name)</span>:</span></div><div class="line">	<span class="keyword">print</span> &#x201C;&lt;%s&gt;&#x201D; % name</div><div class="line">	<span class="keyword">yield</span> <span class="number">123</span></div><div class="line">	<span class="keyword">print</span> &#x201C;&lt;%s/&gt;&#x201D; % name</div><div class="line"></div><div class="line"><span class="comment">#with tag(&#x201C;h1&#x201D;):</span></div><div class="line"><span class="comment"># 	print &#x201C;name&#x201D;</span></div><div class="line"></div><div class="line">t=tag(&#x201C;h1&#x201D;)</div><div class="line"></div><div class="line"><span class="keyword">print</span> next(t)</div><div class="line">next(t)</div></pre></td></tr></table></figure>
+<p>&#x5728;&#x4E00;&#x4E9B;&#x64CD;&#x4F5C;&#x4E4B;&#x524D;&#x548C;&#x4E4B;&#x540E;&#x505A;&#x5904;&#x7406;&#xFF0C;&#x901A;&#x8FC7;&#x8BBF;&#x95EE;&#x53EA;&#x751F;&#x6210;&#x4E00;&#x6B21;&#x7684;&#x751F;&#x6210;&#x5668;&#x5B9E;&#x73B0;&#xFF0C;&#x7B2C;&#x4E00;&#x6B21;&#x8C03;&#x7528; gen.next() &#x4F1A;&#x6267;&#x884C;yield&#x524D;&#x9762;&#x7684;&#x8BED;&#x53E5;&#xFF0C;&#x7B2C;&#x4E8C;&#x6B21;&#x8C03;&#x7528;gen.next()&#x6267;&#x884C;yield&#x540E;&#x9762;&#x7684;&#x8BED;&#x53E5;&#xFF0C;&#x5E76;&#x629B;&#x51FA;</p>
 <p>StopIteration&#x5F02;&#x5E38;&#xFF0C;&#x505C;&#x6B62;&#x8FED;&#x4EE3;&#x3002;&#x521A;&#x597D;&#x7528;&#x4E8E;&#x4E0A;&#x4E0B;&#x6587;&#x7BA1;&#x7406;&#x5668;&#x7684; <strong>enter</strong> &#x548C; <strong>exit</strong>&#x7684;&#x4E24;&#x6B21;&#x8C03;&#x7528;&#xFF08;&#x8FDB;&#x5165;&#x548C;&#x9000;&#x51FA;&#x5F53;&#x524D;&#x4E0A;&#x4E0B;&#x6587;&#xFF09;</p>
 
       
@@ -396,6 +383,12 @@ with tag(&amp;#x201C;h1&amp;#x201C;):    pr">
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
       
 
       
@@ -484,17 +477,8 @@ with tag(&amp;#x201C;h1&amp;#x201C;):    pr">
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -525,7 +509,7 @@ with tag(&amp;#x201C;h1&amp;#x201C;):    pr">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -561,22 +545,6 @@ with tag(&amp;#x201C;h1&amp;#x201C;):    pr">
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#print-“name”"><span class="nav-number">1.</span> <span class="nav-text">print “name”</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
     </div>
