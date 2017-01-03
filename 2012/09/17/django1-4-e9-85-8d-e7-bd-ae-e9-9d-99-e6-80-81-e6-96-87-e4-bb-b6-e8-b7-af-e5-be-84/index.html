@@ -86,19 +86,25 @@
 
 
 
-<meta name="description" content="&amp;#x914D;&amp;#x7684;&amp;#x771F;&amp;#x5FC3;&amp;#x86CB;&amp;#x75BC;
-&amp;#x9996;&amp;#x5148;&amp;#xFF0C;&amp;#x5F97;&amp;#x628A;&amp;#x9759;&amp;#x6001;&amp;#x6587;&amp;#x4EF6;&amp;#x5939;&amp;#x5982;static &amp;#x5355;&amp;#x72EC;&amp;#x653E;&amp;#x5728;&amp;#x4F60;&amp;#x7684;app&amp;#x91">
+<meta name="description" content="django
+
+&amp;#x914D;&amp;#x7684;&amp;#x771F;&amp;#x5FC3;&amp;#x86CB;&amp;#x75BC;
+&amp;#x9996;&amp;#x5148;&amp;#xFF0C;&amp;#x5F97;&amp;#x628A;&amp;#x9759;&amp;#x6001;&amp;#x6587;&amp;#x4EF6;&amp;#x5939;&amp;#x5982;static &amp;#x5355;&amp;#x72EC;&amp;#x653E;&amp;#x5728;&amp;#x4F60;&amp;#x7684">
 <meta property="og:type" content="article">
 <meta property="og:title" content="django1.4配置静态文件路径">
 <meta property="og:url" content="http://notes.7days.top/2012/09/17/django1-4-e9-85-8d-e7-bd-ae-e9-9d-99-e6-80-81-e6-96-87-e4-bb-b6-e8-b7-af-e5-be-84/index.html">
 <meta property="og:site_name" content="Chow's Notes">
-<meta property="og:description" content="&amp;#x914D;&amp;#x7684;&amp;#x771F;&amp;#x5FC3;&amp;#x86CB;&amp;#x75BC;
-&amp;#x9996;&amp;#x5148;&amp;#xFF0C;&amp;#x5F97;&amp;#x628A;&amp;#x9759;&amp;#x6001;&amp;#x6587;&amp;#x4EF6;&amp;#x5939;&amp;#x5982;static &amp;#x5355;&amp;#x72EC;&amp;#x653E;&amp;#x5728;&amp;#x4F60;&amp;#x7684;app&amp;#x91">
-<meta property="og:updated_time" content="2016-12-30T16:03:34.000Z">
+<meta property="og:description" content="django
+
+&amp;#x914D;&amp;#x7684;&amp;#x771F;&amp;#x5FC3;&amp;#x86CB;&amp;#x75BC;
+&amp;#x9996;&amp;#x5148;&amp;#xFF0C;&amp;#x5F97;&amp;#x628A;&amp;#x9759;&amp;#x6001;&amp;#x6587;&amp;#x4EF6;&amp;#x5939;&amp;#x5982;static &amp;#x5355;&amp;#x72EC;&amp;#x653E;&amp;#x5728;&amp;#x4F60;&amp;#x7684">
+<meta property="og:updated_time" content="2017-01-03T07:42:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="django1.4配置静态文件路径">
-<meta name="twitter:description" content="&amp;#x914D;&amp;#x7684;&amp;#x771F;&amp;#x5FC3;&amp;#x86CB;&amp;#x75BC;
-&amp;#x9996;&amp;#x5148;&amp;#xFF0C;&amp;#x5F97;&amp;#x628A;&amp;#x9759;&amp;#x6001;&amp;#x6587;&amp;#x4EF6;&amp;#x5939;&amp;#x5982;static &amp;#x5355;&amp;#x72EC;&amp;#x653E;&amp;#x5728;&amp;#x4F60;&amp;#x7684;app&amp;#x91">
+<meta name="twitter:description" content="django
+
+&amp;#x914D;&amp;#x7684;&amp;#x771F;&amp;#x5FC3;&amp;#x86CB;&amp;#x75BC;
+&amp;#x9996;&amp;#x5148;&amp;#xFF0C;&amp;#x5F97;&amp;#x628A;&amp;#x9759;&amp;#x6001;&amp;#x6587;&amp;#x4EF6;&amp;#x5939;&amp;#x5982;static &amp;#x5355;&amp;#x72EC;&amp;#x653E;&amp;#x5728;&amp;#x4F60;&amp;#x7684">
 
 
 
@@ -362,18 +368,14 @@
       
 
       
-        <p>&#x914D;&#x7684;&#x771F;&#x5FC3;&#x86CB;&#x75BC;</p>
+        <ul>
+<li>django</li>
+</ul>
+<p>&#x914D;&#x7684;&#x771F;&#x5FC3;&#x86CB;&#x75BC;</p>
 <p>&#x9996;&#x5148;&#xFF0C;&#x5F97;&#x628A;&#x9759;&#x6001;&#x6587;&#x4EF6;&#x5939;&#x5982;static &#x5355;&#x72EC;&#x653E;&#x5728;&#x4F60;&#x7684;app&#x91CC;&#x9762;&#xFF0C;&#xFF08;&#x5C31;&#x662F;startapp&#x547D;&#x4EE4;&#x5EFA;&#x7ACB;&#x90A3;&#x4E2A;&#x6587;&#x4EF6;&#x5939;&#x4E0B;&#xFF09;</p>
-<p>&#x7136;&#x540E;&#xFF0C;settings.py:</p>
-<p>STATIC_ROOT =r&#x2019;E:/Py_workspace/note_site/src/notesite/notesapp/static/&#x2018;</p>
-<p>STATIC_URL = &#x2018;/static/&#x2018;</p>
-<h1 id="Additional-locations-of-static-files"><a href="#Additional-locations-of-static-files" class="headerlink" title="Additional locations of static files"></a>Additional locations of static files</h1><p>STATICFILES_DIRS = (<br>r&#x2019;E:/Py_workspace/note_site/src/notesite/notesapp&#x2019;,</p>
-<p>)</p>
-<p>&#x518D;&#x540E;&#x6765;&#xFF0C;urls.py&#xFF1A;</p>
+<p>&#x7136;&#x540E;&#xFF0C;settings.py:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">STATIC_ROOT =<span class="string">r&apos;E:/Py_workspace/note_site/src/notesite/notesapp/static/&apos;</span></div><div class="line"></div><div class="line">STATIC_URL = <span class="string">&apos;/static/&apos;</span></div><div class="line"></div><div class="line"><span class="comment"># Additional locations of static files</span></div><div class="line">STATICFILES_DIRS = (</div><div class="line">   <span class="string">r&apos;E:/Py_workspace/note_site/src/notesite/notesapp&apos;</span>,</div><div class="line">)</div><div class="line">``` python</div><div class="line">&#x518D;&#x540E;&#x6765;&#xFF0C;urls.py&#xFF1A;</div></pre></td></tr></table></figure></p>
 <p>from django.conf import settings<br>from django.conf.urls.static import static</p>
-<p>urlpatterns+=static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)</p>
-<p>&#xA0;</p>
-<p>&#x4F7F;&#x7528;&#xFF1A;</p>
+<p>urlpatterns+=static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)<br>```<br>&#x4F7F;&#x7528;</p>
 
       
     </div>
@@ -482,17 +484,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -523,7 +516,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -559,22 +552,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Additional-locations-of-static-files"><span class="nav-number">1.</span> <span class="nav-text">Additional locations of static files</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
     </div>

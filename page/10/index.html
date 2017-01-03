@@ -1208,11 +1208,12 @@ Hanoi Tower&#x7684;&#x9012;&#x5F52;&#x7B97;&#x6CD5;&#x5B9E;&#x73B0;&#x601D;&#x60
       
         
           
-          &#x914D;&#x7684;&#x771F;&#x5FC3;&#x86CB;&#x75BC;
+          
+django
+
+&#x914D;&#x7684;&#x771F;&#x5FC3;&#x86CB;&#x75BC;
 &#x9996;&#x5148;&#xFF0C;&#x5F97;&#x628A;&#x9759;&#x6001;&#x6587;&#x4EF6;&#x5939;&#x5982;static &#x5355;&#x72EC;&#x653E;&#x5728;&#x4F60;&#x7684;app&#x91CC;&#x9762;&#xFF0C;&#xFF08;&#x5C31;&#x662F;startapp&#x547D;&#x4EE4;&#x5EFA;&#x7ACB;&#x90A3;&#x4E2A;&#x6587;&#x4EF6;&#x5939;&#x4E0B;&#xFF09;
-&#x7136;&#x540E;&#xFF0C;settings.py:
-STATIC_ROOT =r&#x2019;E:/Py_workspace/note_site/src/notesite/notesapp/static/&#x2018;
-STATIC_URL = &#x2018;/static/&#x2018;
+&#x7136;&#x540E;&#xFF0C;settings.py:12345678910STATIC_ROOT =r&apos;E:/Py_workspace/note_site/src/notesite/notesapp/static/&apos;STATIC_URL = &apos;/sta
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
@@ -1369,7 +1370,10 @@ STATIC_URL = &#x2018;/static/&#x2018;
       
         
           
-           1 # -- coding: utf-8 -- 2 3 from  datetime import datetime 4 import time 5 6 # &#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#xFF0C;&#x8FD4;&#x56DE;string&#x7C7B;&#x578B; 7 now_str = time.strftime(&#x201C;%Y-%m-%d %H:%M:%S&#x201C;) 8 print (type(now_str)) 9 print now_str10 print &#x2018;&#x2014;&#x2018;1112 # &#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;,&#x8FD4;&#x56DE;datetime&#x7C7B;&#x578B;13 print (type(datetime.now()))14 print datetime.now()15 print &#x2018;&#x2014;&#x2018;1617 # string -&gt; datet
+          
+&#x539F;&#x6587;&#x51FA;&#x5904;http://blog.163.com/jackylau_v/blog/static/1757540402011102921232980/
+
+1234567891011121314#&#x53D6;&#x5F53;&#x65E5;&#x65F6;&#x95F4;&#x7684;&#x96F6;&#x70B9;&#x96F6;&#x5206;&#x96F6;&#x79D2;&#x7684;&#x65F6;&#x95F4;&#x6233;def getzerotime():	tm = int(time.time())	dt = datetime.datetime.fromtimestamp(tm).strftime(&#x201C;%Y%m%d%H%M%S&#x201D;)	d_time = time.strptime(dt, &#x2018;%Y%m%d%H%M%S&#x2019;)	dd_time = datetime.datetime(d_time[:3])	i_et = int(time.mktime(dd_time
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
@@ -1951,7 +1955,7 @@ HTML&#x89E3;&#x51B3;&#x4E86;Web&#x4E0A;&#x6570;&#x636E;&#x7684;&#x8868;&#x793A;&
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
