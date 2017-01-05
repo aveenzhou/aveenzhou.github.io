@@ -70,7 +70,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Life,Notes" />
+  <meta name="keywords" content="算法," />
 
 
 
@@ -92,7 +92,7 @@
 <meta property="og:url" content="http://notes.7days.top/2012/09/24/e6-b1-89-e8-af-ba-e5-a1-94hanoi-e9-80-92-e5-bd-92-e5-ae-9e-e7-8e-b0/index.html">
 <meta property="og:site_name" content="Chow's Notes">
 <meta property="og:description" content="&amp;#x8981;&amp;#x6C42;&amp;#x5C06;&amp;#x5854;A&amp;#x7684;&amp;#x76D8;&amp;#x5168;&amp;#x90E8;&amp;#x79FB;&amp;#x5230;C&amp;#xFF0C;&amp;#x79FB;&amp;#x52A8;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4E2D;&amp;#x4E0D;&amp;#x80FD;&amp;#x5C06;&amp;#x5927;&amp;#x76D8;&amp;#x653E;&amp;#x5230;&amp;#x5C0F;&amp;#x76D">
-<meta property="og:updated_time" content="2016-12-30T16:03:34.000Z">
+<meta property="og:updated_time" content="2017-01-05T03:16:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="汉诺塔(hanoi)递归实现">
 <meta name="twitter:description" content="&amp;#x8981;&amp;#x6C42;&amp;#x5C06;&amp;#x5854;A&amp;#x7684;&amp;#x76D8;&amp;#x5168;&amp;#x90E8;&amp;#x79FB;&amp;#x5230;C&amp;#xFF0C;&amp;#x79FB;&amp;#x52A8;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4E2D;&amp;#x4E0D;&amp;#x80FD;&amp;#x5C06;&amp;#x5927;&amp;#x76D8;&amp;#x653E;&amp;#x5230;&amp;#x5C0F;&amp;#x76D">
@@ -366,18 +366,7 @@
 <p>&#x5148;&#x9012;&#x5F52;&#x5730;&#x5C06;N-1&#x4E2A;&#x76D8;&#x4ECE;&#x5854;A&#x79FB;&#x5230;&#x8F85;&#x52A9;&#x5854;B&#xFF0C;</p>
 <p>&#x518D;&#x5C06;&#x5269;&#x4E0B;&#x7684;&#x4E00;&#x4E2A;&#x76D8;&#x4ECE;&#x5854;A&#x79FB;&#x5230;&#x5854;C</p>
 <p>&#x6700;&#x540E;&#x9012;&#x5F52;&#x5730;&#x5C06;N-1&#x4E2A;&#x76D8;&#x4ECE;&#x5854;B&#x79FB;&#x5230;&#x5854;C</p>
-<p>&#x9012;&#x5F52;&#x5B9E;&#x73B0;&#x7684;&#x6838;&#x5FC3;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
-<p>hanoi_move( int n, int x, int y, int z )</p>
-<p>{</p>
-<p>if( n==1 )</p>
-<p>printf( &#x201C;%c&#x2013;&gt;%c\n&#x201D;, x, z );//&#x4ECE;X&#x79FB;&#x5230;Z</p>
-<p>else</p>
-<p>{</p>
-<p>hanoi_move( n-1, x, z, y);//n-1&#x4E2A;&#x76D8;&#x4ECE;X&#x79FB;&#x5230;Y&#xFF0C;Z&#x4E3A;&#x8F85;&#x52A9;</p>
-<p>printf( &#x201C;%c&#x2013;&gt;%c\n&#x201D;, x, z );//1&#x4E2A;&#x76D8;&#x4ECE;x&#x79FB;&#x5230;Z</p>
-<p>hanoi_move( n-1, y, x, z );//n-1&#x4E2A;&#x76D8;&#x4ECE;Y&#x79FB;&#x5230;Z&#xFF0C;X&#x4E3A;&#x8F85;&#x52A9;</p>
-<p>}</p>
-<p>}</p>
+<p>&#x9012;&#x5F52;&#x5B9E;&#x73B0;&#x7684;&#x6838;&#x5FC3;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">hanoi_move( <span class="keyword">int</span> n, <span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> z )</div><div class="line"></div><div class="line">{</div><div class="line"></div><div class="line">	<span class="keyword">if</span>( n==<span class="number">1</span> )</div><div class="line"></div><div class="line">		<span class="built_in">printf</span>( <span class="string">&quot;%c--&amp;gt;%c\n&quot;</span>, x, z );<span class="comment">//&#x4ECE;X&#x79FB;&#x5230;Z</span></div><div class="line"></div><div class="line">	<span class="keyword">else</span></div><div class="line"></div><div class="line">	{</div><div class="line"></div><div class="line">		hanoi_move( n<span class="number">-1</span>, x, z, y);<span class="comment">//n-1&#x4E2A;&#x76D8;&#x4ECE;X&#x79FB;&#x5230;Y&#xFF0C;Z&#x4E3A;&#x8F85;&#x52A9;</span></div><div class="line"></div><div class="line">		<span class="built_in">printf</span>( <span class="string">&quot;%c--&amp;gt;%c\n&quot;</span>, x, z );<span class="comment">//1&#x4E2A;&#x76D8;&#x4ECE;x&#x79FB;&#x5230;Z</span></div><div class="line"></div><div class="line">		hanoi_move( n<span class="number">-1</span>, y, x, z );<span class="comment">//n-1&#x4E2A;&#x76D8;&#x4ECE;Y&#x79FB;&#x5230;Z&#xFF0C;X&#x4E3A;&#x8F85;&#x52A9;</span></div><div class="line"></div><div class="line">	}</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -398,6 +387,12 @@
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
       
 
       
