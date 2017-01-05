@@ -70,7 +70,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Life,Notes" />
+  <meta name="keywords" content="javascript," />
 
 
 
@@ -92,7 +92,7 @@
 <meta property="og:url" content="http://notes.7days.top/2012/11/05/js-e6-a8-a1-e5-9d-97-e5-87-bd-e6-95-b0-e5-92-8c-e9-97-ad-e5-8c-85-e6-9d-a5-e6-9e-84-e9-80-a0-e6-a8-a1-e5-9d-97/index.html">
 <meta property="og:site_name" content="Chow's Notes">
 <meta property="og:description" content="&amp;#x6A21;&amp;#x5757;&amp;#x6A21;&amp;#x5F0F;&amp;#x7684;&amp;#x4E00;&amp;#x822C;&amp;#x5F62;&amp;#x5F0F;&amp;#xFF1A;&amp;#x4E00;&amp;#x4E2A;&amp;#x5B9A;&amp;#x4E49;&amp;#x4E86;&amp;#x79C1;&amp;#x6709;&amp;#x53D8;&amp;#x91CF;&amp;#x548C;&amp;#x51FD;&amp;#x6570;&amp;#x7684;&amp;#x51FD;&amp;#x6570;">
-<meta property="og:updated_time" content="2016-12-30T16:03:34.000Z">
+<meta property="og:updated_time" content="2017-01-05T01:41:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js模块(函数和闭包来构造模块)">
 <meta name="twitter:description" content="&amp;#x6A21;&amp;#x5757;&amp;#x6A21;&amp;#x5F0F;&amp;#x7684;&amp;#x4E00;&amp;#x822C;&amp;#x5F62;&amp;#x5F0F;&amp;#xFF1A;&amp;#x4E00;&amp;#x4E2A;&amp;#x5B9A;&amp;#x4E49;&amp;#x4E86;&amp;#x79C1;&amp;#x6709;&amp;#x53D8;&amp;#x91CF;&amp;#x548C;&amp;#x51FD;&amp;#x6570;&amp;#x7684;&amp;#x51FD;&amp;#x6570;">
@@ -360,8 +360,9 @@
 
       
         <p>&#x6A21;&#x5757;&#x6A21;&#x5F0F;&#x7684;&#x4E00;&#x822C;&#x5F62;&#x5F0F;&#xFF1A;&#x4E00;&#x4E2A;&#x5B9A;&#x4E49;&#x4E86;&#x79C1;&#x6709;&#x53D8;&#x91CF;&#x548C;<strong>&#x51FD;&#x6570;</strong>&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x5229;&#x7528;&#x95ED;&#x5305;&#x521B;&#x5EFA;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;&#x79C1;&#x6709;&#x53D8;&#x91CF;&#x548C;&#x51FD;&#x6570;&#x7684;&#x7279;&#x6743;&#x51FD;&#x6570;&#xFF0C;&#x6700;&#x540E;&#x8FD4;&#x56DE;&#x8FD9;&#x4E2A;&#x7279;&#x6743;&#x51FD;&#x6570;&#xFF0C;&#x6216;&#x8005;&#x628A;&#x4ED6;&#x4EEC;&#x4FDD;&#x5B58;&#x5230;&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x4F7F;&#x7528;&#x6A21;&#x5757;&#x53EF;&#x4EE5;&#x6452;&#x5F03;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x7684;&#x4F7F;&#x7528;&#xFF0C;&#x4FC3;&#x8FDB;&#x4E86;&#x4FE1;&#x606F;&#x9690;&#x85CF;&#x548C;&#x5176;&#x4ED6;&#x4F18;&#x79C0;&#x7684;&#x8BBE;&#x8BA1;&#x5B9E;&#x8DF5;&#xFF0C;&#x5BF9;&#x4E8E;js&#x5E94;&#x7528;&#x7A0B;&#x5E8F; &#x7684;&#x5C01;&#x88C5;&#x6216;&#x8005;&#x6784;&#x9020;&#x5355;&#x4F8B;&#x5BF9;&#x8C61;&#xFF0C;&#x6A21;&#x5757;&#x6A21;&#x5F0F;&#x975E;&#x5E38;&#x6709;&#x6548;</p>
-<p>&#x4F8B;&#x5982;&#xFF1A;</p>
-<div class="cnblogs_code"><br><pre>Function.prototype.method=<span style="color: #0000ff;">function</span><span style="color: #000000;">(mthname,fun){<br>    </span><span style="color: #0000ff;">this</span>.prototype[mthname]=<span style="color: #000000;">fun;<br>    </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">this</span><span style="color: #000000;">;<br>}<br><br>String.method(</span>&#x201C;test&#x201D;,<span style="color: #0000ff;">function</span><span style="color: #000000;">(){<br>    </span><span style="color: #0000ff;">var</span> entity={&#x201C;lt&#x201D;:&#x201D;&lt;&#x201D;,&#x201D;gt&#x201D;:&#x201D;&gt;&#x201D;};//&#x53EA;&#x6709;&#x5185;&#x90E8;&#x51FD;&#x6570;&#x4E0E;&#x8BE5;&#x79C1;&#x6709;&#x53D8;&#x91CF;&#x5173;&#x8054;<br>    <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">function</span><span style="color: #000000;">(){<br>        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">this</span>.replace(/&amp;([^&amp;;]+);/g,<span style="color: #0000ff;">function</span><span style="color: #000000;">(a,b){<br>            </span><span style="color: #0000ff;">var</span> r=<span style="color: #000000;">entity[b];<br>            </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">typeof</span> r===&#x201D;String&#x201D; ?<span style="color: #000000;"> r:a;<br>        })<br>    }//&#x8FD4;&#x56DE;&#x8FD9;&#x4E2A;&#x5B9E;&#x9645;&#x7684;&#x51FD;&#x6570;<br>}()//&#x7ACB;&#x5373;&#x8C03;&#x7528;);<br><br></span><span style="color: #0000ff;">var</span> str=&#x201D;&lt;&#x201D;<span style="color: #000000;">;<br>document.write(str.test())</span></pre><br>&#x6A21;&#x5757;&#x5316;&#x7F16;&#x7A0B;&#x8BE6;&#x8FF0;&#xFF0C;&#x53EF;&#x53C2;&#x89C1;&#x8BE5;&#x65E5;&#x5FD7;<a href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2012/10/javascript_module.html</a><br><br></div>
+<p>&#x4F8B;&#x5982;&#xFF1A;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Function</span>.prototype.method=<span class="function"><span class="keyword">function</span>(<span class="params">mthname,fun</span>)</span>{</div><div class="line">    <span class="keyword">this</span>.prototype[mthname]=fun;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line"><span class="built_in">String</span>.method(<span class="string">&quot;test&quot;</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{</div><div class="line">    <span class="keyword">var</span> entity={<span class="string">&quot;lt&quot;</span>:<span class="string">&quot;&lt;&quot;</span>,<span class="string">&quot;gt&quot;</span>:<span class="string">&quot;&gt;&quot;</span>};<span class="comment">//&#x53EA;&#x6709;&#x5185;&#x90E8;&#x51FD;&#x6570;&#x4E0E;&#x8BE5;&#x79C1;&#x6709;&#x53D8;&#x91CF;&#x5173;&#x8054;</span></div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.replace(<span class="regexp">/&amp;([^&amp;;]+);/g</span>,<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>{</div><div class="line">            <span class="keyword">var</span> r=entity[b];</div><div class="line">            <span class="keyword">return</span> <span class="keyword">typeof</span> r===<span class="string">&quot;String&quot;</span> ? r:a;</div><div class="line">        })</div><div class="line">    }<span class="comment">//&#x8FD4;&#x56DE;&#x8FD9;&#x4E2A;&#x5B9E;&#x9645;&#x7684;&#x51FD;&#x6570;</span></div><div class="line">}()<span class="comment">//&#x7ACB;&#x5373;&#x8C03;&#x7528;);</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> str=<span class="string">&quot;&lt;&quot;</span>;</div><div class="line"><span class="built_in">document</span>.write(str.test())</div></pre></td></tr></table></figure></p>
+<p>&#x6A21;&#x5757;&#x5316;&#x7F16;&#x7A0B;&#x8BE6;&#x8FF0;&#xFF0C;&#x53EF;&#x53C2;&#x89C1;&#x8BE5;&#x65E5;&#x5FD7;<a href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2012/10/javascript_module.html</a></p>
+
       
     </div>
 
@@ -381,6 +382,12 @@
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+        </div>
       
 
       
@@ -501,7 +508,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">42</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
