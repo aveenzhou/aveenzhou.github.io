@@ -1799,10 +1799,8 @@ PyDev 2.2.3.zip&#x89E3;&#x538B;&#x628A;features&#x548C;plugins&#x4E0B;&#x7684;&#
       
         
           
-          
- 1 class Singleton(object): 2     def new(cls,args,**kw): 3         if not hasattr(cls,&#x201C;_instance&#x201C;): 4             orig=super(Singleton,cls) 5             cls._instance=orig.new(cls,args,**kw) 6             print &#x201C;Ok&#x201C; 7         return cls._instance 8 9 class MyClass(Singleton):10     def init(self,name):11         self.name=name
-
-def singleton(cls):    instances = {}    def getinstance():            if cls not in instances:                instances[cls] = cls()      
+          1.&#x4F7F;&#x7528;new&#x65B9;&#x6CD5;1234567891011class Singleton(object):	def __new__(cls,args,**kw):		if not hasattr(cls,&#x201C;_instance&#x201C;):			orig=super(Singleton,cls)			cls._instance=orig.__new__(cls,args,**kw)			print &#x201C;Ok&#x201C;		return cls._instanceclass MyClass(Singleton):	def init(self,name):		self.name=name
+&#x7279;&#x6B8A;&#x65B9;&#x6CD5;new&#x662F;&#x4E00;&#x4E2A;&#x5143;&#x6784;&#x9020;&#x7A0B;&#x5E8F;&#xFF0C;&#x6BCF;&#x5F53;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x5FC5;&#x
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
