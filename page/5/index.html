@@ -250,7 +250,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://notes.7days.top/2014/12/22/linux-e6-95-85-e9-9a-9c-ef-bc-9adf-h-e7-bb-9f-e8-ae-a1-e7-a3-81-e7-9b-98-e7-a9-ba-e9-97-b4-e5-8d-a0-e7-94-a8-e5-a4-aa-e5-a4-9a-ef-bc-8c-e4-bd-86-e5-8f-88du-h-e6-89-be-e4-b8-8d-e5-88-b0-e5-a4-a7/">
+  <link itemprop="mainEntityOfPage" href="http://notes.7days.top/2014/12/22/e5-bc-82-e6-ad-a5-e7-a8-8b-e5-ba-8f-e7-9b-b8-e5-85-b3/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Chow">
@@ -275,8 +275,8 @@
             
               
                 
-                <a class="post-title-link" href="/2014/12/22/linux-e6-95-85-e9-9a-9c-ef-bc-9adf-h-e7-bb-9f-e8-ae-a1-e7-a3-81-e7-9b-98-e7-a9-ba-e9-97-b4-e5-8d-a0-e7-94-a8-e5-a4-aa-e5-a4-9a-ef-bc-8c-e4-bd-86-e5-8f-88du-h-e6-89-be-e4-b8-8d-e5-88-b0-e5-a4-a7/" itemprop="url">
-                  linux 故障：df -h统计磁盘空间占用太多，但又du -h找不到大的文件
+                <a class="post-title-link" href="/2014/12/22/e5-bc-82-e6-ad-a5-e7-a8-8b-e5-ba-8f-e7-9b-b8-e5-85-b3/" itemprop="url">
+                  异步程序相关
                 </a>
               
             
@@ -315,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LINUX/" itemprop="url" rel="index">
-                    <span itemprop="name">LINUX</span>
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
                   </a>
                 </span>
 
@@ -333,8 +333,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2014/12/22/linux-e6-95-85-e9-9a-9c-ef-bc-9adf-h-e7-bb-9f-e8-ae-a1-e7-a3-81-e7-9b-98-e7-a9-ba-e9-97-b4-e5-8d-a0-e7-94-a8-e5-a4-aa-e5-a4-9a-ef-bc-8c-e4-bd-86-e5-8f-88du-h-e6-89-be-e4-b8-8d-e5-88-b0-e5-a4-a7/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/22/linux-e6-95-85-e9-9a-9c-ef-bc-9adf-h-e7-bb-9f-e8-ae-a1-e7-a3-81-e7-9b-98-e7-a9-ba-e9-97-b4-e5-8d-a0-e7-94-a8-e5-a4-aa-e5-a4-9a-ef-bc-8c-e4-bd-86-e5-8f-88du-h-e6-89-be-e4-b8-8d-e5-88-b0-e5-a4-a7/" itemprop="commentCount"></span>
+                <a href="/2014/12/22/e5-bc-82-e6-ad-a5-e7-a8-8b-e5-ba-8f-e7-9b-b8-e5-85-b3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/22/e5-bc-82-e6-ad-a5-e7-a8-8b-e5-ba-8f-e7-9b-b8-e5-85-b3/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -362,13 +362,13 @@
       
         
           
-          &#x7528;lsof / | grep -i delete &#x4ECE;&#x6839;&#x76EE;&#x5F55;&#x5B9A;&#x4F4D;&#x6253;&#x5F00;&#x7684;&#x88AB;&#x5220;&#x9664;&#x7684;&#x6587;&#x4EF6;
-&#x5982;&#x679C;&#x5B9A;&#x4F4D;&#x5230;&#x67D0;&#x6587;&#x4EF6;&#x5360;&#x7528;&#x7A7A;&#x95F4;&#x5F88;&#x5927;
-&#x4E3B;&#x8981;&#x662F;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x5728;&#x5220;&#x9664;&#x8FD9;&#x4E2A;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x7684;&#x65F6;&#x5019;&#x662F;&#x7528;rm -rf *.log&#x8FD9;&#x6837;&#x7684;&#x547D;&#x4EE4;&#x5220;&#x966
+          gevent
+libevent&#x662F;&#x4E00;&#x4E2A;&#x4E8B;&#x4EF6;&#x89E6;&#x53D1;&#x7684;&#x7F51;&#x7EDC;&#x5E93;&#xFF0C;&#x9002;&#x7528;&#x4E8E;windows&#x3001;linux&#x3001;bsd&#x7B49;&#x591A;&#x79CD;&#x5E73;&#x53F0;&#xFF0C;&#x5185;&#x90E8;&#x4F7F;&#x7528;select&#x3001;epoll&#x3001;kqueue&#x7B49;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x7BA1;&#x7406;&#x4E8B;&#x4EF6;&#x673A;&#x5236;
+libev&#x662F;libevent&#x4E4B;&#x540E;&#x7684;&#x4E00;&#x4E2A;&#x4E8B;&#x4EF6;&#x9A71;&#x52A8;&#x7684;&#x7F16;&#x7A0B;&#x6846;&#x67B6
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/12/22/linux-e6-95-85-e9-9a-9c-ef-bc-9adf-h-e7-bb-9f-e8-ae-a1-e7-a3-81-e7-9b-98-e7-a9-ba-e9-97-b4-e5-8d-a0-e7-94-a8-e5-a4-aa-e5-a4-9a-ef-bc-8c-e4-bd-86-e5-8f-88du-h-e6-89-be-e4-b8-8d-e5-88-b0-e5-a4-a7/#more" rel="contents">
+            <a class="btn" href="/2014/12/22/e5-bc-82-e6-ad-a5-e7-a8-8b-e5-ba-8f-e7-9b-b8-e5-85-b3/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>

@@ -96,7 +96,7 @@ urllib.urlopen(URL,[,data])
 <meta property="og:description" content="urllib&amp;#xFF1A;&amp;#x7F16;&amp;#x7801;&amp;#x53C2;&amp;#x6570;&amp;#x79BB;&amp;#x4E0D;&amp;#x5F00;urllib&amp;#xFF0C;urllib.urlencode,
 urllib.urlopen(URL,[,data])
 &amp;#x652F;&amp;#x6301;POST&amp;#xFF0C;&amp;#x6839;&amp;#x636E;&amp;#x53C2;&amp;#x6570;&amp;#x533A;&amp;#">
-<meta property="og:updated_time" content="2017-01-03T04:12:36.000Z">
+<meta property="og:updated_time" content="2017-04-15T06:58:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="urllib,urlib2与httplib,urllib3">
 <meta name="twitter:description" content="urllib&amp;#xFF1A;&amp;#x7F16;&amp;#x7801;&amp;#x53C2;&amp;#x6570;&amp;#x79BB;&amp;#x4E0D;&amp;#x5F00;urllib&amp;#xFF0C;urllib.urlencode,
@@ -374,6 +374,9 @@ urllib.urlopen(URL,[,data])
 <p>urllib3&#xFF1A;&#x53EF;&#x4EE5;&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A;&#x8FDE;&#x63A5;&#x6C60;,&#x5177;&#x5907;post&#x6587;&#x4EF6;&#x529F;&#x80FD;</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">http=urllib3.PoolManager()</div><div class="line">res=http.request(&#x2018;GET&#x2019;,URL,data)</div><div class="line"></div><div class="line">http=urllib3.PoolManager()</div><div class="line">res=http.request(&#x2018;POST&#x2019;,TOKEN_URL,req_args,encode_multipart=<span class="keyword">False</span>)</div></pre></td></tr></table></figure>
 <p><strong>&#x5982;&#x679C;&#x8BF7;&#x6C42;&#x54CD;&#x5E94;&#x62A5; Bad Request / Bad content type &#x4FE1;&#x606F;&#x65F6;</strong><br>&#x9700;&#x8981;&#x8BBE;&#x7F6E;&#x53C2;&#x6570;encode_multipart=False</p>
+<p><strong>&#x5BF9;HTTPS URL&#x7684;&#x8BF7;&#x6C42;</strong><br>&#x9ED8;&#x8BA4;&#x4E0D;&#x4F1A;&#x6821;&#x9A8C;HTTPS&#x8BF7;&#x6C42;&#xFF0C;&#x901A;&#x5E38;&#x4F1A;&#x4EA7;&#x751F;InsecureRequestWarning<br>&#x5982;&#x679C;&#x60F3;&#x53D1;&#x8D77;&#x672A;&#x9A8C;&#x8BC1;&#x7684;HTTPS&#x8BF7;&#x6C42;&#xFF0C;&#x53EF;&#x4EE5;&#x7981;&#x7528;&#x8B66;&#x544A;(&#x4E0D;&#x5EFA;&#x8BAE;)<br>&#x53C2;&#x8003;&#xFF1A;urllib3 <a href="https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings" target="_blank" rel="external">SSL Warnings</a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> urllib3</div><div class="line">urllib3.disable_warnings()</div></pre></td></tr></table></figure></p>
+<p>&#x5EFA;&#x8BAE;&#x7528; SSL certificate verification<br>&#x53C2;&#x8003;&#xFF1A;urllib3 <a href="https://urllib3.readthedocs.io/en/latest/user-guide.html#ssl" target="_blank" rel="external">Certificate verification</a><br>&#x53EF;&#x4EE5;&#x5148;&#x5B89;&#x88C5;<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install certifi</div></pre></td></tr></table></figure></p>
+<p>&#x5DF2;&#x7ECF;&#x6709;&#x4E86;certificates&#x540E;&#xFF0C;&#x4EE3;&#x7801;&#x53EF;&#x4EE5;&#x5982;&#x4E0B;<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> certifi</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> urllib3</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>http = urllib3.PoolManager(</div><div class="line"><span class="meta">... </span>    cert_reqs=<span class="string">&apos;CERT_REQUIRED&apos;</span>,</div><div class="line"><span class="meta">... </span>    ca_certs=certifi.where())</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -406,8 +409,8 @@ urllib.urlopen(URL,[,data])
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/12/22/javascript-e7-ac-94-e8-ae-b0/" rel="next" title="javascript 笔记">
-                <i class="fa fa-chevron-left"></i> javascript 笔记
+              <a href="/2014/12/22/blobbinarylargeobject/" rel="next" title="BLOB (binary large object)">
+                <i class="fa fa-chevron-left"></i> BLOB (binary large object)
               </a>
             
           </div>
@@ -416,8 +419,8 @@ urllib.urlopen(URL,[,data])
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/12/22/blobbinarylargeobject/" rel="prev" title="BLOB (binary large object)">
-                BLOB (binary large object) <i class="fa fa-chevron-right"></i>
+              <a href="/2014/12/22/buffer-e5-92-8ccache-e7-9a-84-e5-8c-ba-e5-88-ab/" rel="prev" title="Buffer 和Cache 的区别">
+                Buffer 和Cache 的区别 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
